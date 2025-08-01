@@ -1,1 +1,1 @@
-# constructorio-ui-recommendations
+# Constructor Recommendations UI library
