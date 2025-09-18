@@ -2,9 +2,16 @@
   "name": "constructorio-ui-recommendations",
   "version": "0.0.0",
   "description": "Constructor.io Recommendations UI library for web applications",
-  "author": "constructor.io",
+  "author": "Constructor.io Corporation",
   "license": "MIT",
   "homepage": "https://github.com/Constructor-io/constructorio-ui-recommendations#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Constructor-io/constructorio-ui-recommendations.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Constructor-io/constructorio-ui-recommendations/issues"
+  },
   "main": "lib/cjs/index.js",
   "module": "lib/mjs/index.js",
   "exports": {
@@ -32,6 +39,7 @@
   "engines": {
     "node": ">=14"
   },
+  "types": "lib/types/index.d.ts",
   "scripts": {
     "lint": "eslint src --ext js,ts,jsx,tsx",
     "check-types": "npx tsc --noEmit",
@@ -42,7 +50,7 @@
     "test-storybook": "test-storybook",
     "test-storybook:watch": "test-storybook --watch",
     "test-storybook:ci": "start-server-and-test storybook:ci http://localhost:6006 test-storybook",
-    "build-storybook": "storybook build",
+    "build-storybook": "storybook build --docs -o 'docs'",
     "storybook-docs-dev": "storybook dev --docs -p 6007",
     "serve-built-storybook": "npx http-server docs",
     "verify-node-version": "chmod +x ./scripts/verify-node-version.sh && ./scripts/verify-node-version.sh",
@@ -64,7 +72,6 @@
     "@babel/preset-env": "^7.24.0",
     "@babel/preset-react": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
-    "@chromatic-com/storybook": "^3.2.5",
     "@cspell/eslint-plugin": "^8.17.5",
     "@storybook/addon-a11y": "^8.6.4",
     "@storybook/addon-actions": "^8.6.4",
@@ -87,7 +94,6 @@
     "@types/react-dom": "^19.0.4",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
-    "chromatic": "^11.27.0",
     "eslint": "^8.57.1",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^18.0.0",
