@@ -9,6 +9,7 @@ export function RenderHookServerSideWrapper({
   const hookValue = renderCallback(renderCallbackProps.initialProps);
   // expose the hook value to the test by testing what is passed to onRenderHookValue
   onRenderHookValue(hookValue);
+
   return null;
 }
 

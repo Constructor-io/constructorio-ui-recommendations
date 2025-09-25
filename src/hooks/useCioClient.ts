@@ -24,7 +24,7 @@ const useCioClient: UseCioClient = ({ apiKey, cioClient, options } = {}) => {
     if (apiKey && typeof window !== 'undefined') {
       return new ConstructorIOClient({
         apiKey,
-        sendTrackingEvents: true,
+        sendTrackingEvents: false,
         version: `cio-ui-recommendations-${version}`,
         ...options,
       });
@@ -32,6 +32,7 @@ const useCioClient: UseCioClient = ({ apiKey, cioClient, options } = {}) => {
 
     return null;
   }, [apiKey, cioClient, options]);
+
   return memoizedCioClient!;
 };
 
