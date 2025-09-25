@@ -28,7 +28,7 @@ describe('Hook on Server: useCioClient', () => {
     expect(result).toBe(mockClient);
   });
 
-  it('should return null when it is not called in client environment', () => {
+  it('should return when used on the server without a custom client', () => {
     const key = 'xx';
     const { result } = renderHookServerSide(({ apiKey }) => useCioClient({ apiKey }), {
       initialProps: { apiKey: key },
