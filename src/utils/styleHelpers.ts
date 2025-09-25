@@ -5,5 +5,6 @@ export function getPreferredColorScheme() {
   if (window.matchMedia('(prefers-color-scheme: dark)')?.matches) {
     colorScheme = 'dark';
   }
+
   return colorScheme;
 }
