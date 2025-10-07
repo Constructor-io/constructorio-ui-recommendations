@@ -1,4 +1,4 @@
-import {
+import ConstructorIOClient, {
   Nullable,
   Item as ApiItem,
   RecommendationsResponse as ApiRecommendationsResponse,
@@ -52,6 +52,17 @@ interface RecommendationsData {
   rawApiResponse: ApiRecommendationsResponse;
 }
 
+enum RequestStatus {
+  IDLE = 'idle',
+  FETCHING = 'fetching',
+  SUCCESS = 'success',
+  ERROR = 'error',
+}
+
+interface RecommendationContextValue {
+  cioClient: ConstructorIOClient;
+}
+
 export {
   Nullable,
   Item,
@@ -64,4 +75,6 @@ export {
   ApiVariation,
   ApiPod,
   ApiRecommendationsResponse,
+  RequestStatus,
+  RecommendationContextValue,
 };
