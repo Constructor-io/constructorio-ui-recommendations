@@ -1,14 +1,15 @@
 import {
+  Nullable,
   Item as ApiItem,
   RecommendationsResponse as ApiRecommendationsResponse,
-  RecommendationsRequestType,
+  RecommendationsRequestType as RecommendationsRequestModel,
 } from '@constructor-io/constructorio-client-javascript/lib/types';
 
-export interface Item {
+interface Item {
   itemName: string;
   matchedTerms: Array<string>;
   isSlotted: boolean;
-  variations?: Variation[];
+  variations?: Array<Variation>;
 
   // Flattened Data Object
   itemId: string;
@@ -22,32 +23,45 @@ export interface Item {
   data: Record<string, any>;
 }
 
-export interface Variation
+interface Variation
   extends Omit<Item, 'variations' | 'matchedTerms' | 'isSlotted' | 'itemId' | 'groupIds'> {}
 
-export interface ApiVariation
-  extends Omit<ApiItem, 'variations' | 'matched_terms' | 'is_slotted'> {}
+interface ApiVariation extends Omit<ApiItem, 'variations' | 'matched_terms' | 'is_slotted'> {}
 
-export interface Pod {
+interface Pod {
   id: string;
   displayName: string;
-  channels?: string[];
+  channels?: Array<string>;
   [key: string]: any;
 }
 
-export interface ApiPod extends Omit<Pod, 'displayName'> {
+interface ApiPod extends Omit<Pod, 'displayName'> {
   display_name: string;
 }
 
-export interface RecommendationsResponseModel extends Record<string, any> {
-  results: Partial<Item>[];
+interface RecommendationsResponseModel extends Record<string, any> {
+  results: Array<Item>;
   totalNumResults: number;
   pod: Pod;
 }
 
-export interface RecommendationsData {
+interface RecommendationsData {
   resultId: string;
-  request: RecommendationsRequestType;
+  request: RecommendationsRequestModel;
   response: RecommendationsResponseModel;
   rawApiResponse: ApiRecommendationsResponse;
 }
+
+export {
+  Nullable,
+  Item,
+  Variation,
+  Pod,
+  RecommendationsRequestModel,
+  RecommendationsResponseModel,
+  RecommendationsData,
+  ApiItem,
+  ApiVariation,
+  ApiPod,
+  ApiRecommendationsResponse,
+};

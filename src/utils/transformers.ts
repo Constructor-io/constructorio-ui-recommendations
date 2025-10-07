@@ -1,9 +1,14 @@
 import {
   Nullable,
-  RecommendationsResponse,
-  RecommendationsResultType,
-} from '@constructor-io/constructorio-client-javascript/lib/types';
-import { Item, Variation, ApiVariation, Pod, ApiPod, RecommendationsData } from '../types';
+  Item,
+  Variation,
+  Pod,
+  RecommendationsData,
+  ApiItem,
+  ApiVariation,
+  ApiPod,
+  ApiRecommendationsResponse,
+} from '../types';
 
 export function transformPodData(podData: ApiPod): Pod {
   // Explicitly extract known properties to ensure correct mapping
@@ -43,7 +48,7 @@ export function transformResultVariation(variation: ApiVariation): Variation {
   };
 }
 
-export function transformResultItem(resultItem: RecommendationsResultType): Item {
+export function transformResultItem(resultItem: ApiItem): Item {
   const {
     id: itemId,
     image_url: imageUrl,
@@ -78,7 +83,7 @@ export function transformResultItem(resultItem: RecommendationsResultType): Item
 }
 
 export function transformRecommendationResponse(
-  res: RecommendationsResponse,
+  res: ApiRecommendationsResponse,
 ): Nullable<RecommendationsData> {
   const { response, request, result_id: resultId } = res;
 
@@ -88,9 +93,7 @@ export function transformRecommendationResponse(
     resultId,
     request,
     response: {
-      results: (response.results as RecommendationsResultType[]).map((result) =>
-        transformResultItem(result),
-      ),
+      results: (response.results as ApiItem[]).map((result) => transformResultItem(result)),
       totalNumResults: response.total_num_results,
       pod: response.pod && transformPodData(response.pod),
     },
