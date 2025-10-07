@@ -6,10 +6,14 @@ import {
 import { Item, Variation, ApiVariation, Pod, ApiPod, RecommendationsData } from '../types';
 
 export function transformPodData(podData: ApiPod): Pod {
+  // Explicitly extract known properties to ensure correct mapping
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  const { id, display_name, channels } = podData;
+
   return {
-    id: podData.id,
-    displayName: podData.display_name,
-    channels: podData.channels,
+    id,
+    displayName: display_name,
+    channels,
     ...podData,
   };
 }
