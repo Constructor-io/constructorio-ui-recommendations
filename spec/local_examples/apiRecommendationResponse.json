@@ -1,0 +1,1351 @@
+{
+  "result_id": "sample-result-id",
+  "request": {
+    "section": "Products",
+    "pod_id": "bestsellers",
+    "features": {
+      "query_items": true,
+      "a_a_test": true,
+      "auto_generated_refined_query_rules": true,
+      "manual_searchandizing": true,
+      "personalization": true,
+      "filter_items": true,
+      "use_reranker_service_for_search": false,
+      "use_reranker_service_for_browse": false,
+      "use_reranker_service_for_all": false,
+      "custom_autosuggest_ui": false,
+      "disable_test_only_global_rules_search": false,
+      "disable_test_only_global_rules_browse": false,
+      "use_enriched_attributes_as_fuzzy_searchable": false
+    },
+    "feature_variants": {
+      "query_items": "query_items_ctr_and_l2r",
+      "a_a_test": null,
+      "auto_generated_refined_query_rules": "default_rules",
+      "manual_searchandizing": null,
+      "personalization": "default_personalization",
+      "filter_items": "filter_items_w_atcs_and_purchases",
+      "use_reranker_service_for_search": null,
+      "use_reranker_service_for_browse": null,
+      "use_reranker_service_for_all": null,
+      "custom_autosuggest_ui": null,
+      "disable_test_only_global_rules_search": null,
+      "disable_test_only_global_rules_browse": null,
+      "use_enriched_attributes_as_fuzzy_searchable": null
+    }
+  },
+  "response": {
+    "total_num_results": 10,
+    "pod": {
+      "id": "bestsellers",
+      "display_name": "Best Sellers",
+      "channels": ["site"]
+    },
+    "results": [
+      {
+        "matched_terms": [],
+        "labels": {},
+        "data": {
+          "id": "CSHRT00463-black",
+          "url": "no-url",
+          "price": 89,
+          "image_url": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/WOVEN-CASUAL-SHIRT_BUTTON-DOWN-WOVEN-SHIRT_24746-BK627_40_category-outfitter.jpg",
+          "group_ids": ["1035", "2104", "1198"],
+          "description": "Comfort of a jersey tee in a modern button-down design.",
+          "variation_id": "24747-BK627-MXREG"
+        },
+        "value": "Knit Button-Down (Black)",
+        "is_slotted": false,
+        "variations": [
+          {
+            "data": {
+              "variation_id": "24747-BK627-MXREG"
+            },
+            "value": "Knit Button-Down (Black)"
+          },
+          {
+            "data": {
+              "variation_id": "24747-BK627-SXREG"
+            },
+            "value": "Knit Button-Down (Black)"
+          }
+        ]
+      },
+      {
+        "matched_terms": [],
+        "labels": {},
+        "data": {
+          "id": "CSHRT00463-green pine floral",
+          "url": "no-url",
+          "price": 88,
+          "image_url": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/WOVEN-CASUAL-SHIRT_BUTTON-DOWN-WOVEN-SHIRT_26992-MVH50_3_category.jpg",
+          "group_ids": ["1035", "2104", "1198"],
+          "description": "Comfort of a jersey tee in a modern button-down design.",
+          "variation_id": "26992-MVH50-SXREG"
+        },
+        "value": "Knit Button-Down (Green Pine Floral)",
+        "is_slotted": false,
+        "variations": [
+          {
+            "data": {
+              "variation_id": "26992-MVH50-SXREG"
+            },
+            "value": "Knit Button-Down (Green Pine Floral)"
+          }
+        ]
+      },
+      {
+        "matched_terms": [],
+        "labels": {},
+        "data": {
+          "id": "CSHRT00463-heather burgundy",
+          "url": "no-url",
+          "price": 89,
+          "image_url": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/Casual-Shirts_Washed-Poplin-Shirts_19145-MTX64_40_category-outfitter.jpg",
+          "group_ids": ["1035", "2104", "1198"],
+          "description": "Comfort of a jersey tee in a modern button-down design.",
+          "variation_id": "19145-MTX64-LXREG"
+        },
+        "value": "Knit Button-Down (Heather Burgundy)",
+        "is_slotted": false,
+        "variations": [
+          {
+            "data": {
+              "variation_id": "19145-MTX64-LXREG"
+            },
+            "value": "Knit Button-Down (Heather Burgundy)"
+          },
+          {
+            "data": {
+              "variation_id": "19145-MTX64-MXREG"
+            },
+            "value": "Knit Button-Down (Heather Burgundy)"
+          },
+          {
+            "data": {
+              "variation_id": "19145-MTX64-SXLONG"
+            },
+            "value": "Knit Button-Down (Heather Burgundy)"
+          },
+          {
+            "data": {
+              "variation_id": "19145-MTX64-SXREG"
+            },
+            "value": "Knit Button-Down (Heather Burgundy)"
+          },
+          {
+            "data": {
+              "variation_id": "19145-MTX64-XLXLONG"
+            },
+            "value": "Knit Button-Down (Heather Burgundy)"
+          },
+          {
+            "data": {
+              "variation_id": "19145-MTX64-XLXREG"
+            },
+            "value": "Knit Button-Down (Heather Burgundy)"
+          },
+          {
+            "data": {
+              "variation_id": "19145-MTX64-XLXSHOR"
+            },
+            "value": "Knit Button-Down (Heather Burgundy)"
+          },
+          {
+            "data": {
+              "variation_id": "19145-MTX64-XSXREG"
+            },
+            "value": "Knit Button-Down (Heather Burgundy)"
+          },
+          {
+            "data": {
+              "variation_id": "19145-MTX64-XXLXREG"
+            },
+            "value": "Knit Button-Down (Heather Burgundy)"
+          },
+          {
+            "data": {
+              "variation_id": "19364-MTX64-LXREG"
+            },
+            "value": "Knit Button-Down (Heather Burgundy)"
+          },
+          {
+            "data": {
+              "variation_id": "19364-MTX64-MXLONG"
+            },
+            "value": "Knit Button-Down (Heather Burgundy)"
+          },
+          {
+            "data": {
+              "variation_id": "19364-MTX64-MXREG"
+            },
+            "value": "Knit Button-Down (Heather Burgundy)"
+          },
+          {
+            "data": {
+              "variation_id": "19364-MTX64-SXREG"
+            },
+            "value": "Knit Button-Down (Heather Burgundy)"
+          },
+          {
+            "data": {
+              "variation_id": "19364-MTX64-SXSHOR"
+            },
+            "value": "Knit Button-Down (Heather Burgundy)"
+          },
+          {
+            "data": {
+              "variation_id": "19364-MTX64-XLXREG"
+            },
+            "value": "Knit Button-Down (Heather Burgundy)"
+          },
+          {
+            "data": {
+              "variation_id": "19364-MTX64-XSXREG"
+            },
+            "value": "Knit Button-Down (Heather Burgundy)"
+          },
+          {
+            "data": {
+              "variation_id": "19364-MTX64-XXLXREG"
+            },
+            "value": "Knit Button-Down (Heather Burgundy)"
+          },
+          {
+            "data": {
+              "variation_id": "22069-MTX64-LXLONG"
+            },
+            "value": "Knit Button-Down (Heather Burgundy)"
+          },
+          {
+            "data": {
+              "variation_id": "22069-MTX64-LXREG"
+            },
+            "value": "Knit Button-Down (Heather Burgundy)"
+          },
+          {
+            "data": {
+              "variation_id": "22069-MTX64-MXREG"
+            },
+            "value": "Knit Button-Down (Heather Burgundy)"
+          },
+          {
+            "data": {
+              "variation_id": "22069-MTX64-SXLONG"
+            },
+            "value": "Knit Button-Down (Heather Burgundy)"
+          },
+          {
+            "data": {
+              "variation_id": "22069-MTX64-SXREG"
+            },
+            "value": "Knit Button-Down (Heather Burgundy)"
+          },
+          {
+            "data": {
+              "variation_id": "22069-MTX64-XLXLONG"
+            },
+            "value": "Knit Button-Down (Heather Burgundy)"
+          },
+          {
+            "data": {
+              "variation_id": "22069-MTX64-XLXREG"
+            },
+            "value": "Knit Button-Down (Heather Burgundy)"
+          },
+          {
+            "data": {
+              "variation_id": "22069-MTX64-XSXREG"
+            },
+            "value": "Knit Button-Down (Heather Burgundy)"
+          },
+          {
+            "data": {
+              "variation_id": "22069-MTX64-XXLXREG"
+            },
+            "value": "Knit Button-Down (Heather Burgundy)"
+          }
+        ]
+      },
+      {
+        "matched_terms": [],
+        "labels": {},
+        "data": {
+          "id": "CSHRT00463-heather grey",
+          "url": "no-url",
+          "price": 89,
+          "group_ids": ["1035", "2104", "1198"],
+          "image_url": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/Casual-Shirts_Washed-Poplin-Shirts_19078-GYK32_40_category-outfitter.jpg",
+          "description": "Comfort of a jersey tee in a modern button-down design.",
+          "variation_id": "19078-GYK32-LXREG"
+        },
+        "value": "Knit Button-Down (Heather Grey)",
+        "is_slotted": false,
+        "variations": [
+          {
+            "data": {
+              "variation_id": "19078-GYK32-LXREG"
+            },
+            "value": "Knit Button-Down (Heather Grey)"
+          },
+          {
+            "data": {
+              "variation_id": "19078-GYK32-MXREG"
+            },
+            "value": "Knit Button-Down (Heather Grey)"
+          },
+          {
+            "data": {
+              "variation_id": "19078-GYK32-SXLONG"
+            },
+            "value": "Knit Button-Down (Heather Grey)"
+          },
+          {
+            "data": {
+              "variation_id": "19078-GYK32-SXREG"
+            },
+            "value": "Knit Button-Down (Heather Grey)"
+          },
+          {
+            "data": {
+              "variation_id": "19078-GYK32-XLXLONG"
+            },
+            "value": "Knit Button-Down (Heather Grey)"
+          },
+          {
+            "data": {
+              "variation_id": "19078-GYK32-XLXREG"
+            },
+            "value": "Knit Button-Down (Heather Grey)"
+          },
+          {
+            "data": {
+              "variation_id": "19078-GYK32-XSXREG"
+            },
+            "value": "Knit Button-Down (Heather Grey)"
+          },
+          {
+            "data": {
+              "variation_id": "19078-GYK32-XXLXREG"
+            },
+            "value": "Knit Button-Down (Heather Grey)"
+          },
+          {
+            "data": {
+              "variation_id": "19362-GYK32-LXLONG"
+            },
+            "value": "Knit Button-Down (Heather Grey)"
+          },
+          {
+            "data": {
+              "variation_id": "19362-GYK32-LXREG"
+            },
+            "value": "Knit Button-Down (Heather Grey)"
+          },
+          {
+            "data": {
+              "variation_id": "19362-GYK32-MXLONG"
+            },
+            "value": "Knit Button-Down (Heather Grey)"
+          },
+          {
+            "data": {
+              "variation_id": "19362-GYK32-MXREG"
+            },
+            "value": "Knit Button-Down (Heather Grey)"
+          },
+          {
+            "data": {
+              "variation_id": "19362-GYK32-SXREG"
+            },
+            "value": "Knit Button-Down (Heather Grey)"
+          },
+          {
+            "data": {
+              "variation_id": "19362-GYK32-XLXREG"
+            },
+            "value": "Knit Button-Down (Heather Grey)"
+          },
+          {
+            "data": {
+              "variation_id": "19362-GYK32-XLXSHOR"
+            },
+            "value": "Knit Button-Down (Heather Grey)"
+          },
+          {
+            "data": {
+              "variation_id": "19362-GYK32-XSXREG"
+            },
+            "value": "Knit Button-Down (Heather Grey)"
+          },
+          {
+            "data": {
+              "variation_id": "19362-GYK32-XXLXLONG"
+            },
+            "value": "Knit Button-Down (Heather Grey)"
+          },
+          {
+            "data": {
+              "variation_id": "19362-GYK32-XXLXREG"
+            },
+            "value": "Knit Button-Down (Heather Grey)"
+          },
+          {
+            "data": {
+              "variation_id": "22073-GYK32-LXLONG"
+            },
+            "value": "Knit Button-Down (Heather Grey)"
+          },
+          {
+            "data": {
+              "variation_id": "22073-GYK32-LXREG"
+            },
+            "value": "Knit Button-Down (Heather Grey)"
+          },
+          {
+            "data": {
+              "variation_id": "22073-GYK32-MXLONG"
+            },
+            "value": "Knit Button-Down (Heather Grey)"
+          },
+          {
+            "data": {
+              "variation_id": "22073-GYK32-MXREG"
+            },
+            "value": "Knit Button-Down (Heather Grey)"
+          },
+          {
+            "data": {
+              "variation_id": "22073-GYK32-SXREG"
+            },
+            "value": "Knit Button-Down (Heather Grey)"
+          },
+          {
+            "data": {
+              "variation_id": "22073-GYK32-XLXLONG"
+            },
+            "value": "Knit Button-Down (Heather Grey)"
+          },
+          {
+            "data": {
+              "variation_id": "22073-GYK32-XLXREG"
+            },
+            "value": "Knit Button-Down (Heather Grey)"
+          },
+          {
+            "data": {
+              "variation_id": "22073-GYK32-XSXREG"
+            },
+            "value": "Knit Button-Down (Heather Grey)"
+          },
+          {
+            "data": {
+              "variation_id": "22073-GYK32-XXLXREG"
+            },
+            "value": "Knit Button-Down (Heather Grey)"
+          }
+        ]
+      },
+      {
+        "matched_terms": [],
+        "labels": {},
+        "data": {
+          "id": "CSHRT00463-heather navy",
+          "url": "no-url",
+          "price": 89,
+          "image_url": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/Casual-Shirts_Washed-Poplin-Shirts_19074-BLT43_40_category-outfitter.jpg",
+          "group_ids": ["1035", "2104", "1198"],
+          "description": "Comfort of a jersey tee in a modern button-down design.",
+          "variation_id": "19074-BLT43-LXREG"
+        },
+        "value": "Knit Button-Down (Heather Navy)",
+        "is_slotted": false,
+        "variations": [
+          {
+            "data": {
+              "variation_id": "19074-BLT43-LXREG"
+            },
+            "value": "Knit Button-Down (Heather Navy)"
+          },
+          {
+            "data": {
+              "variation_id": "19074-BLT43-MXREG"
+            },
+            "value": "Knit Button-Down (Heather Navy)"
+          },
+          {
+            "data": {
+              "variation_id": "19074-BLT43-SXREG"
+            },
+            "value": "Knit Button-Down (Heather Navy)"
+          },
+          {
+            "data": {
+              "variation_id": "19074-BLT43-XLXREG"
+            },
+            "value": "Knit Button-Down (Heather Navy)"
+          },
+          {
+            "data": {
+              "variation_id": "19074-BLT43-XLXSHOR"
+            },
+            "value": "Knit Button-Down (Heather Navy)"
+          },
+          {
+            "data": {
+              "variation_id": "19074-BLT43-XSXREG"
+            },
+            "value": "Knit Button-Down (Heather Navy)"
+          },
+          {
+            "data": {
+              "variation_id": "19074-BLT43-XXLXREG"
+            },
+            "value": "Knit Button-Down (Heather Navy)"
+          },
+          {
+            "data": {
+              "variation_id": "19360-BLT43-MXLONG"
+            },
+            "value": "Knit Button-Down (Heather Navy)"
+          },
+          {
+            "data": {
+              "variation_id": "19360-BLT43-MXREG"
+            },
+            "value": "Knit Button-Down (Heather Navy)"
+          },
+          {
+            "data": {
+              "variation_id": "19360-BLT43-SXREG"
+            },
+            "value": "Knit Button-Down (Heather Navy)"
+          },
+          {
+            "data": {
+              "variation_id": "22071-BLT43-LXREG"
+            },
+            "value": "Knit Button-Down (Heather Navy)"
+          },
+          {
+            "data": {
+              "variation_id": "22071-BLT43-MXREG"
+            },
+            "value": "Knit Button-Down (Heather Navy)"
+          },
+          {
+            "data": {
+              "variation_id": "22071-BLT43-SXLONG"
+            },
+            "value": "Knit Button-Down (Heather Navy)"
+          },
+          {
+            "data": {
+              "variation_id": "22071-BLT43-SXREG"
+            },
+            "value": "Knit Button-Down (Heather Navy)"
+          },
+          {
+            "data": {
+              "variation_id": "22071-BLT43-XLXREG"
+            },
+            "value": "Knit Button-Down (Heather Navy)"
+          },
+          {
+            "data": {
+              "variation_id": "22071-BLT43-XSXREG"
+            },
+            "value": "Knit Button-Down (Heather Navy)"
+          },
+          {
+            "data": {
+              "variation_id": "22071-BLT43-XXLXREG"
+            },
+            "value": "Knit Button-Down (Heather Navy)"
+          }
+        ]
+      },
+      {
+        "matched_terms": [],
+        "labels": {},
+        "data": {
+          "id": "CSHRT00463-navy blue microstripe",
+          "url": "no-url",
+          "price": 89,
+          "image_url": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/WOVEN-CASUAL-SHIRT_BUTTON-DOWN-WOVEN-SHIRT_24755-BNR53_40_category-outfitter.jpg",
+          "group_ids": ["1035", "2104", "1198"],
+          "description": "Comfort of a jersey tee in a modern button-down design.",
+          "variation_id": "24756-BNR53-LXREG"
+        },
+        "value": "Knit Button-Down (Navy Blue Microstripe)",
+        "is_slotted": false,
+        "variations": [
+          {
+            "data": {
+              "variation_id": "24756-BNR53-LXREG"
+            },
+            "value": "Knit Button-Down (Navy Blue Microstripe)"
+          },
+          {
+            "data": {
+              "variation_id": "24756-BNR53-XXLXREG"
+            },
+            "value": "Knit Button-Down (Navy Blue Microstripe)"
+          },
+          {
+            "data": {
+              "variation_id": "24757-BNR53-MXREG"
+            },
+            "value": "Knit Button-Down (Navy Blue Microstripe)"
+          },
+          {
+            "data": {
+              "variation_id": "24757-BNR53-XXLXREG"
+            },
+            "value": "Knit Button-Down (Navy Blue Microstripe)"
+          }
+        ]
+      },
+      {
+        "matched_terms": [],
+        "labels": {},
+        "data": {
+          "id": "CSHRT00476-blue",
+          "url": "no-url",
+          "price": 89,
+          "image_url": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/WOVEN-CASUAL-SHIRT_OXFORD-WOVEN-SHIRT_BSH01759SBOV80_3_category.jpg",
+          "group_ids": ["1534", "1035", "2104", "2535"],
+          "description": "The look of a classic Oxford with added stretch for comfort.",
+          "variation_id": "26145-BOV80-LXLONG"
+        },
+        "value": "Stretch Oxford Shirt (Blue)",
+        "is_slotted": false,
+        "variations": [
+          {
+            "data": {
+              "variation_id": "26145-BOV80-LXLONG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV80-LXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV80-LXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV80-MXLONG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV80-MXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV80-MXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV80-SXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV80-SXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV80-XLXLONG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV80-XLXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV80-XSXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV80-XSXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV80-XXLXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV80-LXLONG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV80-LXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV80-LXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV80-MXLONG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV80-MXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV80-MXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV80-SXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV80-SXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV80-XLXLONG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV80-XLXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV80-XLXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV80-XXLXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26147-BOV80-LXLONG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26147-BOV80-LXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26147-BOV80-MXLONG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26147-BOV80-MXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26147-BOV80-MXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26147-BOV80-SXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26147-BOV80-SXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26147-BOV80-XLXLONG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26147-BOV80-XLXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "26147-BOV80-XXLXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "27982-BOV80-LXLONG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "27982-BOV80-LXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "27982-BOV80-LXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "27982-BOV80-MXLONG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "27982-BOV80-MXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "27982-BOV80-MXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "27982-BOV80-SXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "27982-BOV80-SXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "27982-BOV80-XLXLONG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          },
+          {
+            "data": {
+              "variation_id": "27982-BOV80-XLXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue)"
+          }
+        ]
+      },
+      {
+        "matched_terms": [],
+        "labels": {},
+        "data": {
+          "id": "CSHRT00476-blue classic stripe",
+          "url": "no-url",
+          "price": 89,
+          "group_ids": ["1534", "1035", "2104", "2535"],
+          "image_url": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/WOVEN-CASUAL-SHIRT_OXFORD-WOVEN-SHIRT_BSH01759SBOV78_3_category.jpg",
+          "description": "The look of a classic Oxford with added stretch for comfort.",
+          "variation_id": "26145-BOV78-LXLONG"
+        },
+        "value": "Stretch Oxford Shirt (Blue Classic Stripe)",
+        "is_slotted": false,
+        "variations": [
+          {
+            "data": {
+              "variation_id": "26145-BOV78-LXLONG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV78-LXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV78-LXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV78-MXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV78-MXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV78-SXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV78-SXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV78-XLXLONG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV78-XLXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV78-XSXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV78-XSXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV78-XXLXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV78-LXLONG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV78-LXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV78-LXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV78-MXLONG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV78-MXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV78-MXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV78-SXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV78-SXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV78-XLXLONG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV78-XLXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV78-XLXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV78-XXLXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          },
+          {
+            "data": {
+              "variation_id": "26147-BOV78-LXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          },
+          {
+            "data": {
+              "variation_id": "26147-BOV78-MXLONG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          },
+          {
+            "data": {
+              "variation_id": "26147-BOV78-MXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          },
+          {
+            "data": {
+              "variation_id": "26147-BOV78-SXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          },
+          {
+            "data": {
+              "variation_id": "26147-BOV78-SXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          },
+          {
+            "data": {
+              "variation_id": "26147-BOV78-XLXLONG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          },
+          {
+            "data": {
+              "variation_id": "26147-BOV78-XSXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue Classic Stripe)"
+          }
+        ]
+      },
+      {
+        "matched_terms": [],
+        "labels": {},
+        "data": {
+          "id": "CSHRT00476-blue nickel check",
+          "url": "no-url",
+          "price": 89,
+          "image_url": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/WOVEN-CASUAL-SHIRT_OXFORD-WOVEN-SHIRT_BSH01759SBOV79_3_category.jpg",
+          "group_ids": ["1534", "1035", "2104", "2535"],
+          "description": "The look of a classic Oxford with added stretch for comfort.",
+          "variation_id": "26145-BOV79-LXLONG"
+        },
+        "value": "Stretch Oxford Shirt (Blue Nickel Check)",
+        "is_slotted": false,
+        "variations": [
+          {
+            "data": {
+              "variation_id": "26145-BOV79-LXLONG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV79-LXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV79-LXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV79-MXLONG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV79-MXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV79-MXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV79-SXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV79-SXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV79-XLXLONG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV79-XLXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV79-XSXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          },
+          {
+            "data": {
+              "variation_id": "26145-BOV79-XXLXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV79-LXLONG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV79-LXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV79-LXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV79-MXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV79-MXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV79-SXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV79-SXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV79-XLXLONG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV79-XLXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV79-XLXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          },
+          {
+            "data": {
+              "variation_id": "26146-BOV79-XXLXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          },
+          {
+            "data": {
+              "variation_id": "26147-BOV79-LXLONG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          },
+          {
+            "data": {
+              "variation_id": "26147-BOV79-LXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          },
+          {
+            "data": {
+              "variation_id": "26147-BOV79-MXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          },
+          {
+            "data": {
+              "variation_id": "26147-BOV79-MXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          },
+          {
+            "data": {
+              "variation_id": "26147-BOV79-SXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          },
+          {
+            "data": {
+              "variation_id": "26147-BOV79-SXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          },
+          {
+            "data": {
+              "variation_id": "26147-BOV79-XLXREG"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          },
+          {
+            "data": {
+              "variation_id": "26147-BOV79-XSXSHOR"
+            },
+            "value": "Stretch Oxford Shirt (Blue Nickel Check)"
+          }
+        ]
+      },
+      {
+        "matched_terms": [],
+        "labels": {},
+        "data": {
+          "id": "CSHRT00476-charcoal",
+          "url": "no-url",
+          "price": 89,
+          "image_url": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/WOVEN-CASUAL-SHIRT_OXFORD-WOVEN-SHIRT_BSH01759SG1697_3_category.jpg",
+          "group_ids": ["1534", "1035", "2104", "2535"],
+          "description": "The look of a classic Oxford with added stretch for comfort.",
+          "variation_id": "BSH01759SG1697LS"
+        },
+        "value": "Stretch Oxford Shirt (Charcoal)",
+        "is_slotted": false,
+        "variations": [
+          {
+            "data": {
+              "variation_id": "BSH01759SG1697LS"
+            },
+            "value": "Stretch Oxford Shirt (Charcoal)"
+          },
+          {
+            "data": {
+              "variation_id": "BSH01759SG1697ML"
+            },
+            "value": "Stretch Oxford Shirt (Charcoal)"
+          },
+          {
+            "data": {
+              "variation_id": "BSH01759SG1697SS"
+            },
+            "value": "Stretch Oxford Shirt (Charcoal)"
+          },
+          {
+            "data": {
+              "variation_id": "BSH01759SG1697XSR"
+            },
+            "value": "Stretch Oxford Shirt (Charcoal)"
+          },
+          {
+            "data": {
+              "variation_id": "BSH01759SG1697XXLR"
+            },
+            "value": "Stretch Oxford Shirt (Charcoal)"
+          }
+        ]
+      }
+    ]
+  }
+}
