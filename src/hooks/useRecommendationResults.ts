@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import ConstructorIOClient, {
   Nullable,
   RecommendationsParameters,
@@ -45,17 +45,21 @@ export default function useRecommendationResults(): UseRecommendationResultsRetu
       .then((response) => {
         setRecommendationResults(transformRecommendationResponse(response));
         setStatus(RequestStatus.SUCCESS);
+        setMessage(null);
       })
       .catch((error) => {
+        setRecommendationResults(null);
         setStatus(RequestStatus.ERROR);
         setMessage(error.message);
       });
   }, [cioClient, podId, parameters]);
 
+  useEffect(fetchResult, [fetchResult]);
+
   return {
-    data: recommendationResults,
     status,
     message,
+    data: recommendationResults,
     getRecommendations: fetchResult,
   };
 }
