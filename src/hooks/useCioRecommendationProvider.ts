@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { RecommendationContextValue, CioRecommendationProviderProps } from '../types';
 import useCioClient from './useCioClient';
 
-export default function useCioPiaProvider(props: CioRecommendationProviderProps) {
+export default function useCioRecommendationProvider(props: CioRecommendationProviderProps) {
   const {
     apiKey,
     podId,
