@@ -4,25 +4,28 @@ import { renderHook } from '@testing-library/react';
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
 import CioRecommendationsProvider from '../src/components/CioRecommendation/CioRecommendationProvider';
 import { DEMO_API_KEY, DEMO_POD_ID } from '../src/constants';
-import apiRecommendationResponse from './localExamples';
+import { testApiResponse } from './localExamples';
 
 /**
- * Mock ConstructorIOClient to avoid making API calls during tests
- * as Jest is running in a Node environment and `fetch` is not available.
+ * Mock the recommendations.getRecommendations method from ConstructorIOClient
+ * to prevent API calls during tests, as Jest runs in a Node environment where `fetch` is unavailable.
  */
+
 class MockConstructorIOClient extends ConstructorIOClient {
   recommendations = {
-    getRecommendations: jest.fn().mockResolvedValue(apiRecommendationResponse),
+    getRecommendations: jest.fn().mockResolvedValue(testApiResponse),
   };
 }
 
-function mockConstructorIOClient() {
-  return new MockConstructorIOClient({ apiKey: DEMO_API_KEY, fetch: () => {} });
-}
+// Only return Client JS when test is run for client-side environment
+const mockConstructorIOClient =
+  typeof window !== 'undefined'
+    ? new MockConstructorIOClient({ apiKey: DEMO_API_KEY, fetch: jest.fn() })
+    : null;
 
 jest.mock('../src/hooks/useCioClient', () => ({
   __esModule: true,
-  default: () => mockConstructorIOClient(),
+  default: () => mockConstructorIOClient,
 }));
 
 const customRenderHook = (callback, options) =>

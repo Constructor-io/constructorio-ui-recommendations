@@ -11,7 +11,7 @@ export interface UseRecommendationResultsReturn {
   data: Nullable<RecommendationsData>;
   status: RequestStatus;
   message: Nullable<string>;
-  getRecommendations: (podId: string) => void;
+  refetch: (podId: string) => void;
 }
 
 async function fetchRecommendationResults(
@@ -60,6 +60,6 @@ export default function useRecommendationResults(): UseRecommendationResultsRetu
     status,
     message,
     data: recommendationResults,
-    getRecommendations: fetchResult,
+    refetch: fetchResult,
   };
 }
