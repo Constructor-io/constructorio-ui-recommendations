@@ -11,8 +11,8 @@ export default function UseRecommendationResultsExample(
   return (
     <DisplayHookExample
       title='useRecommendationResults Example Results'
-      renderHook={useRecommendationResults}
       providerProps={props}
+      renderHook={useRecommendationResults}
     />
   );
 }

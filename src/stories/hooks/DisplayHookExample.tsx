@@ -1,13 +1,12 @@
 import React from 'react';
 import CioRecommendationProvider from '../../components/CioRecommendation/CioRecommendationProvider';
-import { DEMO_API_KEY, DEMO_POD_ID } from '../../constants';
 import { CioRecommendationProviderProps } from '../../types';
 
 export interface DisplayHookExampleProps {
   title: string;
+  providerProps: CioRecommendationProviderProps;
   renderHook: (props?: Record<string, unknown>) => any;
   renderHookProps?: Record<string, unknown>;
-  providerProps?: CioRecommendationProviderProps;
 }
 
 interface HookRenderProps extends Omit<DisplayHookExampleProps, 'title' | 'providerProps'> {}
@@ -35,21 +34,9 @@ function HookRender({ renderHook, renderHookProps }: HookRenderProps) {
 
 export default function DisplayHookExample(props: DisplayHookExampleProps) {
   const { title, providerProps, renderHook, renderHookProps } = props;
-  let currentProviderProps = {
-    apiKey: DEMO_API_KEY,
-    podId: DEMO_POD_ID,
-  };
-
-  if (providerProps) {
-    currentProviderProps = {
-      ...providerProps,
-      apiKey: providerProps.apiKey,
-      podId: providerProps.podId,
-    };
-  }
 
   return (
-    <CioRecommendationProvider {...currentProviderProps}>
+    <CioRecommendationProvider {...providerProps}>
       <div>
         <h2>{title}</h2>
         <HookRender renderHook={renderHook} renderHookProps={renderHookProps} />
