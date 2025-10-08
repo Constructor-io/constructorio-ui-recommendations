@@ -9,5 +9,10 @@ RecommendationContext.displayName = 'RecommendationContext';
  * Note: Should only be used by components nested under a CioRecommendation provider
  */
 export function useCioRecommendationContext() {
-  return useContext(RecommendationContext as React.Context<RecommendationContextValue>);
+  const context = useContext(RecommendationContext);
+  if (!context) {
+    throw new Error('useCioRecommendationContext must be used within CioRecommendationProvider');
+  }
+
+  return context;
 }

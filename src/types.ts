@@ -1,9 +1,11 @@
+import { ReactNode } from 'react';
 import ConstructorIOClient, {
   Nullable,
   Item as ApiItem,
   RecommendationsResponse as ApiRecommendationsResponse,
   RecommendationsRequestType as RecommendationsRequestModel,
-} from '@constructor-io/constructorio-client-javascript/lib/types';
+  ConstructorClientOptions,
+} from '@constructor-io/constructorio-client-javascript';
 
 interface Item {
   itemName: string;
@@ -59,9 +61,25 @@ enum RequestStatus {
   ERROR = 'error',
 }
 
+interface CioClientOptions extends Omit<ConstructorClientOptions, 'apiKey' | 'version'> {}
+
 interface RecommendationContextValue {
-  cioClient: ConstructorIOClient;
+  podId: string;
+  cioClient: Nullable<ConstructorIOClient>;
+  cioClientOptions: CioClientOptions;
+  setCioClientOptions: (options: CioClientOptions) => void;
 }
+
+interface CioRecommendationProviderProps {
+  apiKey: string;
+  podId: string;
+  cioClient?: Nullable<ConstructorIOClient>;
+  cioClientOptions?: CioClientOptions;
+}
+
+type IncludeRenderProps<ComponentProps, ChildrenFunctionProps> = ComponentProps & {
+  children?: ((props: ChildrenFunctionProps) => ReactNode) | React.ReactNode;
+};
 
 export {
   Nullable,
@@ -77,4 +95,7 @@ export {
   ApiRecommendationsResponse,
   RequestStatus,
   RecommendationContextValue,
+  CioClientOptions,
+  CioRecommendationProviderProps,
+  IncludeRenderProps,
 };
