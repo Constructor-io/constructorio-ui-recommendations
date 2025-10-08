@@ -3,15 +3,19 @@ import ConstructorIOClient, {
   Nullable,
   RecommendationsParameters,
 } from '@constructor-io/constructorio-client-javascript';
-import { RecommendationsData, RequestStatus } from '../types';
+import { ApiRecommendationsResponse, RecommendationsData, RequestStatus } from '../types';
 import { useCioRecommendationContext } from './useCioRecommendationContext';
 import { transformRecommendationResponse } from '../utils/transformers';
+
+export interface UseRecommendationResultsProps {
+  initialRecommendationResponse?: ApiRecommendationsResponse;
+}
 
 export interface UseRecommendationResultsReturn {
   data: Nullable<RecommendationsData>;
   status: RequestStatus;
   message: Nullable<string>;
-  refetch: (podId: string) => void;
+  refetch: () => void;
 }
 
 async function fetchRecommendationResults(
@@ -24,11 +28,22 @@ async function fetchRecommendationResults(
   return response;
 }
 
-export default function useRecommendationResults(): UseRecommendationResultsReturn {
+/**
+ * A React Hook to call to utilize Constructor Recommendation
+ * @param {Object} [props] - The component props.
+ * @param {object} [props.initialSearchResponse] Initial value for recommendation results
+ * Useful when passing initial state for the first render from the server to the client for Server Side Rendering (SSR)
+ * @returns {status, message, data, refetch}
+ */
+export default function useRecommendationResults(
+  props: UseRecommendationResultsProps = {},
+): UseRecommendationResultsReturn {
+  const { initialRecommendationResponse } = props;
   const context = useCioRecommendationContext();
   const { cioClient, podId, parameters } = context;
 
-  if (!cioClient) {
+  // Throw error when cioClient is not provided in client environment
+  if (!cioClient && typeof window !== 'undefined') {
     throw new Error('ConstructorIO client instance is required.');
   }
 
@@ -36,6 +51,13 @@ export default function useRecommendationResults(): UseRecommendationResultsRetu
     useState<Nullable<RecommendationsData>>(null);
   const [status, setStatus] = useState<RequestStatus>(RequestStatus.IDLE);
   const [message, setMessage] = useState<Nullable<string>>(null);
+
+  // Handle initial response for SSR
+  if (initialRecommendationResponse) {
+    setRecommendationResults(transformRecommendationResponse(initialRecommendationResponse));
+    setStatus(RequestStatus.SUCCESS);
+    setMessage(null);
+  }
 
   const fetchResult = useCallback(() => {
     if (!cioClient) return;

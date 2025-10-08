@@ -10,7 +10,6 @@ import { testApiResponse } from './localExamples';
  * Mock the recommendations.getRecommendations method from ConstructorIOClient
  * to prevent API calls during tests, as Jest runs in a Node environment where `fetch` is unavailable.
  */
-
 class MockConstructorIOClient extends ConstructorIOClient {
   recommendations = {
     getRecommendations: jest.fn().mockResolvedValue(testApiResponse),
