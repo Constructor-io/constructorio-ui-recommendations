@@ -31,8 +31,7 @@ describe('Testing Hook: useRecommendationResults', () => {
     });
   });
 
-  it('should handle error if client is not available', () => {
-    // Hook not rendered within CioRecommendationsProvider context
+  it('should throw error if hook is not rendered within CioRecommendationsProvider context', () => {
     expect(() => renderHook(() => useRecommendationResults())).toThrow();
   });
 });

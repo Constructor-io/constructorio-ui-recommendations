@@ -47,17 +47,15 @@ export default function useRecommendationResults(
     throw new Error('ConstructorIO client instance is required.');
   }
 
-  const [recommendationResults, setRecommendationResults] =
-    useState<Nullable<RecommendationsData>>(null);
-  const [status, setStatus] = useState<RequestStatus>(RequestStatus.IDLE);
+  const [recommendationResults, setRecommendationResults] = useState<Nullable<RecommendationsData>>(
+    initialRecommendationResponse
+      ? transformRecommendationResponse(initialRecommendationResponse)
+      : null,
+  );
+  const [status, setStatus] = useState<RequestStatus>(
+    initialRecommendationResponse ? RequestStatus.SUCCESS : RequestStatus.IDLE,
+  );
   const [message, setMessage] = useState<Nullable<string>>(null);
-
-  // Handle initial response for SSR
-  if (initialRecommendationResponse) {
-    setRecommendationResults(transformRecommendationResponse(initialRecommendationResponse));
-    setStatus(RequestStatus.SUCCESS);
-    setMessage(null);
-  }
 
   const fetchResult = useCallback(() => {
     if (!cioClient) return;
