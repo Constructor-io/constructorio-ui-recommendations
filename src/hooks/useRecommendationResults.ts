@@ -7,11 +7,6 @@ import { RecommendationsData, RequestStatus } from '../types';
 import { useCioRecommendationContext } from './useCioRecommendationContext';
 import { transformRecommendationResponse } from '../utils/transformers';
 
-export interface UseRecommendationResultsProps {
-  podId: string;
-  parameters?: RecommendationsParameters;
-}
-
 export interface UseRecommendationResultsReturn {
   data: Nullable<RecommendationsData>;
   status: RequestStatus;
@@ -29,12 +24,9 @@ async function fetchRecommendationResults(
   return response;
 }
 
-export default function useRecommendationResults({
-  podId,
-  parameters,
-}: UseRecommendationResultsProps): UseRecommendationResultsReturn {
+export default function useRecommendationResults(): UseRecommendationResultsReturn {
   const context = useCioRecommendationContext();
-  const { cioClient } = context;
+  const { cioClient, podId, parameters } = context;
 
   if (!cioClient) {
     throw new Error('ConstructorIO client instance is required.');
@@ -58,7 +50,7 @@ export default function useRecommendationResults({
         setStatus(RequestStatus.ERROR);
         setMessage(error.message);
       });
-  }, [podId, cioClient, parameters]);
+  }, [cioClient, podId, parameters]);
 
   return {
     data: recommendationResults,

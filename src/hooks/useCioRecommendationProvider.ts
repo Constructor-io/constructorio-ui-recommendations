@@ -1,13 +1,20 @@
 import { useMemo, useState } from 'react';
-import { RecommendationContextValue, CioRecommendationProviderProps } from '../types';
+import {
+  IncludeRenderProps,
+  CioRecommendationProviderProps,
+  RecommendationContextValue,
+} from '../types';
 import useCioClient from './useCioClient';
 
-export default function useCioRecommendationProvider(props: CioRecommendationProviderProps) {
+export default function useCioRecommendationProvider(
+  props: IncludeRenderProps<CioRecommendationProviderProps, RecommendationContextValue>,
+) {
   const {
     apiKey,
     podId,
     cioClient: customCioClient,
     cioClientOptions: customCioClientOptions = {},
+    parameters,
   } = props;
 
   const [cioClientOptions, setCioClientOptions] = useState(customCioClientOptions);
@@ -19,8 +26,9 @@ export default function useCioRecommendationProvider(props: CioRecommendationPro
       cioClient,
       cioClientOptions,
       setCioClientOptions,
+      parameters,
     }),
-    [cioClient, cioClientOptions, podId],
+    [cioClient, cioClientOptions, podId, parameters],
   );
 
   return contextValue;

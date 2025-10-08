@@ -11,7 +11,7 @@ RecommendationContext.displayName = 'RecommendationContext';
 export function useCioRecommendationContext() {
   const context = useContext(RecommendationContext);
   if (!context) {
-    throw new Error('useCioRecommendationContext must be used within CioRecommendationProvider');
+    throw new Error('useCioRecommendationContext must be used within CioRecommendation');
   }
 
   return context;
