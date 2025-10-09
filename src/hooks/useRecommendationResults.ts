@@ -29,11 +29,19 @@ async function fetchRecommendationResults(
 }
 
 /**
- * A React Hook to call to utilize Constructor Recommendation
- * @param {Object} [props] - The component props.
- * @param {object} [props.initialSearchResponse] Initial value for recommendation results
+ * A custom hook to utilize Constructor Recommendation API
+ *
+ * @param {UseRecommendationResultsProps} [props] - The component props
+ * @param {ApiRecommendationsResponse} [props.initialRecommendationResponse] - Initial value for recommendation results
  * Useful when passing initial state for the first render from the server to the client for Server Side Rendering (SSR)
- * @returns {status, message, data, refetch}
+ *
+ * @returns {UseRecommendationResultsReturn} An object containing:
+ * - `status` {RequestStatus}: The current status of the recommendation request (eg. IDLE, FETCHING, SUCCESS, ERROR)
+ * - `message` {string | null}: Any error message encountered during the request
+ * - `data` {RecommendationsData | null}: The transformed recommendation data
+ * - `refetch` {() => void}: A function to manually refetch the recommendation results
+ *
+ * @throws {Error} Throws an error if the ConstructorIO client instance is not provided in a client environment
  */
 export default function useRecommendationResults(
   props: UseRecommendationResultsProps = {},
