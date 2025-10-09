@@ -1,0 +1,64 @@
+{
+  "itemId": "KNITS00423-park bench dot",
+  "itemName": "Jersey Riviera Shirt (Red Park Bench Dot)",
+  "variationId": "BKT00110DG1733LR",
+  "url": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/KNIT-CASUAL-SHIRT_BUTTON-DOWN-KNIT-SHIRT_BKT00110SG1733_3_category.jpg",
+  "imageUrl": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/KNIT-CASUAL-SHIRT_BUTTON-DOWN-KNIT-SHIRT_BKT00110SG1733_3_category.jpg",
+  "description": "Cotton jersey fabric that feels like a tee & looks like a button-down.",
+  "groupIds": ["1111"],
+  "data": {
+    "price": 90,
+    "altPrice": 69,
+    "salePrice": 70,
+    "rolloverImage": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/WOVEN-CASUAL-SHIRT_BUTTON-DOWN-WOVEN-SHIRT_20084-BLW58_40_category-outfitter.jpg"
+  },
+  "matchedTerms": [],
+  "isSlotted": false,
+  "variations": [
+    {
+      "itemName": "Jersey Riviera Shirt (Red Park Bench Dot)",
+      "variationId": "BKT00110DG1733LR",
+      "url": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/WOVEN-CASUAL-SHIRT_BUTTON-DOWN-WOVEN-SHIRT_20084-BLW58_40_category-outfitter.jpg",
+      "imageUrl": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/WOVEN-CASUAL-SHIRT_BUTTON-DOWN-WOVEN-SHIRT_20084-BLW58_40_category-outfitter.jpg",
+      "data": {
+        "price": 90,
+        "salePrice": 70,
+        "swatchPreview": "#e04062",
+        "rolloverImage": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/WOVEN-CASUAL-SHIRT_BUTTON-DOWN-WOVEN-SHIRT_20084-BLW58_40_category-outfitter.jpg"
+      }
+    },
+    {
+      "itemName": "Jersey Riviera Shirt (Green Park Bench Dot)",
+      "variationId": "BKT00110SG1759",
+      "url": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/KNIT-CASUAL-SHIRT_BUTTON-DOWN-KNIT-SHIRT_BKT00110SG1759_3_category.jpg",
+      "imageUrl": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/KNIT-CASUAL-SHIRT_BUTTON-DOWN-KNIT-SHIRT_BKT00110SG1759_3_category.jpg",
+      "data": {
+        "price": 99,
+        "swatchPreview": "#a3c43b",
+        "rolloverImage": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/KNIT-CASUAL-SHIRT_BUTTON-DOWN-KNIT-SHIRT_BKT00110SG1759_3_category.jpg"
+      }
+    },
+    {
+      "itemName": "Jersey Riviera Shirt (Black Park Bench Dot)",
+      "variationId": "BKT00110SB1725",
+      "url": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/KNIT-CASUAL-SHIRT_BUTTON-DOWN-KNIT-SHIRT_BKT00110SB1725_3_category.jpg",
+      "imageUrl": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/KNIT-CASUAL-SHIRT_BUTTON-DOWN-KNIT-SHIRT_BKT00110SB1725_3_category.jpg",
+      "data": {
+        "price": 100,
+        "salePrice": 80,
+        "rolloverImage": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/KNIT-CASUAL-SHIRT_BUTTON-DOWN-KNIT-SHIRT_BKT00110SB1725_3_category.jpg"
+      }
+    },
+    {
+      "itemName": "Jersey Riviera Shirt (Blue Feeder Stripe)",
+      "variationId": "BKT00110SN1945",
+      "url": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/KNIT-CASUAL-SHIRT_BUTTON-DOWN-KNIT-SHIRT_BKT00110SN1945_3_category.jpg",
+      "imageUrl": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/KNIT-CASUAL-SHIRT_BUTTON-DOWN-KNIT-SHIRT_BKT00110SN1945_3_category.jpg",
+      "data": {
+        "price": 59,
+        "salePrice": 39,
+        "swatchPreview": "#4a90e2"
+      }
+    }
+  ]
+}
