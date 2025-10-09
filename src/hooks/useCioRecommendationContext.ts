@@ -5,8 +5,13 @@ export const RecommendationContext = createContext<Nullable<RecommendationContex
 RecommendationContext.displayName = 'RecommendationContext';
 
 /**
- * React Hook to access state provided by CioRecommendation provider.
- * Note: Should only be used by components nested under a CioRecommendation provider
+ * A custom hook to access state provided by CioRecommendation provider
+ *
+ * @remarks
+ * Should only be used by components nested within the CioRecommendationProvider
+ *
+ * @returns The current recommendation context value
+ * @throws Error when used outside of a CioRecommendation provider
  */
 export function useCioRecommendationContext() {
   const context = useContext(RecommendationContext);
