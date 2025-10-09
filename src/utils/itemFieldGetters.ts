@@ -31,7 +31,7 @@ export function getSwatches(
       swatchList.push({
         itemName: variation?.itemName || item?.itemName,
         url: variation?.url || item?.url,
-        imageUrl: variation?.url,
+        imageUrl: variation?.imageUrl || item?.imageUrl,
         variationId: variation?.variationId,
         price: retrievePrice(variation),
         salePrice: retrieveSalePrice(variation),
