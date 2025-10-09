@@ -11,12 +11,12 @@ describe('Testing Hook on Server: useCioClient', () => {
     jest.resetAllMocks();
   });
 
-  it('should throw error if Api Key not provided', () => {
+  it('should throw error if API Key not provided', () => {
     expect(() =>
       renderHookServerSide(() => useCioClient(), {
         initialProps: {},
       }),
-    ).toThrow('Api Key or Constructor Client required');
+    ).toThrow('API Key or Constructor Client required');
   });
 
   it('should return client when custom client is provided', () => {

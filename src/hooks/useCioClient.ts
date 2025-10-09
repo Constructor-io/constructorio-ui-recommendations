@@ -33,7 +33,7 @@ const useCioClient: UseCioClient = ({
   apiKey,
   cioClient,
   options,
-}: UseCioClientProps): Nullable<ConstructorIOClient> => {
+}: UseCioClientProps = {}): Nullable<ConstructorIOClient> => {
   if (!apiKey && !cioClient) {
     throw new Error('API Key or Constructor Client required');
   }
