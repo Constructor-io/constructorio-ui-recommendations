@@ -12,10 +12,10 @@ import useCioClient from './useCioClient';
  * @param {Object} props - The properties for the recommendation provider
  * @param {string} props.apiKey - Constructor.io API key
  * @param {string} props.podId - ID of the recommendation pod to use
- * @param {Nullable<ConstructorIOClient>} props.cioClient - Optional custom Constructor.io client instance
- * @param {Omit<ConstructorClientOptions, 'apiKey' | 'sendTrackingEvents' | 'version'>} props.cioClientOptions
+ * @param {Nullable<ConstructorIOClient>} [props.cioClient] - Optional custom Constructor.io client instance
+ * @param {CioClientOptions} [props.cioClientOptions]
  * - Optional configuration options for the Constructor.io client
- * @param {Record<string, any>} props.parameters - Optional additional parameters for recommendation requests
+ * @param {RecommendationsParameters} [props.parameters] - Optional additional parameters for recommendation requests
  *
  * @returns An object containing the recommendation context value with:
  *   - podId: The ID of the recommendation pod
