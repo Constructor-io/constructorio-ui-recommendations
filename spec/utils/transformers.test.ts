@@ -1,5 +1,4 @@
-import testItem from '../local_examples/item.json';
-import testApiResponse from '../local_examples/apiRecommendationResponse.json';
+import { testItem, testApiResponse } from '../localExamples';
 import {
   transformPodData,
   transformResultVariation,

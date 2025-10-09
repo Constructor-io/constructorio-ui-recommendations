@@ -1,9 +1,12 @@
-import {
+import { ReactNode } from 'react';
+import ConstructorIOClient, {
   Nullable,
   Item as ApiItem,
+  ConstructorClientOptions,
   RecommendationsResponse as ApiRecommendationsResponse,
   RecommendationsRequestType as RecommendationsRequestModel,
-} from '@constructor-io/constructorio-client-javascript/lib/types';
+  RecommendationsParameters,
+} from '@constructor-io/constructorio-client-javascript';
 
 interface Item {
   itemName: string;
@@ -52,11 +55,43 @@ interface RecommendationsData {
   rawApiResponse: ApiRecommendationsResponse;
 }
 
+enum RequestStatus {
+  IDLE = 'idle',
+  FETCHING = 'fetching',
+  SUCCESS = 'success',
+  ERROR = 'error',
+}
+
+interface CioClientOptions extends Omit<ConstructorClientOptions, 'apiKey' | 'version'> {}
+
+interface RecommendationContextValue {
+  podId: string;
+  cioClient: Nullable<ConstructorIOClient>;
+  cioClientOptions: CioClientOptions;
+  setCioClientOptions: (options: CioClientOptions) => void;
+  parameters?: RecommendationsParameters;
+}
+
+interface CioRecommendationProviderProps {
+  apiKey: string;
+  podId: string;
+  cioClient?: Nullable<ConstructorIOClient>;
+  cioClientOptions?: CioClientOptions;
+  parameters?: RecommendationsParameters;
+}
+
+type IncludeRenderProps<ComponentProps, ChildrenFunctionProps> = ComponentProps & {
+  children?: ((props: ChildrenFunctionProps) => ReactNode) | React.ReactNode;
+};
+
 export {
   Nullable,
+  IncludeRenderProps,
+  CioClientOptions,
   Item,
   Variation,
   Pod,
+  RecommendationsParameters,
   RecommendationsRequestModel,
   RecommendationsResponseModel,
   RecommendationsData,
@@ -64,4 +99,7 @@ export {
   ApiVariation,
   ApiPod,
   ApiRecommendationsResponse,
+  RequestStatus,
+  RecommendationContextValue,
+  CioRecommendationProviderProps,
 };

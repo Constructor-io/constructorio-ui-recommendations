@@ -1,7 +1,7 @@
 import useCioClient from '../../../src/hooks/useCioClient';
-import { renderHookServerSide } from '../../test-utils.server';
+import { renderHookServerSide } from '../../testUtils.server';
 
-describe('Hook on Server: useCioClient', () => {
+describe('Testing Hook on Server: useCioClient', () => {
   beforeEach(() => {
     const spy = jest.spyOn(console, 'error');
     spy.mockImplementation(() => {});
