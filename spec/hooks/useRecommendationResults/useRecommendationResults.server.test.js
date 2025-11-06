@@ -17,6 +17,7 @@ describe('Testing Hook on Server: useRecommendationResults with initial response
       status,
       message,
       data: { resultId, request, response, rawApiResponse },
+      refetch,
     } = result;
 
     expect(status).toBe(RequestStatus.SUCCESS);
@@ -31,6 +32,8 @@ describe('Testing Hook on Server: useRecommendationResults with initial response
     expect(response.pod.id).toBe(testApiResponse.response.pod.id);
     expect(response.results).toBeDefined();
     expect(response.results.length).toBe(testApiResponse.response.results.length);
+    expect(refetch).toBeDefined();
+    expect(refetch).toBeInstanceOf(Function);
   });
 
   it('should throw error if hook is not rendered within CioRecommendationsProvider context', () => {
