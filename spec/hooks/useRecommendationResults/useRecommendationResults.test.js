@@ -14,6 +14,7 @@ describe('Testing Hook: useRecommendationResults', () => {
         status,
         message,
         data: { resultId, request, response, rawApiResponse },
+        refetch,
       } = current;
 
       expect(status).toBe(RequestStatus.SUCCESS);
@@ -28,6 +29,8 @@ describe('Testing Hook: useRecommendationResults', () => {
       expect(response.pod.id).toBe(testApiResponse.response.pod.id);
       expect(response.results).toBeDefined();
       expect(response.results.length).toBe(testApiResponse.response.results.length);
+      expect(refetch).toBeDefined();
+      expect(refetch).toBeInstanceOf(Function);
     });
   });
 
