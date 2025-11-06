@@ -1,6 +1,7 @@
 import React from 'react';
-import CioRecommendationProvider from '../../components/CioRecommendation/CioRecommendationProvider';
-import { CioRecommendationProviderProps } from '../../types';
+import CioRecommendationProvider from '../../../components/CioRecommendation/CioRecommendationProvider';
+import { CioRecommendationProviderProps } from '../../../types';
+import './DisplayHookExample.css';
 
 export interface DisplayHookExampleProps {
   title: string;
@@ -17,17 +18,8 @@ function HookRender({ renderHook, renderHookProps }: HookRenderProps) {
     typeof result === 'object' ? JSON.stringify(result, null, 2) : String(result);
 
   return (
-    <div style={{ width: '100%', overflow: 'hidden' }}>
-      <pre
-        style={{
-          backgroundColor: '#f5f5f5',
-          padding: '15px',
-          whiteSpace: 'pre-wrap',
-          wordBreak: 'break-word',
-          borderRadius: '4px',
-        }}>
-        {displayResult}
-      </pre>
+    <div className='display-hook-example-container'>
+      <pre className='display-hook-example-pre'>{displayResult}</pre>
     </div>
   );
 }

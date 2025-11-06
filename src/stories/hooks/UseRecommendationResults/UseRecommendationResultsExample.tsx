@@ -1,5 +1,5 @@
 import React from 'react';
-import DisplayHookExample from '../DisplayHookExample';
+import { DisplayHookExample } from '../utils';
 import useRecommendationResults from '../../../hooks/useRecommendationResults';
 import { CioRecommendationProviderProps } from '../../../types';
 
