@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { createContext } from 'react';
 import {
   RecommendationContextValue,
   CioRecommendationProviderProps,
   IncludeRenderProps,
+  Nullable,
 } from '../../types';
-import { RecommendationContext } from '../../hooks/useCioRecommendationContext';
 import useCioRecommendationProvider from '../../hooks/useCioRecommendationProvider';
+
+export const RecommendationContext = createContext<Nullable<RecommendationContextValue>>(null);
+RecommendationContext.displayName = 'RecommendationContext';
 
 export default function CioRecommendationProvider(
   props: IncludeRenderProps<CioRecommendationProviderProps, RecommendationContextValue>,
