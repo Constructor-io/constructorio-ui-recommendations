@@ -5,15 +5,15 @@ export function getPrice(item: Item | Variation): number {
 }
 
 export function getSalePrice(item: Item | Variation): number | undefined {
-  return item.data.salePrice;
+  return item.data.sale_price;
 }
 
 export function getRolloverImage(item: Item | Variation): string | undefined {
-  return item.data.rolloverImage;
+  return item.data.rollover_image;
 }
 
 export function getSwatchPreview(variation: Variation): string | undefined {
-  return variation?.data?.swatchPreview;
+  return variation?.data?.swatch_preview;
 }
 
 /* eslint-disable-next-line max-params */

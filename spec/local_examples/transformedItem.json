@@ -8,9 +8,8 @@
   "groupIds": ["1111"],
   "data": {
     "price": 90,
-    "altPrice": 69,
-    "salePrice": 70,
-    "rolloverImage": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/WOVEN-CASUAL-SHIRT_BUTTON-DOWN-WOVEN-SHIRT_20084-BLW58_40_category-outfitter.jpg"
+    "sale_price": 70,
+    "rollover_image": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/WOVEN-CASUAL-SHIRT_BUTTON-DOWN-WOVEN-SHIRT_20084-BLW58_40_category-outfitter.jpg"
   },
   "matchedTerms": [],
   "isSlotted": false,
@@ -22,9 +21,19 @@
       "imageUrl": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/WOVEN-CASUAL-SHIRT_BUTTON-DOWN-WOVEN-SHIRT_20084-BLW58_40_category-outfitter.jpg",
       "data": {
         "price": 90,
-        "salePrice": 70,
-        "swatchPreview": "#e04062",
-        "rolloverImage": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/WOVEN-CASUAL-SHIRT_BUTTON-DOWN-WOVEN-SHIRT_20084-BLW58_40_category-outfitter.jpg"
+        "sale_price": 70,
+        "swatch_preview": "#e04062",
+        "rollover_image": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/WOVEN-CASUAL-SHIRT_BUTTON-DOWN-WOVEN-SHIRT_20084-BLW58_40_category-outfitter.jpg"
+      }
+    },
+    {
+      "itemName": "Jersey Riviera Shirt (Coral Maltby Floral)",
+      "variationId": "BKT00110SP1735",
+      "url": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/KNIT-CASUAL-SHIRT_BUTTON-DOWN-KNIT-SHIRT_BKT00110SP1735_3_category.jpg",
+      "imageUrl": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/KNIT-CASUAL-SHIRT_BUTTON-DOWN-KNIT-SHIRT_BKT00110SP1735_3_category.jpg",
+      "data": {
+        "sale_price": 49,
+        "swatch_preview": "#f57c6a"
       }
     },
     {
@@ -34,8 +43,8 @@
       "imageUrl": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/KNIT-CASUAL-SHIRT_BUTTON-DOWN-KNIT-SHIRT_BKT00110SG1759_3_category.jpg",
       "data": {
         "price": 99,
-        "swatchPreview": "#a3c43b",
-        "rolloverImage": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/KNIT-CASUAL-SHIRT_BUTTON-DOWN-KNIT-SHIRT_BKT00110SG1759_3_category.jpg"
+        "swatch_preview": "#a3c43b",
+        "rollover_image": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/KNIT-CASUAL-SHIRT_BUTTON-DOWN-KNIT-SHIRT_BKT00110SG1759_3_category.jpg"
       }
     },
     {
@@ -45,8 +54,8 @@
       "imageUrl": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/KNIT-CASUAL-SHIRT_BUTTON-DOWN-KNIT-SHIRT_BKT00110SB1725_3_category.jpg",
       "data": {
         "price": 100,
-        "salePrice": 80,
-        "rolloverImage": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/KNIT-CASUAL-SHIRT_BUTTON-DOWN-KNIT-SHIRT_BKT00110SB1725_3_category.jpg"
+        "sale_price": 80,
+        "rollover_image": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/KNIT-CASUAL-SHIRT_BUTTON-DOWN-KNIT-SHIRT_BKT00110SB1725_3_category.jpg"
       }
     },
     {
@@ -56,8 +65,8 @@
       "imageUrl": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/KNIT-CASUAL-SHIRT_BUTTON-DOWN-KNIT-SHIRT_BKT00110SN1945_3_category.jpg",
       "data": {
         "price": 59,
-        "salePrice": 39,
-        "swatchPreview": "#4a90e2"
+        "sale_price": 39,
+        "swatch_preview": "#4a90e2"
       }
     }
   ]
