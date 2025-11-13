@@ -1,4 +1,2 @@
-import testItem from './item.json';
-import testApiResponse from './apiRecommendationResponse.json';
-
-export { testItem, testApiResponse };
+export { default as testItem } from './item.json';
+export { default as testApiResponse } from './apiRecommendationResponse.json';

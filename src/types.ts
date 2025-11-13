@@ -8,7 +8,7 @@ import ConstructorIOClient, {
   RecommendationsParameters,
 } from '@constructor-io/constructorio-client-javascript';
 
-interface Item {
+export interface Item {
   itemName: string;
   matchedTerms: Array<string>;
   isSlotted: boolean;
@@ -26,45 +26,46 @@ interface Item {
   data: Record<string, any>;
 }
 
-interface Variation
+export interface Variation
   extends Omit<Item, 'variations' | 'matchedTerms' | 'isSlotted' | 'itemId' | 'groupIds'> {}
 
-interface ApiVariation extends Omit<ApiItem, 'variations' | 'matched_terms' | 'is_slotted'> {}
+export interface ApiVariation
+  extends Omit<ApiItem, 'variations' | 'matched_terms' | 'is_slotted'> {}
 
-interface Pod {
+export interface Pod {
   id: string;
   displayName: string;
   channels?: Array<string>;
   [key: string]: any;
 }
 
-interface ApiPod extends Omit<Pod, 'displayName'> {
+export interface ApiPod extends Omit<Pod, 'displayName'> {
   display_name: string;
 }
 
-interface RecommendationsResponseModel extends Record<string, any> {
+export interface RecommendationsResponseModel extends Record<string, any> {
   results: Array<Item>;
   totalNumResults: number;
   pod: Pod;
 }
 
-interface RecommendationsData {
+export interface RecommendationsData {
   resultId: string;
   request: RecommendationsRequestModel;
   response: RecommendationsResponseModel;
   rawApiResponse: ApiRecommendationsResponse;
 }
 
-enum RequestStatus {
+export enum RequestStatus {
   IDLE = 'idle',
   FETCHING = 'fetching',
   SUCCESS = 'success',
   ERROR = 'error',
 }
 
-interface CioClientOptions extends Omit<ConstructorClientOptions, 'apiKey' | 'version'> {}
+export interface CioClientOptions extends Omit<ConstructorClientOptions, 'apiKey' | 'version'> {}
 
-interface RecommendationContextValue {
+export interface RecommendationContextValue {
   podId: string;
   cioClient: Nullable<ConstructorIOClient>;
   cioClientOptions: CioClientOptions;
@@ -72,7 +73,7 @@ interface RecommendationContextValue {
   parameters?: RecommendationsParameters;
 }
 
-interface CioRecommendationProviderProps {
+export interface CioRecommendationProviderProps {
   apiKey: string;
   podId: string;
   cioClient?: Nullable<ConstructorIOClient>;
@@ -80,26 +81,14 @@ interface CioRecommendationProviderProps {
   parameters?: RecommendationsParameters;
 }
 
-type IncludeRenderProps<ComponentProps, ChildrenFunctionProps> = ComponentProps & {
+export type IncludeRenderProps<ComponentProps, ChildrenFunctionProps> = ComponentProps & {
   children?: ((props: ChildrenFunctionProps) => ReactNode) | React.ReactNode;
 };
 
 export {
   Nullable,
-  IncludeRenderProps,
-  CioClientOptions,
-  Item,
-  Variation,
-  Pod,
   RecommendationsParameters,
-  RecommendationsRequestModel,
-  RecommendationsResponseModel,
-  RecommendationsData,
-  ApiItem,
-  ApiVariation,
-  ApiPod,
   ApiRecommendationsResponse,
-  RequestStatus,
-  RecommendationContextValue,
-  CioRecommendationProviderProps,
+  RecommendationsRequestModel,
+  ApiItem,
 };
