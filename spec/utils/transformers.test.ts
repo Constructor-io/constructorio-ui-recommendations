@@ -1,4 +1,4 @@
-import { testItem, testApiResponse } from '../localExamples';
+import { testItem, testApiResponse } from '../local_examples';
 import {
   transformPodData,
   transformResultVariation,
