@@ -52,6 +52,31 @@ interface RecommendationsData {
   rawApiResponse: ApiRecommendationsResponse;
 }
 
+interface SwatchItem {
+  variationId?: string;
+  url?: string;
+  itemName?: string;
+  imageUrl?: string;
+  rolloverImage?: string;
+  price?: number;
+  salePrice?: number;
+  swatchPreview?: string;
+}
+
+interface ItemFieldGetters {
+  getPrice: (item: Item | Variation) => number;
+  getSalePrice: (item: Item | Variation) => number | undefined;
+  getRolloverImage: (item: Item | Variation) => string | undefined;
+  getSwatchPreview: (variation: Variation) => string | undefined;
+  getSwatches: (
+    item: Item,
+    retrievePrice: ItemFieldGetters['getPrice'],
+    retrieveSalePrice: ItemFieldGetters['getSalePrice'],
+    retrieveRolloverImage: ItemFieldGetters['getRolloverImage'],
+    retrieveSwatchPreview: ItemFieldGetters['getSwatchPreview'],
+  ) => Array<SwatchItem> | undefined;
+}
+
 export {
   Nullable,
   Item,
@@ -64,4 +89,6 @@ export {
   ApiVariation,
   ApiPod,
   ApiRecommendationsResponse,
+  SwatchItem,
+  ItemFieldGetters,
 };
