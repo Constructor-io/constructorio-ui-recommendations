@@ -54,8 +54,9 @@ describe('Testing Transformers: transformResultVariation', () => {
 
     // Ensure remaining metadata fields are captured in `data`
     expect(result.data.price).toBe(testVariant.data.price);
-    expect(result.data.swatchPreview).toBe(testVariant.data.swatchPreview);
-    expect(result.data.rolloverImage).toBe(testVariant.data.rolloverImage);
+    expect(result.data.sale_price).toBe(testVariant.data.sale_price);
+    expect(result.data.swatch_preview).toBe(testVariant.data.swatch_preview);
+    expect(result.data.rollover_image).toBe(testVariant.data.rollover_image);
   });
 });
 
@@ -97,7 +98,8 @@ describe('Testing Transformers: transformResultItem', () => {
 
     // Ensure remaining metadata fields are captured in `data`
     expect(result.data.price).toBe(testItem.data.price);
-    expect(result.data.altPrice).toBe(testItem.data.altPrice);
+    expect(result.data.sale_price).toBe(testItem.data.sale_price);
+    expect(result.data.rollover_image).toBe(testItem.data.rollover_image);
   });
 });
 
@@ -111,6 +113,9 @@ describe('Testing Transformers: transformRecommendationResponse', () => {
     expect(result?.response.results.length).toBe(testApiResponse.response.results.length);
     result?.response.results.forEach((transformedResult, index) => {
       expect(transformedResult.itemId).toEqual(testApiResponse.response.results[index].data.id);
+      expect(transformedResult.variationId).toEqual(
+        testApiResponse.response.results[index].data.variation_id,
+      );
     });
 
     // Should transform response.total_num_results correctly
