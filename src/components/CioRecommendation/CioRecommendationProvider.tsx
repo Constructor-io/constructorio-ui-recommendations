@@ -1,20 +1,37 @@
-import React, { createContext } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   RecommendationContextValue,
   CioRecommendationProviderProps,
   IncludeRenderProps,
-  Nullable,
 } from '../../types';
-import useCioRecommendationProvider from '../../hooks/useCioRecommendationProvider';
-
-export const RecommendationContext = createContext<Nullable<RecommendationContextValue>>(null);
-RecommendationContext.displayName = 'RecommendationContext';
+import useCioClient from '../../hooks/useCioClient';
+import { RecommendationContext } from '../../hooks/useCioRecommendationContext';
 
 export default function CioRecommendationProvider(
   props: IncludeRenderProps<CioRecommendationProviderProps, RecommendationContextValue>,
 ) {
-  const { children, ...rest } = props;
-  const contextValue = useCioRecommendationProvider(rest);
+  const {
+    children,
+    apiKey,
+    podId,
+    cioClient: customCioClient,
+    cioClientOptions: customCioClientOptions = {},
+    parameters,
+  } = props;
+
+  const [cioClientOptions, setCioClientOptions] = useState(customCioClientOptions);
+  const cioClient = useCioClient({ apiKey, cioClient: customCioClient, options: cioClientOptions });
+
+  const contextValue = useMemo(
+    (): RecommendationContextValue => ({
+      podId,
+      cioClient,
+      cioClientOptions,
+      setCioClientOptions,
+      parameters,
+    }),
+    [cioClient, cioClientOptions, podId, parameters],
+  );
 
   return (
     <RecommendationContext.Provider value={contextValue}>
