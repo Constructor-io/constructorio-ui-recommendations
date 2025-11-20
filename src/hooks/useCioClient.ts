@@ -12,6 +12,8 @@ type UseCioClientProps = {
   options?: Omit<ConstructorClientOptions, 'apiKey' | 'sendTrackingEvents' | 'version'>;
 };
 
+type UseCioClient = (props: UseCioClientProps) => Nullable<ConstructorIOClient> | never;
+
 /**
  * A custom hook to create or use an existing ConstructorIOClient instance
  *
@@ -27,7 +29,7 @@ type UseCioClientProps = {
  *
  * @throws {Error} - Throws an error if neither `apiKey` nor `cioClient` is provided
  */
-const useCioClient = ({
+const useCioClient: UseCioClient = ({
   apiKey,
   cioClient,
   options,
