@@ -2,8 +2,8 @@ import { renderHook } from '@testing-library/react';
 import useCioClient from '../../../src/hooks/useCioClient';
 import version from '../../../src/version';
 
-describe('Hook on Client: useCioClient', () => {
-  it('should throw error if Api Key not provided', () => {
+describe('Testing Hook: useCioClient', () => {
+  it('should throw error if API Key not provided', () => {
     const spy = jest.spyOn(console, 'error');
     spy.mockImplementation(() => {});
     expect(() => renderHook(() => useCioClient())).toThrow();

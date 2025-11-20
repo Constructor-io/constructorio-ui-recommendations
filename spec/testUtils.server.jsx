@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
+import CioRecommendationProvider from '../src/components/CioRecommendation/CioRecommendationProvider';
+import { DEMO_API_KEY, DEMO_POD_ID } from '../src/constants';
 
 export function RenderHookServerSideWrapper({
   renderCallback,
@@ -25,6 +27,27 @@ export function renderHookServerSide(
         renderCallbackProps={renderCallbackProps}
         onRenderHookValue={onRenderHookValue}
       />,
+    ),
+    onRenderHookValue,
+    result: onRenderHookValue.mock.calls[0][0],
+  };
+}
+
+export function renderHookServerSideWithCioProvider(
+  renderCallback,
+  renderCallbackProps,
+  providerProps,
+  onRenderHookValue = jest.fn(),
+) {
+  return {
+    html: ReactDOMServer.renderToString(
+      <CioRecommendationProvider apiKey={DEMO_API_KEY} podId={DEMO_POD_ID} {...providerProps}>
+        <RenderHookServerSideWrapper
+          renderCallback={renderCallback}
+          renderCallbackProps={renderCallbackProps}
+          onRenderHookValue={onRenderHookValue}
+        />
+      </CioRecommendationProvider>,
     ),
     onRenderHookValue,
     result: onRenderHookValue.mock.calls[0][0],

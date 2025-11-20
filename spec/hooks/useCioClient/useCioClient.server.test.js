@@ -1,7 +1,7 @@
 import useCioClient from '../../../src/hooks/useCioClient';
-import { renderHookServerSide } from '../../test-utils.server';
+import { renderHookServerSide } from '../../testUtils.server';
 
-describe('Hook on Server: useCioClient', () => {
+describe('Testing Hook on Server: useCioClient', () => {
   beforeEach(() => {
     const spy = jest.spyOn(console, 'error');
     spy.mockImplementation(() => {});
@@ -11,12 +11,12 @@ describe('Hook on Server: useCioClient', () => {
     jest.resetAllMocks();
   });
 
-  it('should throw error if Api Key not provided', () => {
+  it('should throw error if API Key not provided', () => {
     expect(() =>
       renderHookServerSide(() => useCioClient(), {
         initialProps: {},
       }),
-    ).toThrow('Api Key or Constructor Client required');
+    ).toThrow('API Key or Constructor Client required');
   });
 
   it('should return client when custom client is provided', () => {

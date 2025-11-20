@@ -1,11 +1,14 @@
-import {
+import { ReactNode } from 'react';
+import ConstructorIOClient, {
   Nullable,
   Item as ApiItem,
+  ConstructorClientOptions,
   RecommendationsResponse as ApiRecommendationsResponse,
   RecommendationsRequestType as RecommendationsRequestModel,
-} from '@constructor-io/constructorio-client-javascript/lib/types';
+  RecommendationsParameters,
+} from '@constructor-io/constructorio-client-javascript';
 
-interface Item {
+export interface Item {
   itemName: string;
   matchedTerms: Array<string>;
   isSlotted: boolean;
@@ -23,36 +26,66 @@ interface Item {
   data: Record<string, any>;
 }
 
-interface Variation
+export interface Variation
   extends Omit<Item, 'variations' | 'matchedTerms' | 'isSlotted' | 'itemId' | 'groupIds'> {}
 
-interface ApiVariation extends Omit<ApiItem, 'variations' | 'matched_terms' | 'is_slotted'> {}
+export interface ApiVariation
+  extends Omit<ApiItem, 'variations' | 'matched_terms' | 'is_slotted'> {}
 
-interface Pod {
+export interface Pod {
   id: string;
   displayName: string;
   channels?: Array<string>;
   [key: string]: any;
 }
 
-interface ApiPod extends Omit<Pod, 'displayName'> {
+export interface ApiPod extends Omit<Pod, 'displayName'> {
   display_name: string;
 }
 
-interface RecommendationsResponseModel extends Record<string, any> {
+export interface RecommendationsResponseModel extends Record<string, any> {
   results: Array<Item>;
   totalNumResults: number;
   pod: Pod;
 }
 
-interface RecommendationsData {
+export interface RecommendationsData {
   resultId: string;
   request: RecommendationsRequestModel;
   response: RecommendationsResponseModel;
   rawApiResponse: ApiRecommendationsResponse;
 }
 
-interface SwatchItem {
+export enum RequestStatus {
+  IDLE = 'idle',
+  FETCHING = 'fetching',
+  SUCCESS = 'success',
+  ERROR = 'error',
+}
+
+export interface CioClientOptions extends Omit<ConstructorClientOptions, 'apiKey' | 'version'> {}
+
+export interface RecommendationContextValue {
+  podId: string;
+  cioClient: Nullable<ConstructorIOClient>;
+  cioClientOptions: CioClientOptions;
+  setCioClientOptions: (options: CioClientOptions) => void;
+  parameters?: RecommendationsParameters;
+}
+
+export interface CioRecommendationProviderProps {
+  apiKey: string;
+  podId: string;
+  cioClient?: Nullable<ConstructorIOClient>;
+  cioClientOptions?: CioClientOptions;
+  parameters?: RecommendationsParameters;
+}
+
+export type IncludeRenderProps<ComponentProps, ChildrenFunctionProps> = ComponentProps & {
+  children?: ((props: ChildrenFunctionProps) => ReactNode) | React.ReactNode;
+};
+
+export interface SwatchItem {
   variationId?: string;
   url?: string;
   itemName?: string;
@@ -63,7 +96,7 @@ interface SwatchItem {
   swatchPreview?: string;
 }
 
-interface ItemFieldGetters {
+export interface ItemFieldGetters {
   getPrice: (item: Item | Variation) => number;
   getSalePrice: (item: Item | Variation) => number | undefined;
   getRolloverImage: (item: Item | Variation) => string | undefined;
@@ -79,16 +112,8 @@ interface ItemFieldGetters {
 
 export {
   Nullable,
-  Item,
-  Variation,
-  Pod,
-  RecommendationsRequestModel,
-  RecommendationsResponseModel,
-  RecommendationsData,
-  ApiItem,
-  ApiVariation,
-  ApiPod,
+  RecommendationsParameters,
   ApiRecommendationsResponse,
-  SwatchItem,
-  ItemFieldGetters,
+  RecommendationsRequestModel,
+  ApiItem,
 };

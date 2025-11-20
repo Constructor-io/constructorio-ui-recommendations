@@ -5,7 +5,7 @@ import {
   getSwatchPreview,
   getSwatches,
 } from '../../src/utils/itemFieldGetters';
-import testItem from '../local_examples/transformedItem.json';
+import { testTransformedItem as testItem } from '../localExamples';
 
 describe('Testing ItemFieldGetters: getPrice', () => {
   it('should return the price of given item', () => {
