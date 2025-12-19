@@ -1,4 +1,4 @@
-# 📘 Constructor Recommendations UI
+# Constructor Recommendations UI
 
 *A UI library that provides React components to manage the fetching and rendering logic for [Recommendations](https://constructor.com/solutions/recommendations) powered by Constructor.*
 
@@ -6,43 +6,43 @@
 [![npm version](https://img.shields.io/npm/v/constructorio-ui-recommendations?style=flat-square)](https://www.npmjs.com/package/constructorio-ui-recommendations)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/Constructor-io/constructorio-ui-recommendations/blob/main/LICENSE)
 
-## 📚 Documentation
+## Documentation
 
 View the full component documentation and live examples in **Storybook**:
 
-👉 **[Explore Storybook Documentation →](https://constructor-io.github.io/constructorio-ui-recommendations/)**
+**[Explore Storybook Documentation →](https://constructor-io.github.io/constructorio-ui-recommendations/)**
 
 ---
 
-## 📌 Table of Contents
+## Table of Contents
 
-- [Overview](#-overview)
-- [Installation & Quick Start](#-installation--quick-start)
-- [Integration Modes](#-integration-modes)
-- [Customization](#-customization)
-- [Troubleshooting](#-troubleshooting)
-- [Resources](#-resources)
-- [Contributing](#-contributing)
-- [License](#-license)
+- [Overview](#overview)
+- [Installation & Quick Start](#installation--quick-start)
+- [Integration Modes](#integration-modes)
+- [Customization](#customization)
+- [Troubleshooting](#troubleshooting)
+- [Resources](#resources)
+- [Contributing](#contributing)
+- [License](#license)
 
 ---
 
-## 🚀 Overview
+## Overview
 
 Constructor Recommendations UI provides React components for rendering personalized product recommendations. It handles state management, data fetching, and rendering logic out of the box.
 
 **Key capabilities:**
-- ✅ Ready-to-use React components for recommendations
-- ✅ Automatic state management and data fetching
-- ✅ Fully customizable styling
-- ✅ Framework-agnostic bundle option
-- ✅ TypeScript support included
+- Ready-to-use React components for recommendations
+- Automatic state management and data fetching
+- Fully customizable styling
+- Framework-agnostic bundle option
+- TypeScript support included
 
-📖 **[Explore full documentation →](https://constructor-io.github.io/constructorio-ui-recommendations/)**
+**[Explore full documentation →](https://constructor-io.github.io/constructorio-ui-recommendations/)**
 
 ---
 
-## ⚡ Installation & Quick Start
+## Installation & Quick Start
 
 ### Install via NPM
 
@@ -62,11 +62,11 @@ function App() {
 }
 ```
 
-📖 **[View detailed setup guide →](https://constructor-io.github.io/constructorio-ui-recommendations/)**
+**[View detailed setup guide →](https://constructor-io.github.io/constructorio-ui-recommendations/)**
 
 ---
 
-## 🏗 Integration Modes
+## Integration Modes
 
 ### React Component
 
@@ -94,7 +94,7 @@ CioRecommendations({
 
 ---
 
-## 🎨 Customization
+## Customization
 
 By default, importing React components from this library does not pull any CSS into your project.
 
@@ -117,26 +117,26 @@ import '@constructor-io/constructorio-ui-recommendations/styles.css';
 
 ---
 
-## 🛠 Troubleshooting
+## Troubleshooting
 
 | Issue | Solution |
 |-------|----------|
 | Module not found | Run `npm install constructorio-ui-recommendations` |
 | Need CommonJS build | Import CommonJS: `require('constructorio-ui-recommendations/cjs')` |
 
-💬 **Need more help?** [Open a GitHub issue](https://github.com/Constructor-io/constructorio-ui-recommendations/issues)
+**Need more help?** [Open a GitHub issue](https://github.com/Constructor-io/constructorio-ui-recommendations/issues)
 
 ---
 
-## 🔗 Resources
+## Resources
 
-- 📖 **[Storybook Documentation](https://constructor-io.github.io/constructorio-ui-recommendations/)** - Interactive API reference and examples
-- 📦 **[Constructor.io JS Client](https://github.com/Constructor-io/constructorio-client-javascript)** - Core API client
-- 🌐 **[Constructor.io Docs](https://docs.constructor.com/)** - Platform documentation
+- **[Storybook Documentation](https://constructor-io.github.io/constructorio-ui-recommendations/)** - Interactive API reference and examples
+- **[Constructor.io JS Client](https://github.com/Constructor-io/constructorio-client-javascript)** - Core API client
+- **[Constructor.io Docs](https://docs.constructor.com/)** - Platform documentation
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repo & create a new branch.
 2. Run `npm install` to install dependencies.
@@ -145,7 +145,7 @@ import '@constructor-io/constructorio-ui-recommendations/styles.css';
 
 ---
 
-## 📜 License
+## License
 
 [MIT License](./LICENSE)
 
