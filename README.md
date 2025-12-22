@@ -99,9 +99,14 @@ CioRecommendations({
 By default, importing React components from this library does not pull any CSS into your project.
 
 If you wish to use starter styles from this library, add an import statement similar to the example import statement below:
+
 ```javascript
-import '@constructor-io/constructorio-ui-recommendations/styles.css';
+import 'constructorio-ui-recommendations/styles.css';
 ```
+
+### Customizing Styles
+
+You can customize the default styles using CSS variables:
 
 ```css
 .cio-recommendations {
@@ -109,6 +114,7 @@ import '@constructor-io/constructorio-ui-recommendations/styles.css';
   --font-family: 'Arial', sans-serif;
 }
 ```
+
 - The starter styles can be used as a foundation to build on top of, or as a reference to be replaced completely.
 - To opt out of all default styling, simply do not import the `styles.css` stylesheet.
 - All starter styles in this library are scoped within the `.cio-recommendations` CSS selector.
