@@ -6,6 +6,8 @@
 [![npm version](https://img.shields.io/npm/v/constructorio-ui-recommendations?style=flat-square)](https://www.npmjs.com/package/constructorio-ui-recommendations)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/Constructor-io/constructorio-ui-recommendations/blob/main/LICENSE)
 
+<!-- TODO: Add header GIF/image before release -->
+
 ## Documentation
 
 View the full component documentation and live examples in **Storybook**:
@@ -102,17 +104,6 @@ If you wish to use starter styles from this library, add an import statement sim
 
 ```javascript
 import 'constructorio-ui-recommendations/styles.css';
-```
-
-### Customizing Styles
-
-You can customize the default styles using CSS variables:
-
-```css
-.cio-recommendations {
-  --primary-color: #007bff;
-  --font-family: 'Arial', sans-serif;
-}
 ```
 
 - The starter styles can be used as a foundation to build on top of, or as a reference to be replaced completely.
