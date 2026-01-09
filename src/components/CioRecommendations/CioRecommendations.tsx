@@ -92,4 +92,5 @@ export default function CioRecommendations(props: CioRecommendationsProps) {
   );
 }
 
+CioRecommendations.PodHeader = PodHeader;
 CioRecommendations.Carousel = Carousel;
