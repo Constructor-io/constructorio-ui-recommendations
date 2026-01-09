@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import CioRecommendationProvider from '../src/components/CioRecommendation/CioRecommendationProvider';
+import CioRecommendationProvider from '../src/components/CioRecommendations/CioRecommendationProvider';
 import { DEMO_API_KEY, DEMO_POD_ID } from '../src/constants';
 
 export function RenderHookServerSideWrapper({

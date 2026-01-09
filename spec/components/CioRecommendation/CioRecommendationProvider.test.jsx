@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import CioRecommendationProvider from '../../../src/components/CioRecommendation/CioRecommendationProvider';
+import CioRecommendationProvider from '../../../src/components/CioRecommendations/CioRecommendationProvider';
 import { DEMO_API_KEY, DEMO_POD_ID } from '../../../src/constants';
 
 const mockCioClient = { fetch: jest.fn() };

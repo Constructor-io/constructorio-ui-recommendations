@@ -9,25 +9,41 @@ import ConstructorIOClient, {
 } from '@constructor-io/constructorio-client-javascript';
 
 export interface Item {
-  itemName: string;
+  name: string;
   matchedTerms: Array<string>;
   isSlotted: boolean;
   variations?: Array<Variation>;
+  labels: Record<string, any>;
+  strategy?: { id: string };
 
   // Flattened Data Object
-  itemId: string;
+  id: string;
   variationId?: string;
   url?: string;
   imageUrl?: string;
   description?: string;
   groupIds?: Array<string>;
 
+  // Flattened labels
+  slCampaignId?: string;
+  slCampaignOwner?: string;
+
+  // Flattened strategy
+  strategy_id?: string;
+
+  // ItemFieldGetter Fields
+  price?: number;
+  salePrice?: number;
+
   // Remaining unmapped metadata fields
   data: Record<string, any>;
 }
 
 export interface Variation
-  extends Omit<Item, 'variations' | 'matchedTerms' | 'isSlotted' | 'itemId' | 'groupIds'> {}
+  extends Omit<
+    Item,
+    'variations' | 'matchedTerms' | 'isSlotted' | 'id' | 'groupIds' | 'strategy' | 'labels'
+  > {}
 
 export interface ApiVariation
   extends Omit<ApiItem, 'variations' | 'matched_terms' | 'is_slotted'> {}
@@ -65,25 +81,25 @@ export enum RequestStatus {
 
 export interface CioClientOptions extends Omit<ConstructorClientOptions, 'apiKey' | 'version'> {}
 
-export interface RecommendationContextValue {
+export interface RecommendationsContextValue {
   podId: string;
+  podSubheader?: string;
   cioClient: Nullable<ConstructorIOClient>;
   cioClientOptions: CioClientOptions;
   setCioClientOptions: (options: CioClientOptions) => void;
   parameters?: RecommendationsParameters;
+  itemFieldGetters: ItemFieldGetters;
 }
 
-export interface CioRecommendationProviderProps {
+export interface CioRecommendationsProviderProps {
   apiKey: string;
   podId: string;
+  podSubheader?: string;
   cioClient?: Nullable<ConstructorIOClient>;
   cioClientOptions?: CioClientOptions;
   parameters?: RecommendationsParameters;
+  itemFieldGetters?: Partial<ItemFieldGetters>;
 }
-
-export type IncludeRenderProps<ComponentProps, ChildrenFunctionProps> = ComponentProps & {
-  children?: ((props: ChildrenFunctionProps) => ReactNode) | React.ReactNode;
-};
 
 export interface SwatchItem {
   variationId?: string;
@@ -97,12 +113,12 @@ export interface SwatchItem {
 }
 
 export interface ItemFieldGetters {
-  getPrice: (item: Item | Variation) => number;
-  getSalePrice: (item: Item | Variation) => number | undefined;
-  getRolloverImage: (item: Item | Variation) => string | undefined;
-  getSwatchPreview: (variation: Variation) => string | undefined;
+  getPrice: (item: ApiItem | ApiVariation) => number;
+  getSalePrice: (item: ApiItem | ApiVariation) => number | undefined;
+  getRolloverImage: (item: ApiItem | ApiVariation) => string | undefined;
+  getSwatchPreview: (variation: ApiVariation) => string | undefined;
   getSwatches: (
-    item: Item,
+    item: ApiItem,
     retrievePrice: ItemFieldGetters['getPrice'],
     retrieveSalePrice: ItemFieldGetters['getSalePrice'],
     retrieveRolloverImage: ItemFieldGetters['getRolloverImage'],
@@ -116,4 +132,39 @@ export {
   ApiRecommendationsResponse,
   RecommendationsRequestModel,
   ApiItem,
+};
+
+export type RenderPropsChildren<RenderProps> = ((props: RenderProps) => ReactNode) | ReactNode;
+
+// --- Type Helpers
+
+// Abstract Type
+export interface ComponentOverrideProps<T> {
+  htmlRender?: (props?: T) => HTMLElement; // Unimplemented
+  reactNode?: RenderPropsChildren<T>;
+}
+
+/**
+ * Includes a `children` property of type:
+ * - ReactNode or,
+ * - (renderProps) => ReactNode
+ *
+ * Abstract type to be extended
+ */
+export type IncludeRenderProps<ChildrenFunctionProps> = {
+  children?: RenderPropsChildren<ChildrenFunctionProps>;
+};
+
+/**
+ * Includes the `componentOverrides` property of type:
+ * - ComponentOverrideProps<T>
+ * - Other sub-components J overrides of types `IncludeComponentOverrides<J>`
+ *
+ * Abstract type to be extended
+ */
+export type IncludeComponentOverrides<T> = {
+  /**
+   * ReactNode/RenderProps function overrides for current and sub-components down the tree
+   */
+  componentOverrides?: T;
 };

@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react';
-import { Nullable, RecommendationContextValue } from '../types';
+import { Nullable, RecommendationsContextValue } from '../types';
 
-export const RecommendationContext = createContext<Nullable<RecommendationContextValue>>(null);
+export const RecommendationContext = createContext<Nullable<RecommendationsContextValue>>(null);
 RecommendationContext.displayName = 'RecommendationContext';
 
 /**

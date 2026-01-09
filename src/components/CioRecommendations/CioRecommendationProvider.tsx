@@ -1,36 +1,41 @@
 import React, { useState, useMemo } from 'react';
 import {
-  RecommendationContextValue,
-  CioRecommendationProviderProps,
+  RecommendationsContextValue,
+  CioRecommendationsProviderProps,
   IncludeRenderProps,
 } from '../../types';
 import useCioClient from '../../hooks/useCioClient';
 import { RecommendationContext } from '../../hooks/useCioRecommendationContext';
+import * as defaultGetters from '../../utils/itemFieldGetters';
 
 export default function CioRecommendationProvider(
-  props: IncludeRenderProps<CioRecommendationProviderProps, RecommendationContextValue>,
+  props: CioRecommendationsProviderProps & IncludeRenderProps<RecommendationsContextValue>,
 ) {
   const {
     children,
     apiKey,
     podId,
+    podSubheader,
     cioClient: customCioClient,
     cioClientOptions: customCioClientOptions = {},
     parameters,
+    itemFieldGetters,
   } = props;
 
   const [cioClientOptions, setCioClientOptions] = useState(customCioClientOptions);
   const cioClient = useCioClient({ apiKey, cioClient: customCioClient, options: cioClientOptions });
 
   const contextValue = useMemo(
-    (): RecommendationContextValue => ({
+    (): RecommendationsContextValue => ({
       podId,
+      podSubheader,
       cioClient,
       cioClientOptions,
       setCioClientOptions,
       parameters,
+      itemFieldGetters: { ...defaultGetters, ...itemFieldGetters },
     }),
-    [cioClient, cioClientOptions, podId, parameters],
+    [cioClient, cioClientOptions, podId, podSubheader, parameters, itemFieldGetters],
   );
 
   return (

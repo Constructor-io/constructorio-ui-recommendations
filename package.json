@@ -62,6 +62,7 @@
   },
   "peerDependencies": {
     "@constructor-io/constructorio-client-javascript": "^2.67.1",
+    "@constructor-io/constructorio-ui-components": "file:../constructorio-ui-components",
     "react": ">=16.12.0",
     "react-dom": ">=16.12.0",
     "tslib": "^2.4.0"
@@ -72,13 +73,14 @@
     "@babel/preset-env": "^7.24.0",
     "@babel/preset-react": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
+    "@constructor-io/constructorio-ui-components": "file:../constructorio-ui-components",
     "@cspell/eslint-plugin": "^8.17.5",
     "@storybook/addon-a11y": "^8.6.4",
     "@storybook/addon-actions": "^8.6.4",
     "@storybook/addon-essentials": "^8.6.4",
     "@storybook/addon-interactions": "^8.6.4",
     "@storybook/addon-links": "^8.6.4",
-    "@storybook/addon-mdx-gfm": "^8.6.4",
+    "@storybook/addon-mdx-gfm": "^8.6.14",
     "@storybook/addon-onboarding": "^8.6.4",
     "@storybook/blocks": "^8.6.4",
     "@storybook/react": "^8.6.4",

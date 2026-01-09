@@ -1,6 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 .cio-recommendations,
 * {
   font-family: 'Inter', sans-serif;
+}
+
+.cio-pod-title {
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.cio-pod-subtitle {
+  margin-top: 6px;
+  font-weight: 400;
+  font-size: 14px;
+  color: #64748b;
 }
