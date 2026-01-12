@@ -113,7 +113,7 @@ export interface SwatchItem {
 }
 
 export interface ItemFieldGetters {
-  getPrice: (item: ApiItem | ApiVariation) => number;
+  getPrice: (item: ApiItem | ApiVariation) => number | undefined;
   getSalePrice: (item: ApiItem | ApiVariation) => number | undefined;
   getRolloverImage: (item: ApiItem | ApiVariation) => string | undefined;
   getSwatchPreview: (variation: ApiVariation) => string | undefined;
