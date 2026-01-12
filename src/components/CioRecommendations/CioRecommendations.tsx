@@ -78,6 +78,8 @@ export function CioRecommendationsInner(props: CioRecommendationsInnerProps) {
       </div>
     );
   }
+
+  return null;
 }
 
 export default function CioRecommendations(props: CioRecommendationsProps) {
