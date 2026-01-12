@@ -93,7 +93,7 @@ export default function useRecommendationResults(
 
   const [recommendationResults, setRecommendationResults] = useState<Nullable<RecommendationsData>>(
     initialRecommendationResponse
-      ? transformRecommendationResponse(initialRecommendationResponse)
+      ? transformRecommendationResponse(initialRecommendationResponse, { itemFieldGetters })
       : null,
   );
   const [status, setStatus] = useState<RequestStatus>(
