@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Carousel,
   CarouselOverrides,
+  ComponentOverrideProps,
   IncludeComponentOverrides,
   IncludeRenderProps,
   RenderPropsWrapper,
@@ -14,7 +15,6 @@ import useRecommendationResults, {
 import CioRecommendationProvider from './CioRecommendationProvider';
 import {
   CioRecommendationsProviderProps,
-  ComponentOverrideProps,
   Item,
   RecommendationsContextValue,
 } from '../../types';
@@ -47,11 +47,11 @@ export function CioRecommendationsInner(props: CioRecommendationsInnerProps) {
   const { podSubheader } = context;
 
   if (isResponseLoading(recommendationsResponse)) {
-    return '...loading';
+    return <div className='cio-loading'>Loading...</div>;
   }
 
   if (isResponseError(recommendationsResponse)) {
-    return '404';
+    return <div className='cio-error'>Error loading recommendations</div>;
   }
 
   if (isResponseLoaded(recommendationsResponse)) {
