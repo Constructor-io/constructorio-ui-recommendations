@@ -123,7 +123,7 @@ describe('Testing Transformers: transformResultItem', () => {
 
     expect(result.labels).toBeDefined();
     expect(result.strategy).toBeDefined();
-    expect(result.strategy_id).toBe(testItem.strategy?.id);
+    expect(result.strategyId).toBe(testItem.strategy?.id);
   });
 
   it('should apply itemFieldGetters when provided', () => {
