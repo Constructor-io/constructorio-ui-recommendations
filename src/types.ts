@@ -1,4 +1,3 @@
-import { ReactNode } from 'react';
 import ConstructorIOClient, {
   Nullable,
   Item as ApiItem,
@@ -113,7 +112,7 @@ export interface SwatchItem {
 }
 
 export interface ItemFieldGetters {
-  getPrice: (item: ApiItem | ApiVariation) => number;
+  getPrice: (item: ApiItem | ApiVariation) => number | undefined;
   getSalePrice: (item: ApiItem | ApiVariation) => number | undefined;
   getRolloverImage: (item: ApiItem | ApiVariation) => string | undefined;
   getSwatchPreview: (variation: ApiVariation) => string | undefined;
@@ -132,39 +131,4 @@ export {
   ApiRecommendationsResponse,
   RecommendationsRequestModel,
   ApiItem,
-};
-
-export type RenderPropsChildren<RenderProps> = ((props: RenderProps) => ReactNode) | ReactNode;
-
-// --- Type Helpers
-
-// Abstract Type
-export interface ComponentOverrideProps<T> {
-  htmlRender?: (props?: T) => HTMLElement; // Unimplemented
-  reactNode?: RenderPropsChildren<T>;
-}
-
-/**
- * Includes a `children` property of type:
- * - ReactNode or,
- * - (renderProps) => ReactNode
- *
- * Abstract type to be extended
- */
-export type IncludeRenderProps<ChildrenFunctionProps> = {
-  children?: RenderPropsChildren<ChildrenFunctionProps>;
-};
-
-/**
- * Includes the `componentOverrides` property of type:
- * - ComponentOverrideProps<T>
- * - Other sub-components J overrides of types `IncludeComponentOverrides<J>`
- *
- * Abstract type to be extended
- */
-export type IncludeComponentOverrides<T> = {
-  /**
-   * ReactNode/RenderProps function overrides for current and sub-components down the tree
-   */
-  componentOverrides?: T;
 };

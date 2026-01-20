@@ -39,13 +39,13 @@ export interface UseRecommendationsResultsReturnLoading extends UseRecommendatio
 export function isResponseLoaded(
   response: UseRecommendationResultsReturn,
 ): response is UseRecommendationsResultsReturnSuccess {
-  return response.status === RequestStatus.SUCCESS || response.status === RequestStatus.IDLE;
+  return response.status === RequestStatus.SUCCESS;
 }
 
 export function isResponseLoading(
   response: UseRecommendationResultsReturn,
 ): response is UseRecommendationsResultsReturnLoading {
-  return response.status === RequestStatus.IDLE;
+  return response.status === RequestStatus.FETCHING || response.status === RequestStatus.IDLE;
 }
 
 export function isResponseError(
@@ -93,7 +93,7 @@ export default function useRecommendationResults(
 
   const [recommendationResults, setRecommendationResults] = useState<Nullable<RecommendationsData>>(
     initialRecommendationResponse
-      ? transformRecommendationResponse(initialRecommendationResponse)
+      ? transformRecommendationResponse(initialRecommendationResponse, { itemFieldGetters })
       : null,
   );
   const [status, setStatus] = useState<RequestStatus>(

@@ -1,9 +1,6 @@
 import React, { useState, useMemo } from 'react';
-import {
-  RecommendationsContextValue,
-  CioRecommendationsProviderProps,
-  IncludeRenderProps,
-} from '../../types';
+import { IncludeRenderProps } from '@constructor-io/constructorio-ui-components';
+import { RecommendationsContextValue, CioRecommendationsProviderProps } from '../../types';
 import useCioClient from '../../hooks/useCioClient';
 import { RecommendationContext } from '../../hooks/useCioRecommendationContext';
 import * as defaultGetters from '../../utils/itemFieldGetters';

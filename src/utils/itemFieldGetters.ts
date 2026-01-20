@@ -1,6 +1,6 @@
 import { ItemFieldGetters, ApiItem, SwatchItem, ApiVariation } from '../types';
 
-export function getPrice(item: ApiItem | ApiVariation): number {
+export function getPrice(item: ApiItem | ApiVariation): number | undefined {
   return item.data.price;
 }
 
