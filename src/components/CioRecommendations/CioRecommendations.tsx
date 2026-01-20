@@ -13,11 +13,7 @@ import useRecommendationResults, {
   isResponseLoading,
 } from '../../hooks/useRecommendationResults';
 import CioRecommendationProvider from './CioRecommendationProvider';
-import {
-  CioRecommendationsProviderProps,
-  Item,
-  RecommendationsContextValue,
-} from '../../types';
+import { CioRecommendationsProviderProps, Item, RecommendationsContextValue } from '../../types';
 import { getRecommendationsPodContainerDataAttributes } from '../../utils/dataAttributeHelpers';
 import { PodHeader, PodHeaderOverrides } from '../PodHeader/PodHeader';
 import { useCioRecommendationContext } from '../../hooks/useCioRecommendationContext';

@@ -28,7 +28,7 @@ export interface Item {
   slCampaignOwner?: string;
 
   // Flattened strategy
-  strategy_id?: string;
+  strategyId?: string;
 
   // ItemFieldGetter Fields
   price?: number;

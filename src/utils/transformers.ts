@@ -97,7 +97,7 @@ export function transformResultItem(
     slCampaignOwner: resultItem.labels?.sl_campaign_owner as string | undefined,
 
     // Flatten the strategy object
-    strategy_id: resultItem.strategy?.id,
+    strategyId: resultItem.strategy?.id,
 
     // itemFieldGetters
     price: itemFieldGetters?.getPrice?.(resultItem),
