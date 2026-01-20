@@ -1,0 +1,50 @@
+import { Meta, Canvas, Markdown, Source } from '@storybook/blocks';
+import * as CioRecommendationsStories from './CioRecommendations.stories';
+import RenderPropsExampleCss from './CioRecommendationsExamples.css?raw';
+import RenderPropsTable from './CioRecommendationsRenderProps.md?raw';
+
+<Meta of={CioRecommendationsStories} />
+
+# `CioRecommendations` - Code Examples with Render Props
+
+Using render props pattern for complete layout customization
+
+## Render Props Example
+
+<Canvas of={CioRecommendationsStories.RenderPropsShowcase} />
+
+```jsx
+import CioRecommendations from '@constructor-io/constructorio-ui-recommendations';
+
+const DEMO_API_KEY = 'key_M57QS8SMPdLdLx4x';
+
+export default function MyComponent() {
+  return (
+    <CioRecommendations apiKey={DEMO_API_KEY} podId='bestsellers'>
+      {({ items, podId }) => (
+        <div className='render-props-showcase'>
+          <div className='showcase-header'>
+            <h2 className='showcase-title'>Featured Recommendations</h2>
+            <p className='showcase-subtitle'>Personalized picks for you from {podId}</p>
+          </div>
+          <div className='showcase-grid'>
+            {items.slice(0, 6).map((item) => (
+              <div key={item.id} className='showcase-card'>
+                <img src={item.imageUrl} alt={item.name} />
+                <h3>{item.name}</h3>
+                {item.price && <div className='price'>${item.price}</div>}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </CioRecommendations>
+  );
+}
+```
+
+### CSS
+
+<Source code={RenderPropsExampleCss} language='css' />
+
+<Markdown>{RenderPropsTable}</Markdown>

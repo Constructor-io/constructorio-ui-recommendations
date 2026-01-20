@@ -1,0 +1,40 @@
+import { Meta, Canvas } from '@storybook/blocks';
+import * as PodHeaderStories from './PodHeader.stories';
+
+<Meta of={PodHeaderStories} />
+
+# `PodHeader` - Basic Code Examples
+
+Using the default `PodHeader` component for recommendation pod titles
+
+## Default Header
+
+<Canvas of={PodHeaderStories.Default} />
+
+```jsx
+import { PodHeader } from "@constructor-io/constructorio-ui-recommendations";
+import "@constructor-io/constructorio-ui-recommendations/styles.css";
+
+export default function MyComponent() {
+  return <PodHeader podHeader="Recommended for You" />;
+}
+```
+
+## With Subheader
+
+Add additional context with a subheader below the main title via a prop
+
+<Canvas of={PodHeaderStories.WithSubheader} />
+
+```jsx
+import { PodHeader } from "@constructor-io/constructorio-ui-recommendations";
+
+export default function MyComponent() {
+  return (
+    <PodHeader
+      podHeader="Trending Products"
+      podSubheader="Popular items this week"
+    />
+  );
+}
+```
