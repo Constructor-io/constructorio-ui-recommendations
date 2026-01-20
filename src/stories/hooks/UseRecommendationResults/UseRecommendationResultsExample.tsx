@@ -1,9 +1,9 @@
 import React from 'react';
 import { DisplayHookExample } from '../utils';
 import useRecommendationResults from '../../../hooks/useRecommendationResults';
-import { CioRecommendationProviderProps } from '../../../types';
+import { CioRecommendationsProviderProps } from '../../../types';
 
-interface UseRecommendationResultsExampleProps extends CioRecommendationProviderProps {}
+interface UseRecommendationResultsExampleProps extends CioRecommendationsProviderProps {}
 
 export default function UseRecommendationResultsExample(
   props: UseRecommendationResultsExampleProps,

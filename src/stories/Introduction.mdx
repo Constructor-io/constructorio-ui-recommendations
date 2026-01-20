@@ -1,5 +1,50 @@
 import { Meta } from '@storybook/blocks';
+import Code from './assets/code-brackets.svg';
+import Repo from './assets/repo.svg';
+import StackAlt from './assets/stackalt.svg';
+import './assets/storybook-introduction.css';
 
 <Meta title='General/Introduction' />
 
 # Welcome to Constructor's Recommendations UI
+
+Integration with Constructor's Recommendations API has never been easier with **comprehensive components** that take care of both the tracking and results retrieval,
+allowing you to focus on developing your own unique site experience.
+
+If you prefer hooks, we provide the **useRecommendationResults** hook that accepts a suite of configuration parameters and returns all the underlying logic that powers all our components.
+
+<div className='subheading'>Components</div>
+
+<div className='link-list'>
+  <a className='link-item' href='./?path=/docs/components-ciorecommendations--code-examples-basic'>
+    <img src={Repo} alt='component' />
+    <span>
+      <strong>CioRecommendations</strong>
+      An all-in-one component that renders a recommendations pod with carousel
+    </span>
+  </a>
+  <a className='link-item' href='./?path=/docs/components-podheader--code-examples-basic'>
+    <img src={StackAlt} alt='header' />
+    <span>
+      <strong>PodHeader</strong>
+      Renders the header and optional subheader for a recommendations pod
+    </span>
+  </a>
+</div>
+
+<div className='subheading'>Hooks</div>
+
+<div className='link-list'>
+  <a className='link-item' href='./?path=/docs/hooks-userecommendationresults--props'>
+    <img src={Code} alt='code' />
+    <span>
+      <strong>useRecommendationResults</strong>A Hook that fetches and manages recommendation
+      results from Constructor
+    </span>
+  </a>
+</div>
+
+<div className='badge-wrapper tip-wrapper'>
+  <span className='badge tip'>Tip</span>Having trouble with a unique use case? Contact your friendly
+  Integration Engineers for support!
+</div>
