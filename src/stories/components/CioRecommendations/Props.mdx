@@ -19,9 +19,9 @@ Additional parameters that can be passed to the Constructor.io Recommendations A
 
 | Property      | Type                 | Description                               |
 | ------------- | -------------------- | ----------------------------------------- |
-| num_results   | `number`             | Number of results to return               |
+| numResults    | `number`             | Number of results to return               |
 | section       | `string`             | Section to filter results by              |
-| item_id       | `string \| string[]` | Item ID(s) for item-based recommendations |
+| itemIds       | `string | string[]`  | Item ID(s) for item-based recommendations |
 | filters       | `object`             | Additional filters to apply               |
 | hiddenFields  | `string[]`           | Fields to hide from the response          |
 | variationsMap | `VariationsMap`      | Map of variations configuration           |
@@ -34,7 +34,7 @@ ItemFieldGetters maps the fields sent in the catalog feeds to the fields the lib
 
 | Property         | Type                                                 | Description                                                                                                                      |
 | ---------------- | ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| getPrice         | `(item: Item \| Variation) => number \| undefined`   | Maps the price field from the API Response in `item.data`. Defaults to `item.data.price`                                         |
+| getPrice         | `(item: Item &#124; Variation) => number \| undefined`   | Maps the price field from the API Response in `item.data`. Defaults to `item.data.price`                                         |
 | getSalePrice     | `(item: Item \| Variation) => number \| undefined`   | Maps the sale price from the API Response in `item.data`. Defaults to `item.data.sale_price`                                     |
 | getRolloverImage | `(item: Item \| Variation) => string \| undefined`   | Maps the rollover/hover image URL field from the API Response in `item.data`. Defaults to `item.data.rollover_image`             |
 | getSwatchPreview | `(variation: Variation) => string \| undefined`      | Maps the swatch preview from the API Response in `variations.data`. Defaults to `variation.data.swatch_preview`                  |
@@ -52,8 +52,8 @@ ItemFieldGetters maps the fields sent in the catalog feeds to the fields the lib
 
 The CioRecommendations component uses the following CSS classes for styling:
 
-| Class Name            | Description                                        |
-| --------------------- | -------------------------------------------------- |
-| `.cio-recommendations`| Container for the entire recommendations component |
-| `.cio-loading`        | Loading state container                            |
-| `.cio-error`          | Error state container                              |
+| Class Name             | Description                                        |
+| ---------------------- | -------------------------------------------------- |
+| `.cio-recommendations` | Container for the entire recommendations component |
+| `.cio-loading`         | Loading state container                            |
+| `.cio-error`           | Error state container                              |

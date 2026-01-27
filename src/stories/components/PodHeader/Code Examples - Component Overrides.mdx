@@ -2,7 +2,7 @@ import { Meta, Canvas, Markdown, Source } from '@storybook/blocks';
 import * as PodHeaderStories from './PodHeader.stories';
 import ComponentOverrideCssExample from './PodHeaderComponentOverrideExample.css?raw';
 import RenderPropsTable from './PodHeaderRenderProps.md?raw';
-/* This "?raw" import raw text form the md file */
+/* This "?raw" import imports raw text from the md file */
 
 <Meta of={PodHeaderStories} />
 
@@ -15,7 +15,7 @@ allowing you to customize the pod header without needing to recreate the entire 
 
 <Canvas of={PodHeaderStories.ComponentOverride} />
 
-```jsx
+```
 import CioRecommendations from '@constructor-io/constructorio-ui-recommendations';
 
 const DEMO_API_KEY = 'key_M57QS8SMPdLdLx4x';
