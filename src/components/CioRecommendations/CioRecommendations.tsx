@@ -17,6 +17,14 @@ import { CioRecommendationsProviderProps, Item, RecommendationsContextValue } fr
 import { getRecommendationsPodContainerDataAttributes } from '../../utils/dataAttributeHelpers';
 import { PodHeader, PodHeaderOverrides } from '../PodHeader/PodHeader';
 import { useCioRecommendationContext } from '../../hooks/useCioRecommendationContext';
+import {
+  CioRecommendationsLoading,
+  CioRecommendationsLoadingOverrides,
+} from './CioRecommendationsLoading';
+import {
+  CioRecommendationsError,
+  CioRecommendationsErrorOverrides,
+} from './CioRecommendationsError';
 
 export interface CioRecommendationsRenderProps extends RecommendationsContextValue {
   items: Item[];
@@ -26,6 +34,8 @@ export interface CioRecommendationsComponentOverrides
   extends ComponentOverrideProps<CioRecommendationsRenderProps> {
   carousel?: CarouselOverrides;
   podHeader?: PodHeaderOverrides;
+  loading?: CioRecommendationsLoadingOverrides;
+  error?: CioRecommendationsErrorOverrides;
 }
 
 export interface CioRecommendationsInnerProps
@@ -43,11 +53,16 @@ export function CioRecommendationsInner(props: CioRecommendationsInnerProps) {
   const { podSubheader } = context;
 
   if (isResponseLoading(recommendationsResponse)) {
-    return <div className='cio-loading'>Loading...</div>;
+    return <CioRecommendationsLoading componentOverrides={componentOverrides?.loading} />;
   }
 
   if (isResponseError(recommendationsResponse)) {
-    return <div className='cio-error'>Error loading recommendations</div>;
+    return (
+      <CioRecommendationsError
+        componentOverrides={componentOverrides?.error}
+        response={recommendationsResponse}
+      />
+    );
   }
 
   if (isResponseLoaded(recommendationsResponse)) {
@@ -92,3 +107,5 @@ export default function CioRecommendations(props: CioRecommendationsProps) {
 
 CioRecommendations.PodHeader = PodHeader;
 CioRecommendations.Carousel = Carousel;
+CioRecommendations.Loading = CioRecommendationsLoading;
+CioRecommendations.Error = CioRecommendationsError;
