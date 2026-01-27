@@ -32,7 +32,7 @@ export interface UseRecommendationsResultsReturnFailure extends UseRecommendatio
 
 export interface UseRecommendationsResultsReturnLoading extends UseRecommendationResultsReturn {
   data: never;
-  status: RequestStatus.FETCHING;
+  status: RequestStatus.FETCHING | RequestStatus.IDLE;
   message: never;
 }
 

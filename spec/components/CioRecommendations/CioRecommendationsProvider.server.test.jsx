@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import CioRecommendationProvider from '../../../src/components/CioRecommendations/CioRecommendationProvider';
+import CioRecommendationsProvider from '../../../src/components/CioRecommendations/CioRecommendationsProvider';
 import { useCioRecommendationContext } from '../../../src/hooks/useCioRecommendationContext';
 import { DEMO_API_KEY, DEMO_POD_ID } from '../../../src/constants';
 
 describe('CioRecommendationProvider React Server-Side Rendering', () => {
   it('renders provider without children on the server without error', () => {
     const html = ReactDOMServer.renderToString(
-      <CioRecommendationProvider apiKey={DEMO_API_KEY} podId={DEMO_POD_ID} />,
+      <CioRecommendationsProvider apiKey={DEMO_API_KEY} podId={DEMO_POD_ID} />,
     );
 
     expect(html).toBe('');
@@ -16,7 +16,7 @@ describe('CioRecommendationProvider React Server-Side Rendering', () => {
   it('renders provider without children on the server without error, if cioClient is provided', () => {
     const mockCioClient = { fetch: jest.fn() };
     const html = ReactDOMServer.renderToString(
-      <CioRecommendationProvider
+      <CioRecommendationsProvider
         apiKey={DEMO_API_KEY}
         podId={DEMO_POD_ID}
         cioClient={mockCioClient}
@@ -28,9 +28,9 @@ describe('CioRecommendationProvider React Server-Side Rendering', () => {
 
   it('renders provider with children correctly on the server', () => {
     const html = ReactDOMServer.renderToString(
-      <CioRecommendationProvider apiKey={DEMO_API_KEY} podId={DEMO_POD_ID}>
+      <CioRecommendationsProvider apiKey={DEMO_API_KEY} podId={DEMO_POD_ID}>
         <div>Test Child</div>
-      </CioRecommendationProvider>,
+      </CioRecommendationsProvider>,
     );
 
     expect(html).toContain('<div>Test Child</div>');
@@ -38,9 +38,9 @@ describe('CioRecommendationProvider React Server-Side Rendering', () => {
 
   it('renders provider with render props on the server', () => {
     const html = ReactDOMServer.renderToString(
-      <CioRecommendationProvider apiKey={DEMO_API_KEY} podId={DEMO_POD_ID}>
+      <CioRecommendationsProvider apiKey={DEMO_API_KEY} podId={DEMO_POD_ID}>
         {() => <div>Render Props Child</div>}
-      </CioRecommendationProvider>,
+      </CioRecommendationsProvider>,
     );
 
     expect(html).toContain('<div>Render Props Child</div>');
@@ -54,9 +54,9 @@ describe('CioRecommendationProvider React Server-Side Rendering', () => {
     }
 
     const html = ReactDOMServer.renderToString(
-      <CioRecommendationProvider apiKey={DEMO_API_KEY} podId={DEMO_POD_ID}>
+      <CioRecommendationsProvider apiKey={DEMO_API_KEY} podId={DEMO_POD_ID}>
         <ContextConsumer />
-      </CioRecommendationProvider>,
+      </CioRecommendationsProvider>,
     );
 
     // HTML entities are encoded in server-side rendering
@@ -72,9 +72,9 @@ describe('CioRecommendationProvider React Server-Side Rendering', () => {
     }
 
     const html = ReactDOMServer.renderToString(
-      <CioRecommendationProvider apiKey={DEMO_API_KEY} podId={DEMO_POD_ID}>
+      <CioRecommendationsProvider apiKey={DEMO_API_KEY} podId={DEMO_POD_ID}>
         <ContextConsumer />
-      </CioRecommendationProvider>,
+      </CioRecommendationsProvider>,
     );
 
     expect(html).toContain('data-cio-client="null"');
@@ -90,12 +90,12 @@ describe('CioRecommendationProvider React Server-Side Rendering', () => {
     const testParameters = { num_results: 10, section: 'Products' };
 
     const html = ReactDOMServer.renderToString(
-      <CioRecommendationProvider
+      <CioRecommendationsProvider
         apiKey={DEMO_API_KEY}
         podId={DEMO_POD_ID}
         parameters={testParameters}>
         <ContextConsumer />
-      </CioRecommendationProvider>,
+      </CioRecommendationsProvider>,
     );
 
     // HTML entities are encoded in server-side rendering
@@ -113,12 +113,12 @@ describe('CioRecommendationProvider React Server-Side Rendering', () => {
     }
 
     const html = ReactDOMServer.renderToString(
-      <CioRecommendationProvider
+      <CioRecommendationsProvider
         apiKey={DEMO_API_KEY}
         podId={DEMO_POD_ID}
         podSubheader='Featured Products'>
         <ContextConsumer />
-      </CioRecommendationProvider>,
+      </CioRecommendationsProvider>,
     );
 
     expect(html).toContain('Featured Products');
@@ -133,9 +133,9 @@ describe('CioRecommendationProvider React Server-Side Rendering', () => {
     }
 
     const html = ReactDOMServer.renderToString(
-      <CioRecommendationProvider apiKey={DEMO_API_KEY} podId={DEMO_POD_ID}>
+      <CioRecommendationsProvider apiKey={DEMO_API_KEY} podId={DEMO_POD_ID}>
         <ContextConsumer />
-      </CioRecommendationProvider>,
+      </CioRecommendationsProvider>,
     );
 
     expect(html).toContain('getPrice');
@@ -159,12 +159,12 @@ describe('CioRecommendationProvider React Server-Side Rendering', () => {
     };
 
     const html = ReactDOMServer.renderToString(
-      <CioRecommendationProvider
+      <CioRecommendationsProvider
         apiKey={DEMO_API_KEY}
         podId={DEMO_POD_ID}
         itemFieldGetters={customGetters}>
         <ContextConsumer />
-      </CioRecommendationProvider>,
+      </CioRecommendationsProvider>,
     );
 
     // React may insert comments for hydration, so check for parts
@@ -182,9 +182,9 @@ describe('CioRecommendationProvider React Server-Side Rendering', () => {
     }
 
     const html = ReactDOMServer.renderToString(
-      <CioRecommendationProvider apiKey={DEMO_API_KEY} podId={DEMO_POD_ID}>
+      <CioRecommendationsProvider apiKey={DEMO_API_KEY} podId={DEMO_POD_ID}>
         <ContextConsumer />
-      </CioRecommendationProvider>,
+      </CioRecommendationsProvider>,
     );
 
     expect(html).toContain('data-has-setter="yes"');

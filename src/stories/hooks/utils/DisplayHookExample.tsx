@@ -1,5 +1,5 @@
 import React from 'react';
-import CioRecommendationProvider from '../../../components/CioRecommendations/CioRecommendationProvider';
+import CioRecommendationsProvider from '../../../components/CioRecommendations/CioRecommendationsProvider';
 import { CioRecommendationsProviderProps } from '../../../types';
 import './DisplayHookExample.css';
 
@@ -28,11 +28,11 @@ export default function DisplayHookExample(props: DisplayHookExampleProps) {
   const { title, providerProps, renderHook, renderHookProps } = props;
 
   return (
-    <CioRecommendationProvider {...providerProps}>
+    <CioRecommendationsProvider {...providerProps}>
       <div>
         <h2>{title}</h2>
         <HookRender renderHook={renderHook} renderHookProps={renderHookProps} />
       </div>
-    </CioRecommendationProvider>
+    </CioRecommendationsProvider>
   );
 }

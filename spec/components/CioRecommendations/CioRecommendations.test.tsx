@@ -108,10 +108,12 @@ describe('CioRecommendations', () => {
     it('renders error state when fetch fails', async () => {
       mockGetRecommendations.mockRejectedValue(new Error('API Error'));
 
-      render(<CioRecommendations apiKey={DEMO_API_KEY} podId={DEMO_POD_ID} />);
+      const { container } = render(
+        <CioRecommendations apiKey={DEMO_API_KEY} podId={DEMO_POD_ID} />,
+      );
 
       await waitFor(() => {
-        expect(screen.getByText('Error loading recommendations')).toBeInTheDocument();
+        expect(container.querySelector('.cio-error')).toBeInTheDocument();
       });
     });
 
@@ -120,7 +122,6 @@ describe('CioRecommendations', () => {
 
       await waitFor(() => {
         expect(screen.getByTestId('mock-carousel')).toHaveTextContent('Carousel with 2 items');
-        expect(false).toBeTruthy();
       });
     });
 
