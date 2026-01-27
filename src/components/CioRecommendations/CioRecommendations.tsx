@@ -12,7 +12,7 @@ import useRecommendationResults, {
   isResponseLoaded,
   isResponseLoading,
 } from '../../hooks/useRecommendationResults';
-import CioRecommendationProvider from './CioRecommendationProvider';
+import CioRecommendationsProvider from './CioRecommendationsProvider';
 import { CioRecommendationsProviderProps, Item, RecommendationsContextValue } from '../../types';
 import { getRecommendationsPodContainerDataAttributes } from '../../utils/dataAttributeHelpers';
 import { PodHeader, PodHeaderOverrides } from '../PodHeader/PodHeader';
@@ -82,11 +82,11 @@ export default function CioRecommendations(props: CioRecommendationsProps) {
   const { componentOverrides, children, ...restProps } = props;
 
   return (
-    <CioRecommendationProvider {...restProps}>
+    <CioRecommendationsProvider {...restProps}>
       <CioRecommendationsInner componentOverrides={componentOverrides}>
         {children}
       </CioRecommendationsInner>
-    </CioRecommendationProvider>
+    </CioRecommendationsProvider>
   );
 }
 
