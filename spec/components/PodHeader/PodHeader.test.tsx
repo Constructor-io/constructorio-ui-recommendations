@@ -41,7 +41,9 @@ describe('PodHeader', () => {
     );
 
     expect(screen.getByText('Bestsellers')).toBeInTheDocument();
+    expect(screen.getByText('Bestsellers').tagName).toBe('H1');
     expect(screen.getByText('Top products')).toBeInTheDocument();
+    expect(screen.getByText('Top products').tagName).toBe('P');
   });
 
   it('supports component override', () => {

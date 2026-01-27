@@ -90,258 +90,272 @@ describe('CioRecommendations', () => {
     });
   });
 
-  it('renders with pod subheader', async () => {
-    render(
-      <CioRecommendations
-        apiKey={DEMO_API_KEY}
-        podId={DEMO_POD_ID}
-        podSubheader='Top selling products'
-      />,
-    );
+  describe('Rendering Tests', () => {
+    it('renders with pod subheader', async () => {
+      render(
+        <CioRecommendations
+          apiKey={DEMO_API_KEY}
+          podId={DEMO_POD_ID}
+          podSubheader='Top selling products'
+        />,
+      );
 
-    await waitFor(() => {
-      expect(screen.getByText('Top selling products')).toBeInTheDocument();
+      await waitFor(() => {
+        expect(screen.getByText('Top selling products')).toBeInTheDocument();
+      });
+    });
+
+    it('renders error state when fetch fails', async () => {
+      mockGetRecommendations.mockRejectedValue(new Error('API Error'));
+
+      render(<CioRecommendations apiKey={DEMO_API_KEY} podId={DEMO_POD_ID} />);
+
+      await waitFor(() => {
+        expect(screen.getByText('Error loading recommendations')).toBeInTheDocument();
+      });
+    });
+
+    it('renders carousel with items after successful fetch', async () => {
+      render(<CioRecommendations apiKey={DEMO_API_KEY} podId={DEMO_POD_ID} />);
+
+      await waitFor(() => {
+        expect(screen.getByTestId('mock-carousel')).toHaveTextContent('Carousel with 2 items');
+        expect(false).toBeTruthy();
+      });
+    });
+
+    it('applies tracking data attributes', async () => {
+      const { container } = render(
+        <CioRecommendations apiKey={DEMO_API_KEY} podId={DEMO_POD_ID} />,
+      );
+
+      await waitFor(() => {
+        const recommendationsContainer = container.querySelector('.cio-recommendations');
+        expect(recommendationsContainer).not.toBeNull();
+        if (recommendationsContainer) {
+          expect(recommendationsContainer).toHaveAttribute('data-cnstrc-recommendations', 'true');
+          expect(recommendationsContainer).toHaveAttribute(
+            'data-cnstrc-recommendations-pod-id',
+            DEMO_POD_ID,
+          );
+          expect(recommendationsContainer).toHaveAttribute(
+            'data-cnstrc-result-id',
+            'test-result-id',
+          );
+          expect(recommendationsContainer).toHaveAttribute('data-cnstrc-num-results', '2');
+        }
+      });
+    });
+
+    it('renders loading state initially', () => {
+      // Don't resolve the promise immediately to test loading state
+      mockGetRecommendations.mockImplementation(
+        () =>
+          new Promise((resolve) => {
+            setTimeout(() => resolve(mockRecommendationsResponse), 1000);
+          }),
+      );
+
+      render(<CioRecommendations apiKey={DEMO_API_KEY} podId={DEMO_POD_ID} />);
+
+      expect(screen.getByText('Loading...')).toBeInTheDocument();
+    });
+
+    it('renders without error when custom cioClient is provided', async () => {
+      const mockClient = {
+        recommendations: {
+          getRecommendations: jest.fn().mockResolvedValue(mockRecommendationsResponse),
+        },
+      };
+
+      render(
+        <CioRecommendations
+          apiKey={DEMO_API_KEY}
+          podId={DEMO_POD_ID}
+          cioClient={mockClient as any}
+        />,
+      );
+
+      await waitFor(() => {
+        expect(screen.getByText('Bestsellers')).toBeInTheDocument();
+      });
     });
   });
 
-  it('renders error state when fetch fails', async () => {
-    mockGetRecommendations.mockRejectedValue(new Error('API Error'));
+  describe('Render Overrides Test', () => {
+    it('supports render props pattern', async () => {
+      render(
+        <CioRecommendations apiKey={DEMO_API_KEY} podId={DEMO_POD_ID}>
+          {({ items }) => (
+            <div>
+              <h2>Custom Layout</h2>
+              <p>Items: {items.length}</p>
+            </div>
+          )}
+        </CioRecommendations>,
+      );
 
-    render(<CioRecommendations apiKey={DEMO_API_KEY} podId={DEMO_POD_ID} />);
+      await waitFor(() => {
+        expect(screen.getByText('Custom Layout')).toBeInTheDocument();
+        expect(screen.getByText('Items: 2')).toBeInTheDocument();
+      });
+    });
 
-    await waitFor(() => {
-      expect(screen.getByText('Error loading recommendations')).toBeInTheDocument();
+    it('supports component overrides for pod header', async () => {
+      render(
+        <CioRecommendations
+          apiKey={DEMO_API_KEY}
+          podId={DEMO_POD_ID}
+          componentOverrides={{
+            podHeader: {
+              reactNode: <div>Custom Pod Header</div>,
+            },
+          }}
+        />,
+      );
+
+      await waitFor(
+        () => {
+          expect(screen.getByText('Custom Pod Header')).toBeInTheDocument();
+          expect(screen.queryByText('Bestsellers')).not.toBeInTheDocument();
+        },
+        { timeout: 3000 },
+      );
+    });
+
+    it('provides context values to render props children', async () => {
+      render(
+        <CioRecommendations apiKey={DEMO_API_KEY} podId={DEMO_POD_ID}>
+          {({ podId, items, itemFieldGetters }) => (
+            <div>
+              <span data-testid='context-pod-id'>{podId}</span>
+              <span data-testid='context-items-count'>{items.length}</span>
+              <span data-testid='context-has-getters'>
+                {typeof itemFieldGetters.getPrice === 'function' ? 'yes' : 'no'}
+              </span>
+            </div>
+          )}
+        </CioRecommendations>,
+      );
+
+      await waitFor(() => {
+        expect(screen.getByTestId('context-pod-id')).toHaveTextContent(DEMO_POD_ID);
+        expect(screen.getByTestId('context-items-count')).toHaveTextContent('2');
+        expect(screen.getByTestId('context-has-getters')).toHaveTextContent('yes');
+      });
+    });
+
+    it('supports component override with render props for pod header', async () => {
+      render(
+        <CioRecommendations
+          apiKey={DEMO_API_KEY}
+          podId={DEMO_POD_ID}
+          componentOverrides={{
+            podHeader: {
+              reactNode: (
+                <div data-testid='custom-header' className='cio-pod-header'>
+                  Modified Header
+                </div>
+              ),
+            },
+          }}
+        />,
+      );
+
+      await waitFor(
+        () => {
+          expect(screen.getByTestId('custom-header')).toHaveTextContent('Modified Header');
+        },
+        { timeout: 3000 },
+      );
+    });
+
+    it('supports component override with reactNode for entire component', async () => {
+      render(
+        <CioRecommendations
+          apiKey={DEMO_API_KEY}
+          podId={DEMO_POD_ID}
+          componentOverrides={{
+            reactNode: <div data-testid='full-override'>Completely Custom Content</div>,
+          }}
+        />,
+      );
+
+      await waitFor(
+        () => {
+          expect(screen.getByTestId('full-override')).toBeInTheDocument();
+          expect(screen.queryByText('Bestsellers')).not.toBeInTheDocument();
+        },
+        { timeout: 3000 },
+      );
     });
   });
 
-  it('applies tracking data attributes', async () => {
-    const { container } = render(<CioRecommendations apiKey={DEMO_API_KEY} podId={DEMO_POD_ID} />);
+  describe('Passing Props Test', () => {
+    it('calls API with correct parameters', async () => {
+      const customParameters = {
+        num_results: 5,
+        section: 'Products',
+      };
 
-    await waitFor(() => {
-      const recommendationsContainer = container.querySelector('.cio-recommendations');
-      expect(recommendationsContainer).not.toBeNull();
-      if (recommendationsContainer) {
-        expect(recommendationsContainer).toHaveAttribute('data-cnstrc-recommendations', 'true');
-        expect(recommendationsContainer).toHaveAttribute(
-          'data-cnstrc-recommendations-pod-id',
-          DEMO_POD_ID,
+      render(
+        <CioRecommendations
+          apiKey={DEMO_API_KEY}
+          podId={DEMO_POD_ID}
+          parameters={customParameters}
+        />,
+      );
+
+      await waitFor(() => {
+        expect(mockGetRecommendations).toHaveBeenCalledWith(DEMO_POD_ID, customParameters);
+      });
+    });
+
+    it('passes custom cioClientOptions through provider', async () => {
+      function ContextConsumer() {
+        const context = useCioRecommendationContext();
+
+        return (
+          <div data-testid='service-url'>{context.cioClientOptions.serviceUrl || 'default'}</div>
         );
-        expect(recommendationsContainer).toHaveAttribute('data-cnstrc-result-id', 'test-result-id');
-        expect(recommendationsContainer).toHaveAttribute('data-cnstrc-num-results', '2');
       }
+
+      render(
+        <CioRecommendations
+          apiKey={DEMO_API_KEY}
+          podId={DEMO_POD_ID}
+          cioClientOptions={{ serviceUrl: 'https://custom.cnstrc.com' }}>
+          {() => <ContextConsumer />}
+        </CioRecommendations>,
+      );
+
+      await waitFor(() => {
+        expect(screen.getByTestId('service-url')).toHaveTextContent('https://custom.cnstrc.com');
+      });
     });
-  });
 
-  it('supports render props pattern', async () => {
-    render(
-      <CioRecommendations apiKey={DEMO_API_KEY} podId={DEMO_POD_ID}>
-        {({ items }) => (
-          <div>
-            <h2>Custom Layout</h2>
-            <p>Items: {items.length}</p>
-          </div>
-        )}
-      </CioRecommendations>,
-    );
+    it('passes custom itemFieldGetters through provider', async () => {
+      const customGetPrice = jest.fn().mockReturnValue(999);
+      const customGetters = {
+        getPrice: customGetPrice,
+      };
 
-    await waitFor(() => {
-      expect(screen.getByText('Custom Layout')).toBeInTheDocument();
-      expect(screen.getByText('Items: 2')).toBeInTheDocument();
-    });
-  });
+      render(
+        <CioRecommendations
+          apiKey={DEMO_API_KEY}
+          podId={DEMO_POD_ID}
+          itemFieldGetters={customGetters}>
+          {({ items, itemFieldGetters }) => (
+            <div data-testid='custom-price'>
+              {itemFieldGetters.getPrice({ data: { price: 100 } } as any)}
+            </div>
+          )}
+        </CioRecommendations>,
+      );
 
-  it('supports component overrides for pod header', async () => {
-    render(
-      <CioRecommendations
-        apiKey={DEMO_API_KEY}
-        podId={DEMO_POD_ID}
-        componentOverrides={{
-          podHeader: {
-            reactNode: <div>Custom Pod Header</div>,
-          },
-        }}
-      />,
-    );
-
-    await waitFor(
-      () => {
-        expect(screen.getByText('Custom Pod Header')).toBeInTheDocument();
-        expect(screen.queryByText('Bestsellers')).not.toBeInTheDocument();
-      },
-      { timeout: 3000 },
-    );
-  });
-
-  it('calls API with correct parameters', async () => {
-    const customParameters = {
-      num_results: 5,
-      section: 'Products',
-    };
-
-    render(
-      <CioRecommendations
-        apiKey={DEMO_API_KEY}
-        podId={DEMO_POD_ID}
-        parameters={customParameters}
-      />,
-    );
-
-    await waitFor(() => {
-      expect(mockGetRecommendations).toHaveBeenCalledWith(DEMO_POD_ID, customParameters);
-    });
-  });
-
-  it('renders without error when custom cioClient is provided', async () => {
-    const mockClient = {
-      recommendations: {
-        getRecommendations: jest.fn().mockResolvedValue(mockRecommendationsResponse),
-      },
-    };
-
-    render(
-      <CioRecommendations apiKey={DEMO_API_KEY} podId={DEMO_POD_ID} cioClient={mockClient as any} />,
-    );
-
-    await waitFor(() => {
-      expect(screen.getByText('Bestsellers')).toBeInTheDocument();
-    });
-  });
-
-  it('provides context values to render props children', async () => {
-    render(
-      <CioRecommendations apiKey={DEMO_API_KEY} podId={DEMO_POD_ID}>
-        {({ podId, items, itemFieldGetters }) => (
-          <div>
-            <span data-testid='context-pod-id'>{podId}</span>
-            <span data-testid='context-items-count'>{items.length}</span>
-            <span data-testid='context-has-getters'>
-              {typeof itemFieldGetters.getPrice === 'function' ? 'yes' : 'no'}
-            </span>
-          </div>
-        )}
-      </CioRecommendations>,
-    );
-
-    await waitFor(() => {
-      expect(screen.getByTestId('context-pod-id')).toHaveTextContent(DEMO_POD_ID);
-      expect(screen.getByTestId('context-items-count')).toHaveTextContent('2');
-      expect(screen.getByTestId('context-has-getters')).toHaveTextContent('yes');
-    });
-  });
-
-  it('supports component override with render props for pod header', async () => {
-    render(
-      <CioRecommendations
-        apiKey={DEMO_API_KEY}
-        podId={DEMO_POD_ID}
-        componentOverrides={{
-          podHeader: {
-            reactNode: (
-              <div data-testid='custom-header' className='cio-pod-header'>
-                Modified Header
-              </div>
-            ),
-          },
-        }}
-      />,
-    );
-
-    await waitFor(
-      () => {
-        expect(screen.getByTestId('custom-header')).toHaveTextContent('Modified Header');
-      },
-      { timeout: 3000 },
-    );
-  });
-
-  it('supports component override with reactNode for entire component', async () => {
-    render(
-      <CioRecommendations
-        apiKey={DEMO_API_KEY}
-        podId={DEMO_POD_ID}
-        componentOverrides={{
-          reactNode: <div data-testid='full-override'>Completely Custom Content</div>,
-        }}
-      />,
-    );
-
-    await waitFor(
-      () => {
-        expect(screen.getByTestId('full-override')).toBeInTheDocument();
-        expect(screen.queryByText('Bestsellers')).not.toBeInTheDocument();
-      },
-      { timeout: 3000 },
-    );
-  });
-
-  it('renders loading state initially', () => {
-    // Don't resolve the promise immediately to test loading state
-    mockGetRecommendations.mockImplementation(
-      () => new Promise((resolve) => setTimeout(() => resolve(mockRecommendationsResponse), 1000)),
-    );
-
-    render(<CioRecommendations apiKey={DEMO_API_KEY} podId={DEMO_POD_ID} />);
-
-    expect(screen.getByText('Loading...')).toBeInTheDocument();
-  });
-
-  it('renders error message when fetch fails', async () => {
-    mockGetRecommendations.mockRejectedValue(new Error('Network Error'));
-
-    render(<CioRecommendations apiKey={DEMO_API_KEY} podId={DEMO_POD_ID} />);
-
-    await waitFor(() => {
-      expect(screen.getByText('Error loading recommendations')).toBeInTheDocument();
-    });
-  });
-
-  it('passes custom cioClientOptions through provider', async () => {
-    function ContextConsumer() {
-      const context = useCioRecommendationContext();
-
-      return <div data-testid='service-url'>{context.cioClientOptions.serviceUrl || 'default'}</div>;
-    }
-
-    render(
-      <CioRecommendations
-        apiKey={DEMO_API_KEY}
-        podId={DEMO_POD_ID}
-        cioClientOptions={{ serviceUrl: 'https://custom.cnstrc.com' }}>
-        {() => <ContextConsumer />}
-      </CioRecommendations>,
-    );
-
-    await waitFor(() => {
-      expect(screen.getByTestId('service-url')).toHaveTextContent('https://custom.cnstrc.com');
-    });
-  });
-
-  it('passes custom itemFieldGetters through provider', async () => {
-    const customGetPrice = jest.fn().mockReturnValue(999);
-    const customGetters = {
-      getPrice: customGetPrice,
-    };
-
-    render(
-      <CioRecommendations apiKey={DEMO_API_KEY} podId={DEMO_POD_ID} itemFieldGetters={customGetters}>
-        {({ items, itemFieldGetters }) => (
-          <div data-testid='custom-price'>
-            {itemFieldGetters.getPrice({ data: { price: 100 } } as any)}
-          </div>
-        )}
-      </CioRecommendations>,
-    );
-
-    await waitFor(() => {
-      expect(screen.getByTestId('custom-price')).toHaveTextContent('999');
-    });
-  });
-
-  it('renders carousel with items after successful fetch', async () => {
-    render(<CioRecommendations apiKey={DEMO_API_KEY} podId={DEMO_POD_ID} />);
-
-    await waitFor(() => {
-      expect(screen.getByTestId('mock-carousel')).toHaveTextContent('Carousel with 2 items');
+      await waitFor(() => {
+        expect(screen.getByTestId('custom-price')).toHaveTextContent('999');
+      });
     });
   });
 });
