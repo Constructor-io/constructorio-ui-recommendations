@@ -5,6 +5,7 @@ import {
   ComponentOverrideProps,
   IncludeComponentOverrides,
   IncludeRenderProps,
+  ProductCard,
   RenderPropsWrapper,
 } from '@constructor-io/constructorio-ui-components';
 import useRecommendationResults, {
@@ -107,5 +108,6 @@ export default function CioRecommendations(props: CioRecommendationsProps) {
 
 CioRecommendations.PodHeader = PodHeader;
 CioRecommendations.Carousel = Carousel;
+CioRecommendations.ProductCard = ProductCard;
 CioRecommendations.Loading = CioRecommendationsLoading;
 CioRecommendations.Error = CioRecommendationsError;
