@@ -1,0 +1,169 @@
+import { Meta, Canvas, ArgTypes, Markdown, Source } from '@storybook/blocks';
+import * as CioRecommendationsStories from './CioRecommendations.stories';
+import CioRecommendationsRenderProps from './CioRecommendationsRenderProps.md?raw';
+
+<Meta of={CioRecommendationsStories} />
+
+# CioRecommendations
+
+An all-in-one component that fetches and renders product recommendations from Constructor.io. It displays results in a carousel layout with a pod header, handling all data fetching and state management automatically.
+
+## Interactive Example
+
+<Canvas of={CioRecommendationsStories.Default} />
+
+[View fullscreen](./?path=/story/components-ciorecommendations--default)
+
+```jsx
+import CioRecommendations from '@constructor-io/constructorio-ui-recommendations';
+import '@constructor-io/constructorio-ui-recommendations/styles.css';
+
+export default function MyComponent() {
+  return <CioRecommendations apiKey="YOUR_API_KEY" podId="YOUR_POD_ID" />;
+}
+```
+
+> Note: The Pod Header is taken from the display title set in the [Customer Dashboard](https://docs.constructor.com/docs/using-the-constructor-dashboard-recommendations-create-a-recommendations-pod#step-2-define-recommendation-strategy).
+
+---
+
+## Props Reference
+
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `apiKey` | `string` | - | **Required.** Your Constructor.io API key |
+| `podId` | `string` | - | **Required.** The ID of the recommendations pod to display |
+| `podSubheader` | `string` | - | Subheader text displayed below the pod title |
+| `cioClient` | `ConstructorIOClient` | - | Pre-initialized Constructor.io client instance |
+| [cioClientOptions](#cioclientoptions) | `CioClientOptions` | - | Configuration options for the Constructor.io JS client |                             
+| [parameters](#recommendationsparameters) | `RecommendationsParameters` | - | Additional parameters passed to the recommendations API |
+| [itemFieldGetters](#itemfieldgetters) | `ItemFieldGetters` | - | Functions that map fields from your catalog to rendering fields |
+| [children](./?path=/docs/components-ciorecommendations-usage-patterns-render-props--docs)  | `function` | - | Render prop for custom rendering. See [Render Props](./?path=/docs/components-ciorecommendations-usage-patterns-render-props--docs) |
+| [componentOverrides](#componentoverrides) | `CioRecommendationsComponentOverrides` | - | Override default sub-components (carousel, podHeader). See [Component Overrides](./?path=/docs/components-ciorecommendations-usage-patterns-component-overrides--docs) |
+
+
+### CioClientOptions
+
+Configuration options for the Constructor.io client.
+
+For the full list of client options, refer to the [Constructor.io JS Client documentation](https://constructor-io.github.io/constructorio-client-javascript/ConstructorIO.html#setClientOptions).
+
+### parameters
+
+Additional parameters passed to the Constructor.io Recommendations API.
+
+| Property            | Type               | Description                                        |
+| ------------------- | ------------------ | -------------------------------------------------- |
+| numResults          | `number`           | Number of results to return                        |
+| section             | `string`           | Section to return results from                     |
+| itemIds             | `string\|string[]` | Item ID(s) for item-based recommendations          |
+| term                | `string`           | Term to use to refine results (strategy specific)  |
+| filters             | `object`           | Key/value mapping of filters to refine results     |
+| variationsMap       | `object`           | Aggregates variations configuration                |
+| preFilterExpression | `object`           | Faceting expression to scope results               |
+| fmtOptions          | `object`           | Options to format different aspects of the response|
+| hiddenFields        | `string[]`         | Metadata fields to include in the response         |
+
+For the full list of request parameters, refer to the [getRecommendations documentation](https://constructor-io.github.io/constructorio-client-javascript/module-recommendations.html#~getRecommendations).
+
+### ItemFieldGetters
+
+Functions that map fields from your catalog feed to the fields the library expects for rendering.
+
+| Property         | Type                                                 | Description                                                                                     |
+| ---------------- | ---------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| getPrice         | `(item: Item \| Variation) => number \| undefined`   | Maps the price field. Defaults to `item.data.price`                                             |
+| getSalePrice     | `(item: Item \| Variation) => number \| undefined`   | Maps the sale price. Defaults to `item.data.sale_price`                                         |
+| getRolloverImage | `(item: Item \| Variation) => string \| undefined`   | Maps the rollover/hover image URL. Defaults to `item.data.rollover_image`                       |
+| getSwatchPreview | `(variation: Variation) => string \| undefined`      | Maps the swatch preview. Defaults to `variation.data.swatch_preview`                            |
+| getSwatches      | `(item: Item, options) => SwatchItem[] \| undefined` | Maps swatches from `item.variations`. Builds a SwatchItem array by iterating through variations |
+
+---
+
+## CSS Classes
+
+| Class Name             | Description                                        |
+| ---------------------- | -------------------------------------------------- |
+| `.cio-recommendations` | Container for the entire recommendations component |
+| `.cio-loading`         | Loading state container                            |
+| `.cio-error`           | Error state container                              |
+
+---
+
+## Examples
+
+### With Subheader
+
+Add additional context with a subheader below the pod title.
+
+<Canvas of={CioRecommendationsStories.WithSubheader} />
+
+```jsx
+import CioRecommendations from '@constructor-io/constructorio-ui-recommendations';
+
+export default function MyComponent() {
+  return (
+    <CioRecommendations
+      apiKey="YOUR_API_KEY"
+      podId="YOUR_POD_ID"
+      podSubheader="Curated selection of top-rated products"
+    />
+  );
+}
+```
+
+### With Custom Parameters
+
+Pass additional parameters when requesting a Recommendations Pod.
+
+<Canvas of={CioRecommendationsStories.WithCustomParameters} />
+
+```jsx
+import CioRecommendations from '@constructor-io/constructorio-ui-recommendations';
+
+export default function MyComponent() {
+  return (
+    <CioRecommendations
+      apiKey="YOUR_API_KEY"
+      podId="YOUR_POD_ID"
+      parameters={{
+        numResults: 5,
+      }}
+    />
+  );
+}
+```
+
+### With ItemFieldGetters
+
+Customize how item data is extracted from the API response for rendering.
+
+```jsx
+import CioRecommendations from '@constructor-io/constructorio-ui-recommendations';
+
+export default function MyComponent() {
+  const customItemFieldGetters = {
+    getPrice: (item) => item.data.custom_price,
+    getSalePrice: (item) => item.data.custom_sale_price,
+    getRolloverImage: (item) => item.data.hover_image,
+  };
+
+  return (
+    <CioRecommendations
+      apiKey="YOUR_API_KEY"
+      podId="YOUR_POD_ID"
+      itemFieldGetters={customItemFieldGetters}
+    />
+  );
+}
+```
+
+---
+
+## See Also
+
+- [Usage Patterns - Render Props](./?path=/docs/components-ciorecommendations-usage-patterns-render-props--docs)
+- [Usage Patterns - Component Overrides](./?path=/docs/components-ciorecommendations-usage-patterns-component-overrides--docs)
+- [PodHeader Component](./?path=/docs/components-podheader--docs)
+- [useRecommendationResults Hook](./?path=/docs/hooks-userecommendationresults--docs)

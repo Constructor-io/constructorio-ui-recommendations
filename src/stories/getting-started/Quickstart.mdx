@@ -1,0 +1,50 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title='Getting Started/Quickstart' />
+
+# Quickstart
+
+Get up and running with Constructor Recommendations UI.
+
+## Step 1: Install
+
+```bash
+npm install @constructor-io/constructorio-ui-recommendations
+```
+
+## Step 2: Basic Setup
+
+```jsx
+import CioRecommendations from '@constructor-io/constructorio-ui-recommendations';
+import '@constructor-io/constructorio-ui-recommendations/styles.css';
+
+function App() {
+  return (
+    <CioRecommendations
+      apiKey="YOUR_API_KEY"
+      podId="YOUR_POD_ID"
+    />
+  );
+}
+```
+Replace `YOUR_API_KEY` with your Constructor.io API key and `YOUR_POD_ID` with the pod ID configured in your [Constructor Dashboard](https://internal-app.constructor.io/dashboard/recommendations).
+
+## Step 3: Optional Styling
+
+By default, no styles are included. Import the starter styles to get a baseline look:
+
+```jsx
+import '@constructor-io/constructorio-ui-recommendations/styles.css';
+```
+
+The starter styles are scoped to `.cio-recommendations` and can be extended or replaced with your own CSS.
+
+## Next Steps
+
+- [Explore CioRecommendations](./?path=/docs/components-ciorecommendations--docs)
+- [View examples](./?path=/docs/components-ciorecommendations--docs#examples)
+- [Learn about customization patterns](./?path=/docs/basic-concepts-usage-patterns--docs)
+
+<div className='badge-wrapper tip-wrapper'>
+  <span className='badge tip'>Tip</span>Having trouble with a unique use case? Contact your friendly Integration Engineers for support!
+</div>

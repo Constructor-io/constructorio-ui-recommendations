@@ -1,0 +1,131 @@
+import { Meta, Canvas, ArgTypes, Markdown } from '@storybook/blocks';
+import * as UseRecommendationResultsStories from './UseRecommendationResults.stories';
+import UseRecommendationResultsReturn from './UseRecommendationResultsReturn.md?raw';
+
+<Meta of={UseRecommendationResultsStories} name='Usage' />
+
+# useRecommendationResults
+
+A hook that fetches and manages recommendation results from the Constructor.io Recommendations API. Use this hook when you need full control over how recommendations are rendered while letting the library handle data fetching and state management.
+
+## When to Use
+
+Use this hook when you need to:
+- Build a completely custom recommendations UI
+- Integrate recommendations into an existing component structure
+- Access the raw recommendation data for custom processing
+- Implement custom loading and error states
+
+**Example use cases:**
+- Building a custom grid layout instead of the default carousel
+- Integrating recommendations into a sidebar widget
+- Creating a recommendations page with filtering and sorting
+- Implementing server-side rendering with initial data
+
+## Usage
+
+This hook must be used within a `CioRecommendationProvider` context. The `CioRecommendations` component provides this context automatically, or you can use the provider directly.
+
+```jsx
+import CioRecommendations from '@constructor-io/constructorio-ui-recommendations';
+import { useRecommendationResults } from '@constructor-io/constructorio-ui-recommendations';
+
+function CustomRecommendations() {
+  const { status, data, message, refetch } = useRecommendationResults();
+
+  if (status === 'fetching' || status === 'idle') {
+    return <div>Loading recommendations...</div>;
+  }
+
+  if (status === 'error') {
+    return <div>Error: {message}</div>;
+  }
+
+  return (
+    <div>
+      <h2>{data.response.pod.displayName}</h2>
+      <ul>
+        {data.response.results.map((item) => (
+          <li key={item.id}>
+            <img src={item.imageUrl} alt={item.name} />
+            <span>{item.name}</span>
+          </li>
+        ))}
+      </ul>
+      <button onClick={refetch}>Refresh</button>
+    </div>
+  );
+}
+
+// Wrap with CioRecommendations to provide the context
+function App() {
+  return (
+    <CioRecommendations apiKey="YOUR_API_KEY" podId="YOUR_POD_ID">
+      {() => <CustomRecommendations />}
+    </CioRecommendations>
+  );
+}
+```
+
+## Interactive Example
+
+<Canvas of={UseRecommendationResultsStories.Default} />
+
+---
+
+## Props
+
+<ArgTypes />
+
+| Property                       | Type                         | Description                                                                                                              |
+| ------------------------------ | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| initialRecommendationResponse  | `ApiRecommendationsResponse` | Initial value for recommendation results. Useful for Server-Side Rendering (SSR) to hydrate the component on the client |
+
+---
+
+## Return Value
+
+<Markdown>{UseRecommendationResultsReturn}</Markdown>
+
+### Type Guards
+
+The hook also exports type guard functions for narrowing the return type:
+
+| Function          | Description                                            |
+| ----------------- | ------------------------------------------------------ |
+| `isResponseLoaded`  | Returns `true` when `status` is `SUCCESS`              |
+| `isResponseLoading` | Returns `true` when `status` is `FETCHING` or `IDLE`   |
+| `isResponseError`   | Returns `true` when `status` is `ERROR`                |
+
+```jsx
+import {
+  useRecommendationResults,
+  isResponseLoaded,
+  isResponseLoading,
+  isResponseError
+} from '@constructor-io/constructorio-ui-recommendations';
+
+function MyComponent() {
+  const response = useRecommendationResults();
+
+  if (isResponseLoading(response)) {
+    return <LoadingSpinner />;
+  }
+
+  if (isResponseError(response)) {
+    return <ErrorMessage message={response.message} />;
+  }
+
+  if (isResponseLoaded(response)) {
+    // TypeScript knows response.data is defined here
+    return <RecommendationsList items={response.data.response.results} />;
+  }
+}
+```
+
+---
+
+## See Also
+
+- [CioRecommendations Component](./?path=/docs/components-ciorecommendations--docs)
+- [Usage Patterns](./?path=/docs/basic-concepts-usage-patterns--docs)

@@ -1,0 +1,70 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/blocks';
+import * as PodHeaderStories from './PodHeader.stories';
+
+<Meta of={PodHeaderStories} />
+
+# PodHeader
+
+Renders the header and optional subheader for a recommendations pod. This component is used internally by `CioRecommendations` but can also be used standalone or customized via component overrides.
+
+## Interactive Example
+
+<Canvas of={PodHeaderStories.Default} />
+
+[View fullscreen](./?path=/story/components-podheader--default)
+
+```jsx
+import { PodHeader } from '@constructor-io/constructorio-ui-recommendations';
+import '@constructor-io/constructorio-ui-recommendations/styles.css';
+
+export default function MyComponent() {
+  return <PodHeader podHeader="Recommended for You" />;
+}
+```
+
+---
+
+## Props Reference
+
+<ArgTypes />
+
+---
+
+## CSS Classes
+
+| Class Name          | Description                         |
+| ------------------- | ----------------------------------- |
+| `.cio-pod-header`   | Container for the entire pod header |
+| `.cio-pod-title`    | Main header text element            |
+| `.cio-pod-subtitle` | Subheader text element              |
+
+---
+
+## Examples
+
+### With Subheader
+
+Add additional context with a subheader below the main title.
+
+<Canvas of={PodHeaderStories.WithSubheader} />
+
+```jsx
+import { PodHeader } from '@constructor-io/constructorio-ui-recommendations';
+
+export default function MyComponent() {
+  return (
+    <PodHeader
+      podHeader="Trending Products"
+      podSubheader="Popular items this week"
+    />
+  );
+}
+```
+
+---
+
+## See Also
+
+- [Usage Patterns - Render Props](./?path=/docs/components-podheader-usage-patterns-render-props--docs)
+- [Usage Patterns - Component Overrides](./?path=/docs/components-podheader-usage-patterns-component-overrides--docs)
+- [CioRecommendations Component](./?path=/docs/components-ciorecommendations--docs)

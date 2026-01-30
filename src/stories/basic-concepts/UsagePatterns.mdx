@@ -1,0 +1,185 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title='Basic Concepts/Usage Patterns' />
+
+# Usage Patterns
+
+The Constructor Recommendations UI library is designed to be flexible by default and customizable when needed. Instead of enforcing a single way of working, it supports multiple usage patterns that let you adapt components to different use cases, styling approaches, and rendering requirements.
+
+Each pattern represents a different level of control—from simple configuration to fully customized rendering—allowing you to choose the approach that best fits your use case without unnecessary complexity.
+
+---
+
+## 1. Default Usage
+
+The simplest approach: pass required props and let the library handle everything.
+
+```jsx
+import CioRecommendations from '@constructor-io/constructorio-ui-recommendations';
+import '@constructor-io/constructorio-ui-recommendations/styles.css';
+
+function App() {
+  return (
+    <CioRecommendations
+      apiKey="YOUR_API_KEY"
+      podId="YOUR_POD_ID"
+    />
+  );
+}
+```
+
+Use this when you want a fully functional recommendations carousel with minimal configuration.
+
+---
+
+## 2. Component Overrides
+
+The `componentOverrides` prop allows you to customize specific parts of a component's rendering by providing custom content or render functions. This pattern is useful when you want to customize how a component (or part of it) is rendered without rewriting or wrapping the entire component.
+
+### How It Works
+
+Each override key accepts either:
+- A static `ReactNode` to fully replace the rendered output
+- A render function that receives the component's internal render props and returns a `ReactNode`
+
+This enables both simple overrides (custom markup) and advanced ones (conditional rendering based on internal state).
+
+### Available Override Keys
+
+| Key       | Type                 | Description                      |
+| --------- | -------------------- | -------------------------------- |
+| reactNode | `ReactNode \| (props) => ReactNode` | Override the entire component |
+| podHeader | `PodHeaderOverrides` | Override the PodHeader component |
+| carousel  | `CarouselOverrides`  | Override the Carousel component  |
+
+### Example: Custom Pod Header
+
+```jsx
+import CioRecommendations from '@constructor-io/constructorio-ui-recommendations';
+
+function App() {
+  return (
+    <CioRecommendations
+      apiKey="YOUR_API_KEY"
+      podId="YOUR_POD_ID"
+      componentOverrides={{
+        podHeader: {
+          reactNode: ({ podHeader, podSubheader }) => (
+            <div className="custom-header">
+              <h2>{podHeader}</h2>
+              {podSubheader && <p>{podSubheader}</p>}
+            </div>
+          ),
+        },
+      }}
+    />
+  );
+}
+```
+
+> **Note:** For each component that supports this pattern, its documentation includes a dedicated reference listing all supported keys that can be passed to the `componentOverrides` prop, along with their corresponding render props.
+
+---
+
+## 3. Render Props
+
+The render props pattern allows you to customize a component's rendering by passing a function as `children`. This function receives the component's internal state and helpers, giving you full control over what gets rendered while the component continues to manage its own behavior.
+
+This pattern is ideal when customization requires dynamic logic or when you need to completely replace the default layout.
+
+### How It Works
+
+1. The component exposes a set of render props (state, callbacks, and helpers)
+2. You provide a function that receives these props and returns a `ReactNode`
+3. The component remains responsible for state management, accessibility, and behavior
+
+### Example: Custom Grid Layout
+
+```jsx
+import CioRecommendations from '@constructor-io/constructorio-ui-recommendations';
+
+function App() {
+  return (
+    <CioRecommendations apiKey="YOUR_API_KEY" podId="YOUR_POD_ID">
+      {({ items, podId }) => (
+        <div className="custom-grid">
+          <h2>Recommendations from {podId}</h2>
+          <div className="grid">
+            {items.map((item) => (
+              <div key={item.id} className="grid-item">
+                <img src={item.imageUrl} alt={item.name} />
+                <h3>{item.name}</h3>
+                {item.price && <span>${item.price}</span>}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </CioRecommendations>
+  );
+}
+```
+
+### Available Render Props
+
+| Property            | Type                                  | Description                          |
+| ------------------- | ------------------------------------- | ------------------------------------ |
+| items               | `Item[]`                              | Array of recommendation items        |
+| podId               | `string`                              | The pod ID being displayed           |
+| podSubheader        | `string \| undefined`                 | Optional subheader text              |
+| cioClient           | `ConstructorIOClient \| null`         | Constructor.io client instance       |
+| cioClientOptions    | `CioClientOptions`                    | Configuration options for the client |
+| setCioClientOptions | `(options: CioClientOptions) => void` | Function to update client options    |
+| parameters          | `RecommendationsParameters`           | API request parameters               |
+| itemFieldGetters    | `ItemFieldGetters`                    | Functions to extract item data       |
+
+> **Note:** For each component that supports render props, its documentation clearly lists the available render props, including their types and intended usage.
+
+---
+
+## 4. Hooks for Full Control
+
+For maximum flexibility, use the `useRecommendationResults` hook directly. This gives you complete control over the UI while the library handles data fetching, caching, and state management.
+
+```jsx
+import CioRecommendations, { useRecommendationResults } from '@constructor-io/constructorio-ui-recommendations';
+
+function CustomUI() {
+  const { status, data, message, refetch } = useRecommendationResults();
+
+  if (status === 'fetching') return <LoadingSpinner />;
+  if (status === 'error') return <ErrorMessage message={message} />;
+  if (status === 'success') {
+    return (
+      <MyCustomComponent
+        items={data.response.results}
+        onRefresh={refetch}
+      />
+    );
+  }
+  return null;
+}
+
+function App() {
+  return (
+    <CioRecommendations apiKey="YOUR_API_KEY" podId="YOUR_POD_ID">
+      {() => <CustomUI />}
+    </CioRecommendations>
+  );
+}
+```
+
+See the [useRecommendationResults documentation](./?path=/docs/hooks-userecommendationresults--docs) for full details on the hook API.
+
+---
+
+## Choosing the Right Pattern
+
+| Pattern             | When to Use                                                                 |
+| ------------------- | --------------------------------------------------------------------------- |
+| Default Usage       | Standard recommendations carousel with minimal customization                |
+| Component Overrides | Customize specific parts (header, cards) while keeping the overall structure |
+| Render Props        | Complete control over layout while keeping data fetching managed            |
+| Hooks               | Maximum flexibility, custom state handling, or integration with other systems |
+
+Start with the simplest pattern that meets your needs and move to more flexible patterns only when necessary.

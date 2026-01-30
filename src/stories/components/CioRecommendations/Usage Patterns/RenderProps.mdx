@@ -1,0 +1,74 @@
+import { Meta, Canvas, Markdown, Source } from '@storybook/blocks';
+import * as CioRecommendationsStories from '../CioRecommendations.stories';
+import RenderPropsExampleCss from '../CioRecommendationsExamples.css?raw';
+import RenderPropsTable from '../CioRecommendationsRenderProps.md?raw';
+
+<Meta title='Components/CioRecommendations/Usage Patterns/Render Props' />
+
+# Render Props
+
+This document describes the **render props API** exposed by CioRecommendations. For a full explanation of how render props work, see the [Usage Patterns Reference](./?path=/docs/basic-concepts-usage-patterns--docs).
+
+Render props allow you to fully control how the component is rendered by passing a function that receives the component's internal state and helpers, while the component continues to manage behavior, accessibility, and state.
+
+Use this reference to understand **which render props are available**, their types, and when to use them.
+
+---
+
+## Usage
+
+The CioRecommendations component accepts a render function as its `children` prop.
+
+```tsx
+<CioRecommendations apiKey="YOUR_API_KEY" podId="YOUR_POD_ID">
+  {(props) => (
+    <div>
+      {/* Custom rendering using render props */}
+    </div>
+  )}
+</CioRecommendations>
+```
+
+## Available Render Props
+
+<Markdown>{RenderPropsTable}</Markdown>
+
+---
+
+## Example
+
+<Canvas of={CioRecommendationsStories.RenderPropsShowcase} />
+
+```jsx
+import CioRecommendations from '@constructor-io/constructorio-ui-recommendations';
+
+const DEMO_API_KEY = 'key_M57QS8SMPdLdLx4x';
+
+export default function MyComponent() {
+  return (
+    <CioRecommendations apiKey={DEMO_API_KEY} podId='bestsellers'>
+      {({ items, podId }) => (
+        <div className='render-props-showcase'>
+          <div className='showcase-header'>
+            <h2 className='showcase-title'>Featured Recommendations</h2>
+            <p className='showcase-subtitle'>Personalized picks for you from {podId}</p>
+          </div>
+          <div className='showcase-grid'>
+            {items.slice(0, 6).map((item) => (
+              <div key={item.id} className='showcase-card'>
+                <img src={item.imageUrl} alt={item.name} />
+                <h3>{item.name}</h3>
+                {item.price && <div className='price'>${item.price}</div>}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </CioRecommendations>
+  );
+}
+```
+
+### CSS
+
+<Source code={RenderPropsExampleCss} language='css' />
