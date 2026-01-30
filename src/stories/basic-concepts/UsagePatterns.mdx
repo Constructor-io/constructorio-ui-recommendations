@@ -172,6 +172,62 @@ function App() {
 
 ---
 
+## 5. Bundled Version (Vanilla JavaScript)
+
+For non-React projects, the library provides a framework-agnostic bundle that can be used in any JavaScript project. The `CioRecommendations` function injects a complete recommendations UI into a specified DOM element.
+
+### Installation
+
+```bash
+npm install @constructor-io/constructorio-ui-recommendations
+```
+
+### Usage
+
+```javascript
+import CioRecommendations from '@constructor-io/constructorio-ui-recommendations/constructorio-ui-recommendations-bundled';
+
+CioRecommendations({
+  selector: '#recommendations-container',
+  apiKey: 'YOUR_API_KEY',
+  podId: 'YOUR_POD_ID',
+});
+```
+
+### Options
+
+| Option | Type | Description |
+| ------ | ---- | ----------- |
+| `selector` | `string` | **Required.** CSS selector for the container element where the UI will be injected |
+| `apiKey` | `string` | **Required.** Your Constructor.io API key |
+| `podId` | `string` | **Required.** The ID of the recommendations pod to display |
+| `podSubheader` | `string` | Subheader text displayed below the pod title |
+| `cioClientOptions` | `object` | Configuration options for the Constructor.io JS client |
+| `parameters` | `object` | Additional parameters passed to the recommendations API (e.g., `numResults`, `filters`) |
+| `itemFieldGetters` | `object` | Functions that map fields from your catalog to rendering fields |
+
+For the full list of options, see [CioRecommendations Props](./?path=/docs/components-ciorecommendations--docs).
+
+### HTML Setup
+
+```html
+<!-- Add a container element -->
+<div id="recommendations-container"></div>
+
+<!-- Include the bundle -->
+<script type="module">
+  import CioRecommendations from '@constructor-io/constructorio-ui-recommendations/constructorio-ui-recommendations-bundled';
+
+  CioRecommendations({
+    selector: '#recommendations-container',
+    apiKey: 'YOUR_API_KEY',
+    podId: 'YOUR_POD_ID',
+  });
+</script>
+```
+
+---
+
 ## Choosing the Right Pattern
 
 | Pattern             | When to Use                                                                 |
@@ -180,4 +236,5 @@ function App() {
 | Component Overrides | Customize specific parts (header, cards) while keeping the overall structure |
 | Render Props        | Complete control over layout while keeping data fetching managed            |
 | Hooks               | Maximum flexibility, custom state handling, or integration with other systems |
+| Bundled Version     | Non-React projects or vanilla JavaScript applications                       |
 
