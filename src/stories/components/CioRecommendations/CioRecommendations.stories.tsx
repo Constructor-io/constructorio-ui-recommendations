@@ -60,3 +60,82 @@ export const RenderPropsShowcase: Story = {
     ),
   },
 };
+
+export const OverrideEntireComponent: Story = {
+  args: {
+    apiKey: DEMO_API_KEY,
+    podId: DEMO_POD_ID,
+    componentOverrides: {
+      reactNode: ({ items, podId }) => (
+        <div className='custom-recommendations'>
+          <h2>Products from {podId}</h2>
+          <ul>
+            {items.map((item) => (
+              <li key={item.id}>{item.name}</li>
+            ))}
+          </ul>
+        </div>
+      ),
+    },
+  },
+};
+
+export const OverrideCarousel: Story = {
+  args: {
+    apiKey: DEMO_API_KEY,
+    podId: DEMO_POD_ID,
+    componentOverrides: {
+      carousel: {
+        reactNode: ({ items }) => (
+          <div className='custom-grid'>
+            {items.map((item) => (
+              <div key={item.id} className='grid-item'>
+                <img src={item.imageUrl} alt={item.name} />
+                <p>{item.name}</p>
+              </div>
+            ))}
+          </div>
+        ),
+      },
+    },
+  },
+};
+
+export const OverridePodHeader: Story = {
+  args: {
+    apiKey: DEMO_API_KEY,
+    podId: DEMO_POD_ID,
+    podSubheader: 'Curated picks for you',
+    componentOverrides: {
+      podHeader: {
+        reactNode: ({ podHeader, podSubheader }) => (
+          <div className='custom-header'>
+            <span className='badge'>Featured</span>
+            <h2>{podHeader}</h2>
+            {podSubheader && <p>{podSubheader}</p>}
+          </div>
+        ),
+      },
+    },
+  },
+};
+
+export const OverrideProductCard: Story = {
+  args: {
+    apiKey: DEMO_API_KEY,
+    podId: DEMO_POD_ID,
+    componentOverrides: {
+      carousel: {
+        productCard: {
+          reactNode: ({ item }) => (
+            <div className='custom-product-card'>
+              <img src={item.imageUrl} alt={item.name} />
+              <h3>{item.name}</h3>
+              {item.price && <span className='price'>${item.price}</span>}
+            </div>
+          ),
+        },
+      },
+    },
+  },
+};

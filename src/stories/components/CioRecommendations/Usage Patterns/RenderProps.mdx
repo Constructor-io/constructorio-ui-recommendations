@@ -1,7 +1,6 @@
-import { Meta, Canvas, Markdown, Source } from '@storybook/blocks';
+import { Meta, Canvas, Source } from '@storybook/blocks';
 import * as CioRecommendationsStories from '../CioRecommendations.stories';
 import RenderPropsExampleCss from '../CioRecommendationsExamples.css?raw';
-import RenderPropsTable from '../CioRecommendationsRenderProps.md?raw';
 
 <Meta title='Components/CioRecommendations/Usage Patterns/Render Props' />
 
@@ -31,7 +30,21 @@ The CioRecommendations component accepts a render function as its `children` pro
 
 ## Available Render Props
 
-<Markdown>{RenderPropsTable}</Markdown>
+### Arguments passed to children via Render Props
+
+> Accessible to children of the CioRecommendations component via render props
+
+| Property            | Type                                  | Description                          |
+| ------------------- | ------------------------------------- | ------------------------------------ |
+| items               | `Item[]`                              | Array of recommendation items        |
+| podId               | `string`                              | The pod ID being displayed           |
+| podSubheader        | `string \| undefined`                 | Optional subheader text              |
+| cioClient           | `ConstructorIOClient \| null`         | Constructor.io client instance       |
+| cioClientOptions    | `CioClientOptions`                    | Configuration options for the client |
+| setCioClientOptions | `(options: CioClientOptions) => void` | Function to update client options    |
+| parameters          | `RecommendationsParameters`           | API request parameters               |
+| itemFieldGetters    | `ItemFieldGetters`                    | Functions to extract item data       |
+
 
 ---
 
