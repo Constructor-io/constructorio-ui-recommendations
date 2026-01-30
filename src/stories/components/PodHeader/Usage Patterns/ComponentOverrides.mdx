@@ -1,0 +1,91 @@
+import { Meta, Canvas, Markdown, Source } from '@storybook/blocks';
+import * as PodHeaderStories from '../PodHeader.stories';
+import ComponentOverrideCssExample from '../PodHeaderComponentOverrideExample.css?raw';
+import RenderPropsTable from '../PodHeaderRenderProps.md?raw';
+
+<Meta title='Components/PodHeader/Usage Patterns/Component Overrides' />
+
+# Component Overrides
+
+This document describes the **component overrides API** for PodHeader. For a full explanation of how component overrides work, see the [Usage Patterns Reference](./?path=/docs/basic-concepts-usage-patterns--docs).
+
+The component overrides pattern allows you to customize specific parts of a component's rendering by providing **custom content** or **render functions**. This pattern lets you change the markup or behavior of subcomponents without rewriting or wrapping the entire component.
+
+Use this reference to understand **which keys can be overridden**, their types, and their purpose.
+
+---
+
+## Usage
+
+PodHeader is overridden via the `componentOverrides` prop on the parent CioRecommendations component.
+
+```tsx
+<CioRecommendations
+  apiKey="YOUR_API_KEY"
+  podId="YOUR_POD_ID"
+  componentOverrides={{
+    podHeader: {
+      reactNode: ({ podHeader, podSubheader }) => <CustomHeader title={podHeader} />,
+    },
+  }}
+/>
+```
+
+## Available Override Keys
+
+| Key       | Type                                            | Description                       |
+| --------- | ----------------------------------------------- | --------------------------------- |
+| reactNode | `ReactNode \| (PodHeaderRenderProps) => ReactNode` | Override the entire PodHeader render |
+
+## Render Props Passed to Override Function
+
+<Markdown>{RenderPropsTable}</Markdown>
+
+---
+
+## Example
+
+<Canvas of={PodHeaderStories.ComponentOverride} />
+
+```jsx
+import CioRecommendations from '@constructor-io/constructorio-ui-recommendations';
+
+const DEMO_API_KEY = 'key_M57QS8SMPdLdLx4x';
+
+export default function MyComponent() {
+  return (
+    <CioRecommendations
+      apiKey={DEMO_API_KEY}
+      podId='bestsellers'
+      podSubheader='A custom PodHeader component via Component Overrides'
+      componentOverrides={{
+        podHeader: {
+          reactNode: ({ podHeader, podSubheader }) => (
+            <div className='component-override-header'>
+              <div className='header-wrapper'>
+                <span className='badge'>⭐</span>
+                <div>
+                  <h2 className='header'>{podHeader}</h2>
+                  <p className='subheader'>{podSubheader}</p>
+                </div>
+              </div>
+            </div>
+          ),
+        },
+      }}
+    />
+  );
+}
+```
+
+### CSS
+
+<Source code={ComponentOverrideCssExample} language='css' />
+
+---
+
+## See Also
+
+- [Render Props Pattern](./?path=/docs/components-podheader-usage-patterns-render-props--docs)
+- [CioRecommendations Component Overrides](./?path=/docs/components-ciorecommendations-usage-patterns-component-overrides--docs)
+- [Usage Patterns Overview](./?path=/docs/basic-concepts-usage-patterns--docs)

@@ -1,0 +1,87 @@
+import { Meta, Canvas } from '@storybook/blocks';
+import * as CioRecommendationsStories from '../CioRecommendations.stories';
+
+<Meta title='Components/CioRecommendations/Usage Patterns/Component Overrides' />
+
+# Component Overrides
+
+This document describes the **component overrides API** exposed by CioRecommendations. For a full explanation of how component overrides work, see the [Usage Patterns Reference](./?path=/docs/basic-concepts-usage-patterns--docs).
+
+The component overrides pattern allows you to customize specific parts of a component's rendering by providing **custom content** or **render functions**. This pattern lets you change the markup or behavior of subcomponents without rewriting or wrapping the entire component.
+
+Use this reference to understand **which keys can be overridden**, their types, and their purpose.
+
+---
+
+## Usage
+
+CioRecommendations supports overrides via the `componentOverrides` prop.
+
+```tsx
+<CioRecommendations
+  apiKey="YOUR_API_KEY"
+  podId="YOUR_POD_ID"
+  componentOverrides={{
+    podHeader: {
+      reactNode: ({ podHeader, podSubheader }) => <CustomHeader title={podHeader} />,
+    },
+  }}
+/>
+```
+
+## Available Override Keys
+
+| Key       | Type                                                     | Description                                                                                          |
+| --------- | -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| reactNode | `ReactNode \| (RecommendationsRenderProps) => ReactNode` | Override the entire CioRecommendations render                                                        |
+| podHeader | `PodHeaderOverrides`                                     | Override the [PodHeader](./?path=/docs/components-podheader-usage-patterns-component-overrides--docs) component |
+| carousel  | `CarouselOverrides`                                      | Override the Carousel component from constructorio-ui-components                                     |
+
+---
+
+## Override the Pod Header
+
+Customize the recommendation pod header while keeping the carousel intact.
+
+```jsx
+import CioRecommendations from '@constructor-io/constructorio-ui-recommendations';
+
+function App() {
+  return (
+    <CioRecommendations
+      apiKey="YOUR_API_KEY"
+      podId="YOUR_POD_ID"
+      podSubheader="Curated picks for you"
+      componentOverrides={{
+        podHeader: {
+          reactNode: ({ podHeader, podSubheader }) => (
+            <div className="custom-header">
+              <span className="badge">Featured</span>
+              <h2>{podHeader}</h2>
+              {podSubheader && <p>{podSubheader}</p>}
+            </div>
+          ),
+        },
+      }}
+    />
+  );
+}
+```
+
+For detailed PodHeader override options, see [PodHeader Component Overrides](./?path=/docs/components-podheader-usage-patterns-component-overrides--docs).
+
+---
+
+## Override the Product Cards in the Carousel
+
+Customize how individual product cards are rendered within the carousel.
+
+For ProductCard override options, refer to the [ProductCard documentation in constructorio-ui-components](https://constructor-io.github.io/constructorio-ui-components/?path=/docs/components-productcard--code-examples-component-overrides).
+
+---
+
+## See Also
+
+- [PodHeader Component Overrides](./?path=/docs/components-podheader-usage-patterns-component-overrides--docs)
+- [Render Props Pattern](./?path=/docs/components-ciorecommendations-usage-patterns-render-props--docs)
+- [Usage Patterns Overview](./?path=/docs/basic-concepts-usage-patterns--docs)
