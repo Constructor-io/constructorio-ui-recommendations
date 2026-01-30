@@ -6,7 +6,7 @@ const meta = {
   title: 'Hooks/UseRecommendationResults',
   component: UseRecommendationResultsExample,
   parameters: {
-    layout: 'centered',
+    layout: 'padded',
     docs: {
       controls: {
         sort: 'requiredFirst',

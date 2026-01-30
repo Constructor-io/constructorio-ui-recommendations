@@ -1,6 +1,6 @@
-import { Meta, Canvas, ArgTypes, Markdown } from '@storybook/blocks';
+import { Meta, Canvas, Source } from '@storybook/blocks';
 import * as UseRecommendationResultsStories from './UseRecommendationResults.stories';
-import UseRecommendationResultsReturn from './UseRecommendationResultsReturn.md?raw';
+import UseRecommendationResultsExampleCss from './UseRecommendationResultsExample.css?raw';
 
 <Meta of={UseRecommendationResultsStories} name='Usage' />
 
@@ -24,68 +24,59 @@ Use this hook when you need to:
 
 ## Usage
 
-This hook must be used within a `CioRecommendationProvider` context. The `CioRecommendations` component provides this context automatically, or you can use the provider directly.
+This hook must be used within a `CioRecommendationProvider` context.
 
 ```jsx
-import CioRecommendations from '@constructor-io/constructorio-ui-recommendations';
-import { useRecommendationResults } from '@constructor-io/constructorio-ui-recommendations';
+import {
+  CioRecommendationProvider,
+  useCioRecommendationContext,
+  useRecommendationResults
+} from '@constructor-io/constructorio-ui-recommendations';
 
 function CustomRecommendations() {
-  const { status, data, message, refetch } = useRecommendationResults();
+  // Access context values
+  const { podId } = useCioRecommendationContext();
 
-  if (status === 'fetching' || status === 'idle') {
-    return <div>Loading recommendations...</div>;
-  }
+  // Fetch recommendations
+  const { status, data, refetch } = useRecommendationResults();
 
-  if (status === 'error') {
-    return <div>Error: {message}</div>;
-  }
-
+  // Render your custom UI
   return (
     <div>
       <h2>{data.response.pod.displayName}</h2>
-      <ul>
-        {data.response.results.map((item) => (
-          <li key={item.id}>
-            <img src={item.imageUrl} alt={item.name} />
-            <span>{item.name}</span>
-          </li>
-        ))}
-      </ul>
-      <button onClick={refetch}>Refresh</button>
+      {data.response.results.map((item) => (
+        <div key={item.id}>{item.name}</div>
+      ))}
     </div>
   );
 }
 
-// Wrap with CioRecommendations to provide the context
 function App() {
   return (
-    <CioRecommendations apiKey="YOUR_API_KEY" podId="YOUR_POD_ID">
-      {() => <CustomRecommendations />}
-    </CioRecommendations>
+    <CioRecommendationProvider apiKey="YOUR_API_KEY" podId="YOUR_POD_ID">
+      <CustomRecommendations />
+    </CioRecommendationProvider>
   );
 }
 ```
 
-## Interactive Example
-
-<Canvas of={UseRecommendationResultsStories.Default} />
-
----
-
 ## Props
 
-<ArgTypes />
-
-| Property                       | Type                         | Description                                                                                                              |
-| ------------------------------ | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| initialRecommendationResponse  | `ApiRecommendationsResponse` | Initial value for recommendation results. Useful for Server-Side Rendering (SSR) to hydrate the component on the client |
+| Property | Type | Description |
+| -------- | ---- | ----------- |
+| `initialRecommendationResponse` | `ApiRecommendationsResponse` | Initial value for recommendation results. Useful for Server-Side Rendering (SSR) to hydrate the component on the client |
 
 ---
 
 ## Return Value
 
-<Markdown>{UseRecommendationResultsReturn}</Markdown>
+| property | type                            | description                                                                                   |
+| -------- | ------------------------------- | --------------------------------------------------------------------------------------------- |
+| status   | `RequestStatus`                 | The current status of the recommendation request (eg. `IDLE`, `FETCHING`, `SUCCESS`, `ERROR`) |
+| message  | `string` \| `null`              | Any error message encountered during the request                                              |
+| data     | `RecommendationsData` \| `null` | The transformed recommendation data                                                           |
+| refetch  | () => void                      | A function to manually refetch the recommendation results                                     |
+
 
 ### Type Guards
 
@@ -123,6 +114,73 @@ function MyComponent() {
 }
 ```
 
+## Interactive Example
+
+<Canvas of={UseRecommendationResultsStories.Default} />
+
+```jsx
+import {
+  CioRecommendationProvider,
+  useCioRecommendationContext,
+  useRecommendationResults
+} from '@constructor-io/constructorio-ui-recommendations';
+
+function CustomRecommendations() {
+  const { podId } = useCioRecommendationContext();
+  const { status, data, message, refetch } = useRecommendationResults();
+
+  if (status === 'fetching' || status === 'idle') {
+    return (
+      <div className='hook-example-container'>
+        <div className='hook-example-loading'>Loading recommendations...</div>
+      </div>
+    );
+  }
+
+  if (status === 'error') {
+    return (
+      <div className='hook-example-container'>
+        <div className='hook-example-error'>Error: {message}</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className='hook-example-container'>
+      <div className='hook-example-header'>
+        <div>
+          <h2 className='hook-example-title'>{data.response.pod.displayName}</h2>
+          <span className='hook-example-pod-id'>Pod: {podId}</span>
+        </div>
+        <button className='hook-example-refresh' type='button' onClick={refetch}>
+          Refresh
+        </button>
+      </div>
+      <div className='hook-example-grid'>
+        {data.response.results.slice(0, 6).map((item) => (
+          <div key={item.id} className='hook-example-card'>
+            <img src={item.imageUrl} alt={item.name} />
+            <h3>{item.name}</h3>
+            {item.price && <span className='hook-example-price'>${item.price}</span>}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <CioRecommendationProvider apiKey="YOUR_API_KEY" podId="YOUR_POD_ID">
+      <CustomRecommendations />
+    </CioRecommendationProvider>
+  );
+}
+```
+
+### CSS
+
+<Source code={UseRecommendationResultsExampleCss} language='css' />
 ---
 
 ## See Also

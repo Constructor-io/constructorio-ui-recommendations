@@ -1,7 +1,6 @@
 import { Meta, Canvas, Markdown, Source } from '@storybook/blocks';
 import * as PodHeaderStories from '../PodHeader.stories';
 import ComponentOverrideCssExample from '../PodHeaderComponentOverrideExample.css?raw';
-import RenderPropsTable from '../PodHeaderRenderProps.md?raw';
 
 <Meta title='Components/PodHeader/Usage Patterns/Component Overrides' />
 
@@ -17,16 +16,12 @@ Use this reference to understand **which keys can be overridden**, their types, 
 
 ## Usage
 
-PodHeader is overridden via the `componentOverrides` prop on the parent CioRecommendations component.
+PodHeader supports overrides via the `componentOverrides` prop.
 
 ```tsx
-<CioRecommendations
-  apiKey="YOUR_API_KEY"
-  podId="YOUR_POD_ID"
+<PodHeader
   componentOverrides={{
-    podHeader: {
-      reactNode: ({ podHeader, podSubheader }) => <CustomHeader title={podHeader} />,
-    },
+    reactNode: ({ podHeader, podSubheader }) => <CustomHeader title={podHeader} subtitle={podSubheader} />,
   }}
 />
 ```
@@ -35,11 +30,8 @@ PodHeader is overridden via the `componentOverrides` prop on the parent CioRecom
 
 | Key       | Type                                            | Description                       |
 | --------- | ----------------------------------------------- | --------------------------------- |
-| reactNode | `ReactNode \| (PodHeaderRenderProps) => ReactNode` | Override the entire PodHeader render |
+| reactNode | [`ReactNode \| (PodHeaderRenderProps) => ReactNode`](./?path=/docs/components-podheader-usage-patterns-render-props--docs#available-render-props) | Override the entire PodHeader render |
 
-## Render Props Passed to Override Function
-
-<Markdown>{RenderPropsTable}</Markdown>
 
 ---
 
@@ -48,30 +40,25 @@ PodHeader is overridden via the `componentOverrides` prop on the parent CioRecom
 <Canvas of={PodHeaderStories.ComponentOverride} />
 
 ```jsx
-import CioRecommendations from '@constructor-io/constructorio-ui-recommendations';
-
-const DEMO_API_KEY = 'key_M57QS8SMPdLdLx4x';
+import { PodHeader } from '@constructor-io/constructorio-ui-recommendations';
 
 export default function MyComponent() {
   return (
-    <CioRecommendations
-      apiKey={DEMO_API_KEY}
-      podId='bestsellers'
+    <PodHeader
+      podHeader='Bestsellers'
       podSubheader='A custom PodHeader component via Component Overrides'
       componentOverrides={{
-        podHeader: {
-          reactNode: ({ podHeader, podSubheader }) => (
-            <div className='component-override-header'>
-              <div className='header-wrapper'>
-                <span className='badge'>⭐</span>
-                <div>
-                  <h2 className='header'>{podHeader}</h2>
-                  <p className='subheader'>{podSubheader}</p>
-                </div>
+        reactNode: ({ podHeader, podSubheader }) => (
+          <div className='component-override-header'>
+            <div className='header-wrapper'>
+              <span className='badge'>⭐</span>
+              <div>
+                <h2 className='header'>{podHeader}</h2>
+                <p className='subheader'>{podSubheader}</p>
               </div>
             </div>
-          ),
-        },
+          </div>
+        ),
       }}
     />
   );

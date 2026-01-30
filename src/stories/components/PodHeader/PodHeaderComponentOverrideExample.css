@@ -12,10 +12,6 @@
   gap: 12px;
 }
 
-.component-override-header .badge {
-  font-size: 24px;
-}
-
 .component-override-header .subheader {
   margin: 4px 0 0;
   font-size: 14px;

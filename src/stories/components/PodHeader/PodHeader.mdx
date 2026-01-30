@@ -1,4 +1,4 @@
-import { Meta, Canvas, ArgTypes } from '@storybook/blocks';
+import { Meta, Canvas } from '@storybook/blocks';
 import * as PodHeaderStories from './PodHeader.stories';
 
 <Meta of={PodHeaderStories} />
@@ -26,7 +26,12 @@ export default function MyComponent() {
 
 ## Props Reference
 
-<ArgTypes />
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `podHeader` | `string` | Pod display name | Main header text for the pod |
+| `podSubheader` | `string` | - | Optional subheader text displayed below the main title |
+| `children` | `function` | - | Render prop for custom rendering. See [Render Props](./?path=/docs/components-podheader-usage-patterns-render-props--docs) |
+| `componentOverrides` | `PodHeaderComponentOverrides` | - | Override default sub-components. See [Component Overrides](./?path=/docs/components-podheader-usage-patterns-component-overrides--docs) |
 
 ---
 

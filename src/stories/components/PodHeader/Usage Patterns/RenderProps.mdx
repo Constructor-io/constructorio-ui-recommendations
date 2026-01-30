@@ -1,7 +1,6 @@
 import { Meta, Canvas, Markdown, Source } from '@storybook/blocks';
 import * as PodHeaderStories from '../PodHeader.stories';
 import RenderPropsCssExample from '../PodHeaderRenderPropsExample.css?raw';
-import RenderPropsTable from '../PodHeaderRenderProps.md?raw';
 
 <Meta title='Components/PodHeader/Usage Patterns/Render Props' />
 
@@ -9,7 +8,7 @@ import RenderPropsTable from '../PodHeaderRenderProps.md?raw';
 
 This document describes the **render props API** exposed by PodHeader. For a full explanation of how render props work, see the [Usage Patterns Reference](./?path=/docs/basic-concepts-usage-patterns--docs).
 
-Render props allow you to fully control how the component is rendered by passing a function that receives the component's internal state and helpers, while the component continues to manage behavior, accessibility, and state.
+Render props allow you to fully control how the component is rendered by passing a function that receives the component's internal state and helpers, while the component continues to manage behavior and state.
 
 Use this reference to understand **which render props are available**, their types, and when to use them.
 
@@ -31,7 +30,15 @@ The PodHeader component accepts a render function as its `children` prop.
 
 ## Available Render Props
 
-<Markdown>{RenderPropsTable}</Markdown>
+### Arguments passed to children via Render Props
+
+> Accessible to children of the `PodHeader` component via render props
+
+| Property     | Type                  | Description                  |
+| ------------ | --------------------- | ---------------------------- |
+| podHeader    | `string`              | Main header text for the pod |
+| podSubheader | `string \| undefined` | Optional subheader text      |
+
 
 ---
 
