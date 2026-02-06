@@ -5,7 +5,6 @@ import { DEMO_API_KEY, DEMO_POD_ID } from '../../../constants';
 const meta = {
   title: 'Hooks/UseRecommendationResults',
   component: UseRecommendationResultsExample,
-  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
     docs: {

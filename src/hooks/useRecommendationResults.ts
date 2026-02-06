@@ -12,9 +12,21 @@ export interface UseRecommendationResultsProps {
 }
 
 export interface UseRecommendationResultsReturn {
+  /**
+   * The transformed recommendation data
+   */
   data: Nullable<RecommendationsData>;
+  /**
+   * The current status of the recommendation request (eg. `IDLE`, `FETCHING`, `SUCCESS`, `ERROR`)
+   */
   status: RequestStatus;
+  /**
+   * Any error message encountered during the request
+   */
   message: Nullable<string>;
+  /**
+   * A function to manually refetch the recommendation results
+   */
   refetch: () => void;
 }
 

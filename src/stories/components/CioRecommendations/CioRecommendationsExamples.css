@@ -1,0 +1,62 @@
+.render-props-showcase {
+  padding: 24px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.render-props-showcase .showcase-header {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.render-props-showcase .showcase-title {
+  margin: 0 0 8px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.render-props-showcase .showcase-subtitle {
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+.render-props-showcase .showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.render-props-showcase .showcase-card {
+  background-color: white;
+  color: #1f2937;
+  border-radius: 12px;
+  padding: 16px;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.render-props-showcase .showcase-card:hover {
+  transform: translateY(-4px);
+}
+
+.render-props-showcase .showcase-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.render-props-showcase .showcase-card h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.render-props-showcase .showcase-card .price {
+  font-size: 18px;
+  font-weight: 700;
+  color: #059669;
+}

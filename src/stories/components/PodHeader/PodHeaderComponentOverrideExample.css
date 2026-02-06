@@ -1,0 +1,29 @@
+.component-override-header {
+  padding: 16px 24px;
+  background-color: #059669;
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.component-override-header .header-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.component-override-header .badge {
+  font-size: 24px;
+}
+
+.component-override-header .subheader {
+  margin: 4px 0 0;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.component-override-header .header {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}

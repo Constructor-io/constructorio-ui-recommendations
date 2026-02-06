@@ -8,11 +8,15 @@ const config: StorybookConfig = {
   "addons": [
     "@storybook/addon-essentials",
     "@storybook/addon-onboarding",
-    "@storybook/addon-interactions"
+    "@storybook/addon-interactions",
+    "@storybook/addon-mdx-gfm",
   ],
   "framework": {
     "name": "@storybook/react-vite",
     "options": {}
+  },
+  "typescript": {
+    "reactDocgen": "react-docgen-typescript"
   }
 };
 export default config;

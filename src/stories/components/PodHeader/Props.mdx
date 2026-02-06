@@ -1,0 +1,27 @@
+import { Meta, ArgTypes } from '@storybook/blocks';
+import * as PodHeaderStories from './PodHeader.stories';
+
+<Meta of={PodHeaderStories} />
+
+## Props
+
+<ArgTypes />
+
+## Render Props passed to children/component overrides
+
+> Accessible to children of the PodHeader component via render props
+
+| Property     | Type                  | Description                  |
+| ------------ | --------------------- | ---------------------------- |
+| podHeader    | `string`              | Main header text for the pod |
+| podSubheader | `string \| undefined` | Optional subheader text      |
+
+## CSS Classes
+
+The PodHeader component uses the following CSS classes for styling:
+
+| Class Name          | Description                         |
+| ------------------- | ----------------------------------- |
+| `.cio-pod-header`   | Container for the entire pod header |
+| `.cio-pod-title`    | Main header text element            |
+| `.cio-pod-subtitle` | Subheader text element              |
