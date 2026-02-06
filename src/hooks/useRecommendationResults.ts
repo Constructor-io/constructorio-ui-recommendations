@@ -12,10 +12,58 @@ export interface UseRecommendationResultsProps {
 }
 
 export interface UseRecommendationResultsReturn {
+  /**
+   * The transformed recommendation data
+   */
   data: Nullable<RecommendationsData>;
+  /**
+   * The current status of the recommendation request (eg. `IDLE`, `FETCHING`, `SUCCESS`, `ERROR`)
+   */
   status: RequestStatus;
+  /**
+   * Any error message encountered during the request
+   */
   message: Nullable<string>;
+  /**
+   * A function to manually refetch the recommendation results
+   */
   refetch: () => void;
+}
+
+export interface UseRecommendationsResultsReturnSuccess extends UseRecommendationResultsReturn {
+  data: RecommendationsData;
+  status: RequestStatus.SUCCESS | RequestStatus.IDLE;
+  message: never;
+}
+
+export interface UseRecommendationsResultsReturnFailure extends UseRecommendationResultsReturn {
+  data: never;
+  status: RequestStatus.ERROR;
+  message: string;
+}
+
+export interface UseRecommendationsResultsReturnLoading extends UseRecommendationResultsReturn {
+  data: never;
+  status: RequestStatus.FETCHING | RequestStatus.IDLE;
+  message: never;
+}
+
+export function isResponseLoaded(
+  response: UseRecommendationResultsReturn,
+): response is UseRecommendationsResultsReturnSuccess {
+  return response.status === RequestStatus.SUCCESS;
+}
+
+export function isResponseLoading(
+  response: UseRecommendationResultsReturn,
+): response is UseRecommendationsResultsReturnLoading {
+  return response.status === RequestStatus.FETCHING || response.status === RequestStatus.IDLE;
+}
+
+export function isResponseError(
+  response: UseRecommendationResultsReturn,
+): response is UseRecommendationsResultsReturnFailure {
+  return response.status === RequestStatus.ERROR;
 }
 
 async function fetchRecommendationResults(
@@ -48,7 +96,7 @@ export default function useRecommendationResults(
 ): UseRecommendationResultsReturn {
   const { initialRecommendationResponse } = props;
   const context = useCioRecommendationContext();
-  const { cioClient, podId, parameters } = context;
+  const { cioClient, podId, parameters, itemFieldGetters } = context;
 
   // Throw error when cioClient is not provided in client environment
   if (!cioClient && typeof window !== 'undefined') {
@@ -57,7 +105,7 @@ export default function useRecommendationResults(
 
   const [recommendationResults, setRecommendationResults] = useState<Nullable<RecommendationsData>>(
     initialRecommendationResponse
-      ? transformRecommendationResponse(initialRecommendationResponse)
+      ? transformRecommendationResponse(initialRecommendationResponse, { itemFieldGetters })
       : null,
   );
   const [status, setStatus] = useState<RequestStatus>(
@@ -71,7 +119,7 @@ export default function useRecommendationResults(
 
     fetchRecommendationResults(cioClient, podId, parameters)
       .then((response) => {
-        setRecommendationResults(transformRecommendationResponse(response));
+        setRecommendationResults(transformRecommendationResponse(response, { itemFieldGetters }));
         setStatus(RequestStatus.SUCCESS);
         setMessage(null);
       })
@@ -80,7 +128,7 @@ export default function useRecommendationResults(
         setStatus(RequestStatus.ERROR);
         setMessage(error.message);
       });
-  }, [cioClient, podId, parameters]);
+  }, [cioClient, podId, parameters, itemFieldGetters]);
 
   useEffect(fetchResult, [fetchResult]);
 

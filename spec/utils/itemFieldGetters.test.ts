@@ -5,7 +5,7 @@ import {
   getSwatchPreview,
   getSwatches,
 } from '../../src/utils/itemFieldGetters';
-import { testTransformedItem as testItem } from '../localExamples';
+import { testItem } from '../localExamples';
 
 describe('Testing ItemFieldGetters: getPrice', () => {
   it('should return the price of given item', () => {
@@ -115,16 +115,18 @@ describe('Testing ItemFieldGetters: getSwatches', () => {
       (variation) => variation.data.swatch_preview === undefined,
     );
     expect(
-      swatches?.find((swatch) => swatch.variationId === variationWithoutSwatchPreview?.variationId),
+      swatches?.find(
+        (swatch) => swatch.variationId === variationWithoutSwatchPreview?.data.variation_id,
+      ),
     ).toBeUndefined();
 
     // Check that the returned swatch contains the correct fields
     const firstItemVariation = testItem.variations[0];
     expect(swatches?.[0]).toEqual({
-      itemName: firstItemVariation.itemName,
-      url: firstItemVariation.url,
-      imageUrl: firstItemVariation.imageUrl,
-      variationId: firstItemVariation.variationId,
+      itemName: firstItemVariation.value || testItem.value,
+      url: firstItemVariation.data.url || testItem.data.url,
+      imageUrl: firstItemVariation.data.image_url || testItem.data.image_url,
+      variationId: firstItemVariation.data.variation_id,
       price: firstItemVariation.data.price,
       salePrice: firstItemVariation.data.sale_price,
       swatchPreview: firstItemVariation.data.swatch_preview,

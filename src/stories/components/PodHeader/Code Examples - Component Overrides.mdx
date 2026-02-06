@@ -1,0 +1,53 @@
+import { Meta, Canvas, Markdown, Source } from '@storybook/blocks';
+import * as PodHeaderStories from './PodHeader.stories';
+import ComponentOverrideCssExample from './PodHeaderComponentOverrideExample.css?raw';
+import RenderPropsTable from './PodHeaderRenderProps.md?raw';
+/* This "?raw" import imports raw text from the md file */
+
+<Meta of={PodHeaderStories} />
+
+# `PodHeader` - Code Examples with Component Overrides
+
+The `PodHeader` component supports top-level componentOverrides passed through the `CioRecommendations` component,
+allowing you to customize the pod header without needing to recreate the entire Recommendations component.
+
+## Override PodHeader from CioRecommendations
+
+<Canvas of={PodHeaderStories.ComponentOverride} />
+
+```
+import CioRecommendations from '@constructor-io/constructorio-ui-recommendations';
+
+const DEMO_API_KEY = 'key_M57QS8SMPdLdLx4x';
+
+export default function MyComponent() {
+  return (
+    <CioRecommendations
+      apiKey={DEMO_API_KEY}
+      podId='bestsellers'
+      podSubheader='A custom PodHeader component via Component Overrides'
+      componentOverrides={{
+        podHeader: {
+          reactNode: ({ podHeader, podSubheader }) => (
+            <div className='component-override-header'>
+              <div className='header-wrapper'>
+                <span className='badge'>⭐</span>
+                <div>
+                  <h2 className='header'>{podHeader}</h2>
+                  <p className='subheader'>{podSubheader}</p>
+                </div>
+              </div>
+            </div>
+          ),
+        },
+      }}
+    />
+  );
+}
+```
+
+### CSS
+
+<Source code={ComponentOverrideCssExample} language='css' />
+
+<Markdown>{RenderPropsTable}</Markdown>

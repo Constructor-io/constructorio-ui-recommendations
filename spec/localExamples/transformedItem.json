@@ -6,6 +6,8 @@
   "imageUrl": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/KNIT-CASUAL-SHIRT_BUTTON-DOWN-KNIT-SHIRT_BKT00110SG1733_3_category.jpg",
   "description": "Cotton jersey fabric that feels like a tee & looks like a button-down.",
   "groupIds": ["1111"],
+  "price": 90,
+  "salePrice": 70,
   "data": {
     "price": 90,
     "sale_price": 70,
@@ -19,6 +21,8 @@
       "variationId": "BKT00110DG1733LR",
       "url": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/WOVEN-CASUAL-SHIRT_BUTTON-DOWN-WOVEN-SHIRT_20084-BLW58_40_category-outfitter.jpg",
       "imageUrl": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/WOVEN-CASUAL-SHIRT_BUTTON-DOWN-WOVEN-SHIRT_20084-BLW58_40_category-outfitter.jpg",
+      "price": 90,
+      "salePrice": 70,
       "data": {
         "price": 90,
         "sale_price": 70,
@@ -31,6 +35,7 @@
       "variationId": "BKT00110SP1735",
       "url": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/KNIT-CASUAL-SHIRT_BUTTON-DOWN-KNIT-SHIRT_BKT00110SP1735_3_category.jpg",
       "imageUrl": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/KNIT-CASUAL-SHIRT_BUTTON-DOWN-KNIT-SHIRT_BKT00110SP1735_3_category.jpg",
+      "salePrice": 49,
       "data": {
         "sale_price": 49,
         "swatch_preview": "#f57c6a"
@@ -41,6 +46,7 @@
       "variationId": "BKT00110SG1759",
       "url": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/KNIT-CASUAL-SHIRT_BUTTON-DOWN-KNIT-SHIRT_BKT00110SG1759_3_category.jpg",
       "imageUrl": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/KNIT-CASUAL-SHIRT_BUTTON-DOWN-KNIT-SHIRT_BKT00110SG1759_3_category.jpg",
+      "price": 99,
       "data": {
         "price": 99,
         "swatch_preview": "#a3c43b",
@@ -52,6 +58,8 @@
       "variationId": "BKT00110SB1725",
       "url": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/KNIT-CASUAL-SHIRT_BUTTON-DOWN-KNIT-SHIRT_BKT00110SB1725_3_category.jpg",
       "imageUrl": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/KNIT-CASUAL-SHIRT_BUTTON-DOWN-KNIT-SHIRT_BKT00110SB1725_3_category.jpg",
+      "price": 100,
+      "salePrice": 80,
       "data": {
         "price": 100,
         "sale_price": 80,
@@ -63,6 +71,8 @@
       "variationId": "BKT00110SN1945",
       "url": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/KNIT-CASUAL-SHIRT_BUTTON-DOWN-KNIT-SHIRT_BKT00110SN1945_3_category.jpg",
       "imageUrl": "https://constructorio-integrations.s3.amazonaws.com/tikus-threads/2022-06-29/KNIT-CASUAL-SHIRT_BUTTON-DOWN-KNIT-SHIRT_BKT00110SN1945_3_category.jpg",
+      "price": 59,
+      "salePrice": 39,
       "data": {
         "price": 59,
         "sale_price": 39,

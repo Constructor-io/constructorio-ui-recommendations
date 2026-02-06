@@ -1,0 +1,42 @@
+.render-props-showcase {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 12px;
+  column-gap: 16px;
+}
+
+.render-props-showcase .showcase-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.render-props-showcase .showcase-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.render-props-showcase .showcase-subtitle {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.render-props-showcase .view-all-btn {
+  padding: 8px 16px;
+  background-color: white;
+  color: #667eea;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.render-props-showcase .view-all-btn:hover {
+  transform: scale(1.05);
+}

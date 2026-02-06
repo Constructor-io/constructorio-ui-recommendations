@@ -2,7 +2,7 @@
 import React from 'react';
 import { renderHook } from '@testing-library/react';
 import ConstructorIOClient from '@constructor-io/constructorio-client-javascript';
-import CioRecommendationsProvider from '../src/components/CioRecommendation/CioRecommendationProvider';
+import CioRecommendationsProvider from '../src/components/CioRecommendations/CioRecommendationsProvider';
 import { DEMO_API_KEY, DEMO_POD_ID } from '../src/constants';
 import { testApiResponse } from './localExamples';
 

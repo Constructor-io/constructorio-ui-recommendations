@@ -1,11 +1,11 @@
 import React from 'react';
-import CioRecommendationProvider from '../../../components/CioRecommendation/CioRecommendationProvider';
-import { CioRecommendationProviderProps } from '../../../types';
+import CioRecommendationsProvider from '../../../components/CioRecommendations/CioRecommendationsProvider';
+import { CioRecommendationsProviderProps } from '../../../types';
 import './DisplayHookExample.css';
 
 export interface DisplayHookExampleProps {
   title: string;
-  providerProps: CioRecommendationProviderProps;
+  providerProps: CioRecommendationsProviderProps;
   renderHook: (props?: Record<string, unknown>) => any;
   renderHookProps?: Record<string, unknown>;
 }
@@ -28,11 +28,11 @@ export default function DisplayHookExample(props: DisplayHookExampleProps) {
   const { title, providerProps, renderHook, renderHookProps } = props;
 
   return (
-    <CioRecommendationProvider {...providerProps}>
+    <CioRecommendationsProvider {...providerProps}>
       <div>
         <h2>{title}</h2>
         <HookRender renderHook={renderHook} renderHookProps={renderHookProps} />
       </div>
-    </CioRecommendationProvider>
+    </CioRecommendationsProvider>
   );
 }

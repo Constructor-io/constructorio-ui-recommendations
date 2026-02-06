@@ -1,0 +1,97 @@
+import { Meta, Canvas } from '@storybook/blocks';
+import * as CioRecommendationsStories from './CioRecommendations.stories';
+
+<Meta of={CioRecommendationsStories} />
+
+# `CioRecommendations` - Basic Code Examples
+
+Simply pass your Constructor index key and pod id to render your Recommendations!
+
+## Default Recommendations
+
+<Canvas of={CioRecommendationsStories.Default} />
+
+```jsx
+import CioRecommendations from '@constructor-io/constructorio-ui-recommendations';
+import '@constructor-io/constructorio-ui-recommendations/styles.css';
+
+const DEMO_API_KEY = 'key_M57QS8SMPdLdLx4x';
+
+export default function MyComponent() {
+  return <CioRecommendations apiKey={DEMO_API_KEY} podId='bestsellers' />;
+}
+```
+
+> Note: The Pod Header is taken from the display title set in the [Customer Dashboard](https://docs.constructor.com/docs/using-the-constructor-dashboard-recommendations-create-a-recommendations-pod#step-2-define-recommendation-strategy).
+
+## With Subheader
+
+Add additional context with a subheader below the pod title
+
+<Canvas of={CioRecommendationsStories.WithSubheader} />
+
+```jsx
+import CioRecommendations from '@constructor-io/constructorio-ui-recommendations';
+
+const DEMO_API_KEY = 'key_M57QS8SMPdLdLx4x';
+
+export default function MyComponent() {
+  return (
+    <CioRecommendations
+      apiKey={DEMO_API_KEY}
+      podId='bestsellers'
+      podSubheader='Curated selection of top-rated products'
+    />
+  );
+}
+```
+
+## Custom Parameters
+
+Pass additional parameters when requesting for a Recommendations Pod
+
+<Canvas of={CioRecommendationsStories.WithCustomParameters} />
+
+```jsx
+import CioRecommendations from '@constructor-io/constructorio-ui-recommendations';
+
+const DEMO_API_KEY = 'key_M57QS8SMPdLdLx4x';
+
+export default function MyComponent() {
+  return (
+    <CioRecommendations
+      apiKey={DEMO_API_KEY}
+      podId='bestsellers'
+      parameters={{
+        numResults: 5,
+      }}
+    />
+  );
+}
+```
+
+## With ItemFieldGetters
+
+Customize how item data is extracted from the API response for rendering
+
+```jsx
+import CioRecommendations from '@constructor-io/constructorio-ui-recommendations';
+
+const DEMO_API_KEY = 'key_M57QS8SMPdLdLx4x';
+
+export default function MyComponent() {
+  const customItemFieldGetters = {
+    getPrice: (item) => item.data.custom_price,
+    getSalePrice: (item) => item.data.custom_sale_price,
+    getRolloverImage: (item) => item.data.hover_image,
+  };
+
+  return (
+    <CioRecommendations
+      apiKey={DEMO_API_KEY}
+      podId='bestsellers'
+      itemFieldGetters={customItemFieldGetters}
+    />
+  );
+}
+```
