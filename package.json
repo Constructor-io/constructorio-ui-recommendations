@@ -112,7 +112,7 @@
     "license-checker": "^25.0.1",
     "prop-types": "^15.8.1",
     "start-server-and-test": "^2.0.10",
-    "storybook": "^8.6.4",
+    "storybook": "^8.6.15",
     "typescript": "^4.9.4",
     "typescript-eslint": "^8.26.1",
     "vite": "^6.4.1",

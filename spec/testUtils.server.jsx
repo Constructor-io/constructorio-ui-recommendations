@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import CioRecommendationProvider from '../src/components/CioRecommendations/CioRecommendationProvider';
+import CioRecommendationsProvider from '../src/components/CioRecommendations/CioRecommendationsProvider';
 import { DEMO_API_KEY, DEMO_POD_ID } from '../src/constants';
 
 export function RenderHookServerSideWrapper({
@@ -41,13 +41,13 @@ export function renderHookServerSideWithCioProvider(
 ) {
   return {
     html: ReactDOMServer.renderToString(
-      <CioRecommendationProvider apiKey={DEMO_API_KEY} podId={DEMO_POD_ID} {...providerProps}>
+      <CioRecommendationsProvider apiKey={DEMO_API_KEY} podId={DEMO_POD_ID} {...providerProps}>
         <RenderHookServerSideWrapper
           renderCallback={renderCallback}
           renderCallbackProps={renderCallbackProps}
           onRenderHookValue={onRenderHookValue}
         />
-      </CioRecommendationProvider>,
+      </CioRecommendationsProvider>,
     ),
     onRenderHookValue,
     result: onRenderHookValue.mock.calls[0][0],

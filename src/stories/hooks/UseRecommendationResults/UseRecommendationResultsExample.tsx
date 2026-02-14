@@ -1,7 +1,7 @@
 import React from 'react';
 import useRecommendationResults from '../../../hooks/useRecommendationResults';
 import { useCioRecommendationContext } from '../../../hooks/useCioRecommendationContext';
-import CioRecommendationProvider from '../../../components/CioRecommendations/CioRecommendationProvider';
+import CioRecommendationsProvider from '../../../components/CioRecommendations/CioRecommendationsProvider';
 import { CioRecommendationsProviderProps } from '../../../types';
 import './UseRecommendationResultsExample.css';
 
@@ -55,8 +55,8 @@ export default function UseRecommendationResultsExample(
   props: UseRecommendationResultsExampleProps,
 ) {
   return (
-    <CioRecommendationProvider {...props}>
+    <CioRecommendationsProvider {...props}>
       <CustomRecommendations />
-    </CioRecommendationProvider>
+    </CioRecommendationsProvider>
   );
 }

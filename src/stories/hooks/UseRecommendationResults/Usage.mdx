@@ -24,11 +24,11 @@ Use this hook when you need to:
 
 ## Usage
 
-This hook must be used within a `CioRecommendationProvider` context.
+This hook must be used within a `CioRecommendationsProvider` context.
 
 ```jsx
 import {
-  CioRecommendationProvider,
+  CioRecommendationsProvider,
   useCioRecommendationContext,
   useRecommendationResults
 } from '@constructor-io/constructorio-ui-recommendations';
@@ -53,9 +53,9 @@ function CustomRecommendations() {
 
 function App() {
   return (
-    <CioRecommendationProvider apiKey="YOUR_API_KEY" podId="YOUR_POD_ID">
+    <CioRecommendationsProvider apiKey="YOUR_API_KEY" podId="YOUR_POD_ID">
       <CustomRecommendations />
-    </CioRecommendationProvider>
+    </CioRecommendationsProvider>
   );
 }
 ```
@@ -120,7 +120,7 @@ function MyComponent() {
 
 ```jsx
 import {
-  CioRecommendationProvider,
+  CioRecommendationsProvider,
   useCioRecommendationContext,
   useRecommendationResults
 } from '@constructor-io/constructorio-ui-recommendations';
@@ -171,9 +171,9 @@ function CustomRecommendations() {
 
 function App() {
   return (
-    <CioRecommendationProvider apiKey="YOUR_API_KEY" podId="YOUR_POD_ID">
+    <CioRecommendationsProvider apiKey="YOUR_API_KEY" podId="YOUR_POD_ID">
       <CustomRecommendations />
-    </CioRecommendationProvider>
+    </CioRecommendationsProvider>
   );
 }
 ```

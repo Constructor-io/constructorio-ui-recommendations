@@ -5,7 +5,7 @@ import useCioClient from '../../hooks/useCioClient';
 import { RecommendationContext } from '../../hooks/useCioRecommendationContext';
 import * as defaultGetters from '../../utils/itemFieldGetters';
 
-export default function CioRecommendationProvider(
+export default function CioRecommendationsProvider(
   props: CioRecommendationsProviderProps & IncludeRenderProps<RecommendationsContextValue>,
 ) {
   const {
