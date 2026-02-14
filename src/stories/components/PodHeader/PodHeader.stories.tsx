@@ -1,8 +1,10 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { PodHeader } from '../../../components/PodHeader/PodHeader';
-import './PodHeaderComponentOverrideExample.css';
+import CioRecommendations from '../../../components/CioRecommendations/CioRecommendations';
+import { DEMO_API_KEY, DEMO_POD_ID } from '../../../constants';
 import './PodHeaderRenderPropsExample.css';
+import './PodHeaderFromCioRecommendationsExample.css';
 
 const meta = {
   title: 'Components/PodHeader',
@@ -25,7 +27,7 @@ export const WithSubheader: Story = {
   },
 };
 
-export const RenderPropsPattern: Story = {
+export const RenderProps: Story = {
   args: {
     podHeader: 'Featured Collection',
     podSubheader: 'Hand-picked by our team',
@@ -43,22 +45,25 @@ export const RenderPropsPattern: Story = {
   },
 };
 
-export const ComponentOverride: Story = {
-  args: {
-    podHeader: 'Bestsellers',
-    podSubheader: 'A custom PodHeader component via Component Overrides',
-    componentOverrides: {
-      reactNode: ({ podHeader, podSubheader }) => (
-        <div className='component-override-header'>
-          <div className='header-wrapper'>
-            <span className='badge'>⭐</span>
-            <div>
-              <h2 className='header'>{podHeader}</h2>
-              <p className='subheader'>{podSubheader}</p>
+export const ComponentOverride: StoryObj<typeof CioRecommendations> = {
+  render: () => (
+    <CioRecommendations
+      apiKey={DEMO_API_KEY}
+      podId={DEMO_POD_ID}
+      podSubheader='Curated picks for you'
+      componentOverrides={{
+        podHeader: {
+          reactNode: ({ podHeader, podSubheader }) => (
+            <div className='cio-override-header'>
+              <span className='badge'>Featured</span>
+              <div>
+                <h2>{podHeader}</h2>
+                {podSubheader && <p>{podSubheader}</p>}
+              </div>
             </div>
-          </div>
-        </div>
-      ),
-    },
-  },
+          ),
+        },
+      }}
+    />
+  ),
 };

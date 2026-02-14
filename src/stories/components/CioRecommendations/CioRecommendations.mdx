@@ -1,7 +1,7 @@
 import { Meta, Canvas } from '@storybook/blocks';
 import * as CioRecommendationsStories from './CioRecommendations.stories';
 
-<Meta of={CioRecommendationsStories} />
+<Meta of={CioRecommendationsStories} title="Docs" />
 
 # CioRecommendations
 
@@ -36,10 +36,10 @@ export default function MyComponent() {
 | `podSubheader` | `string` | - | Subheader text displayed below the pod title |
 | `cioClient` | `ConstructorIOClient` | - | Pre-initialized Constructor.io client instance |
 | [cioClientOptions](#cioclientoptions) | `CioClientOptions` | - | Configuration options for the Constructor.io JS client |                             
-| [parameters](#recommendationsparameters) | `RecommendationsParameters` | - | Additional parameters passed to the recommendations API |
+| [parameters](#recommendations-api-parameters) | `RecommendationsParameters` | - | Additional parameters passed to the recommendations API |
 | [itemFieldGetters](#itemfieldgetters) | `ItemFieldGetters` | - | Functions that map fields from your catalog to rendering fields |
 | [children](./?path=/docs/components-ciorecommendations-usage-patterns-render-props--docs)  | `function` | - | Render prop for custom rendering. See [Render Props](./?path=/docs/components-ciorecommendations-usage-patterns-render-props--docs) |
-| [componentOverrides](#componentoverrides) | `CioRecommendationsComponentOverrides` | - | Override default sub-components (carousel, podHeader). See [Component Overrides](./?path=/docs/components-ciorecommendations-usage-patterns-component-overrides--docs) |
+| [componentOverrides](./?path=/docs/components-ciorecommendations-usage-patterns-component-overrides--docs) | `CioRecommendationsComponentOverrides` | - | Override default sub-components (carousel, podHeader). See [Component Overrides](./?path=/docs/components-ciorecommendations-usage-patterns-component-overrides--docs) |
 
 
 ### CioClientOptions
@@ -48,7 +48,7 @@ Configuration options for the Constructor.io client.
 
 For the full list of client options, refer to the [Constructor.io JS Client documentation](https://constructor-io.github.io/constructorio-client-javascript/ConstructorIO.html#setClientOptions).
 
-### parameters
+### Recommendations API Parameters
 
 Additional parameters passed to the Constructor.io Recommendations API.
 

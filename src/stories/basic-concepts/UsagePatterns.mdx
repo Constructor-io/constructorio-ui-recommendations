@@ -8,8 +8,6 @@ The Constructor Recommendations UI library is designed to be flexible by default
 
 Each pattern represents a different level of control—from simple configuration to fully customized rendering—allowing you to choose the approach that best fits your use case without unnecessary complexity.
 
----
-
 ## 1. Default Usage
 
 The simplest approach: pass required props and let the library handle everything.
@@ -27,10 +25,8 @@ function App() {
   );
 }
 ```
-
 Use this when you want a fully functional recommendations carousel with minimal configuration.
 
----
 
 ## 2. Component Overrides
 
@@ -43,14 +39,6 @@ Each override key accepts either:
 - A render function that receives the component's internal render props and returns a `ReactNode`
 
 This enables both simple overrides (custom markup) and advanced ones (conditional rendering based on internal state).
-
-### Available Override Keys
-
-| Key       | Type                 | Description                      |
-| --------- | -------------------- | -------------------------------- |
-| reactNode | `ReactNode \| (props) => ReactNode` | Override the entire component |
-| podHeader | `PodHeaderOverrides` | Override the PodHeader component |
-| carousel  | `CarouselOverrides`  | Override the Carousel component  |
 
 ### Example: Custom Pod Header
 
@@ -77,11 +65,45 @@ function App() {
 }
 ```
 
-> **Note:** For each component that supports this pattern, its documentation includes a dedicated reference listing all supported keys that can be passed to the `componentOverrides` prop, along with their corresponding render props.
+> **Note:** For each component that supports component overrides, its documentation includes a dedicated reference listing all supported keys that can be passed to the `componentOverrides` prop, along with their corresponding render props.
 
----
 
-## 3. Render Props
+## 3. Compound Components
+
+The compound components pattern exposes a set of related subcomponents that work together under a shared parent context, allowing you to pass props directly to nested components rather than having the top-level component expose all child props. This keeps the API clean and makes it clear which props belong to which component.
+
+### How It Works
+
+1. The parent component provides shared context (state, API client, configuration)
+2. Subcomponents are used directly in your JSX and receive their own props
+3. Each subcomponent manages its own configuration instead of cluttering the parent's API
+
+### Example: Custom Layout with Compound Components
+
+```jsx
+import CioRecommendations from '@constructor-io/constructorio-ui-recommendations';
+
+function App() {
+  return (
+    <CioRecommendations apiKey="YOUR_API_KEY" podId="YOUR_POD_ID">
+      {({ items }) => (
+        <div className="custom-layout">
+          <div className="header-section">
+            <CioRecommendations.PodHeader />
+          </div>
+          <div className="carousel-section">
+            <CioRecommendations.Carousel items={items} />
+          </div>
+        </div>
+      )}
+    </CioRecommendations>
+  );
+}
+```
+
+> **Note:** For each component that supports compound components, its documentation lists all available compound subcomponents, along with their expected hierarchy and usage rules.
+
+## 4. Render Props
 
 The render props pattern allows you to customize a component's rendering by passing a function as `children`. This function receives the component's internal state and helpers, giving you full control over what gets rendered while the component continues to manage its own behavior.
 
@@ -120,24 +142,9 @@ function App() {
 }
 ```
 
-### Available Render Props
-
-| Property            | Type                                  | Description                          |
-| ------------------- | ------------------------------------- | ------------------------------------ |
-| items               | `Item[]`                              | Array of recommendation items        |
-| podId               | `string`                              | The pod ID being displayed           |
-| podSubheader        | `string \| undefined`                 | Optional subheader text              |
-| cioClient           | `ConstructorIOClient \| null`         | Constructor.io client instance       |
-| cioClientOptions    | `CioClientOptions`                    | Configuration options for the client |
-| setCioClientOptions | `(options: CioClientOptions) => void` | Function to update client options    |
-| parameters          | `RecommendationsParameters`           | API request parameters               |
-| itemFieldGetters    | `ItemFieldGetters`                    | Functions to extract item data       |
-
 > **Note:** For each component that supports render props, its documentation clearly lists the available render props, including their types and intended usage.
 
----
-
-## 4. Hooks for Full Control
+## 5. Hooks for Full Control
 
 For maximum flexibility, use the `useRecommendationResults` hook directly. This gives you complete control over the UI while the library handles data fetching, caching, and state management.
 
@@ -169,30 +176,9 @@ function App() {
 }
 ```
 
-
----
-
-## 5. Bundled Version (Vanilla JavaScript)
+## 6. Bundled Version (Vanilla JavaScript)
 
 For non-React projects, the library provides a framework-agnostic bundle that can be used in any JavaScript project. The `CioRecommendations` function injects a complete recommendations UI into a specified DOM element.
-
-### Installation
-
-```bash
-npm install @constructor-io/constructorio-ui-recommendations
-```
-
-### Usage
-
-```javascript
-import CioRecommendations from '@constructor-io/constructorio-ui-recommendations/constructorio-ui-recommendations-bundled';
-
-CioRecommendations({
-  selector: '#recommendations-container',
-  apiKey: 'YOUR_API_KEY',
-  podId: 'YOUR_POD_ID',
-});
-```
 
 ### Options
 
@@ -226,14 +212,13 @@ For the full list of options, see [CioRecommendations Props](./?path=/docs/compo
 </script>
 ```
 
----
-
 ## Choosing the Right Pattern
 
 | Pattern             | When to Use                                                                 |
 | ------------------- | --------------------------------------------------------------------------- |
 | Default Usage       | Standard recommendations carousel with minimal customization                |
 | Component Overrides | Customize specific parts (header, cards) while keeping the overall structure |
+| Compound Components | Custom layout with direct control over subcomponent props                   |
 | Render Props        | Complete control over layout while keeping data fetching managed            |
 | Hooks               | Maximum flexibility, custom state handling, or integration with other systems |
 | Bundled Version     | Non-React projects or vanilla JavaScript applications                       |

@@ -1,6 +1,6 @@
 import { Meta, Canvas, Source } from '@storybook/blocks';
 import * as CioRecommendationsStories from '../CioRecommendations.stories';
-import RenderPropsExampleCss from '../CioRecommendationsExamples.css?raw';
+import RenderPropsCss from '../css/RenderProps.css?raw';
 
 <Meta title='Components/CioRecommendations/Usage Patterns/Render Props' />
 
@@ -30,9 +30,7 @@ The CioRecommendations component accepts a render function as its `children` pro
 
 ## Available Render Props
 
-### Arguments passed to children via Render Props
-
-> Accessible to children of the CioRecommendations component via render props
+Accessible to children of the CioRecommendations component via render props
 
 | Property            | Type                                  | Description                          |
 | ------------------- | ------------------------------------- | ------------------------------------ |
@@ -50,25 +48,23 @@ The CioRecommendations component accepts a render function as its `children` pro
 
 ## Example
 
-<Canvas of={CioRecommendationsStories.RenderPropsShowcase} />
+<Canvas of={CioRecommendationsStories.RenderProps} />
 
 ```jsx
 import CioRecommendations from '@constructor-io/constructorio-ui-recommendations';
 
-const DEMO_API_KEY = 'key_M57QS8SMPdLdLx4x';
-
 export default function MyComponent() {
   return (
-    <CioRecommendations apiKey={DEMO_API_KEY} podId='bestsellers'>
+    <CioRecommendations apiKey="YOUR_API_KEY" podId="YOUR_POD_ID">
       {({ items, podId }) => (
-        <div className='render-props-showcase'>
-          <div className='showcase-header'>
-            <h2 className='showcase-title'>Featured Recommendations</h2>
-            <p className='showcase-subtitle'>Personalized picks for you from {podId}</p>
+        <div className='render-props'>
+          <div className='header'>
+            <h2 className='title'>Featured Recommendations</h2>
+            <p className='subtitle'>Personalized picks for you from {podId}</p>
           </div>
-          <div className='showcase-grid'>
+          <div className='grid'>
             {items.slice(0, 6).map((item) => (
-              <div key={item.id} className='showcase-card'>
+              <div key={item.id} className='card'>
                 <img src={item.imageUrl} alt={item.name} />
                 <h3>{item.name}</h3>
                 {item.price && <div className='price'>${item.price}</div>}
@@ -84,4 +80,4 @@ export default function MyComponent() {
 
 ### CSS
 
-<Source code={RenderPropsExampleCss} language='css' />
+<Source code={RenderPropsCss} language='css' />

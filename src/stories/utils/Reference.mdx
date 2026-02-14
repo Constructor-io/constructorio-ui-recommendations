@@ -6,7 +6,6 @@ import { Meta } from '@storybook/blocks';
 
 Helper functions for working with Constructor.io recommendation data. These utilities are used internally by the library but can also be imported for custom implementations.
 
----
 
 ## Item Field Getters
 
@@ -37,7 +36,6 @@ const price = getPrice(item);
 // Returns: 29.99
 ```
 
----
 
 ### getSalePrice
 
@@ -64,7 +62,6 @@ const salePrice = getSalePrice(item);
 // Returns: 19.99
 ```
 
----
 
 ### getRolloverImage
 
@@ -91,8 +88,6 @@ const rolloverImage = getRolloverImage(item);
 // Returns: "https://example.com/product-hover.jpg"
 ```
 
----
-
 ### getSwatchPreview
 
 Extracts the swatch preview image from a variation.
@@ -118,7 +113,6 @@ const swatchPreview = getSwatchPreview(variation);
 // Returns: "https://example.com/swatch-red.jpg"
 ```
 
----
 
 ### getSwatches
 
@@ -155,7 +149,6 @@ const swatches = getSwatches(item, getPrice, getSalePrice, getRolloverImage, get
 // Returns: [{ variationId: "var-1", swatchPreview: "...", price: 29.99, ... }, ...]
 ```
 
----
 
 ## Response Transformers
 
@@ -201,7 +194,6 @@ const transformedData = transformRecommendationResponse(apiResponse, {
 });
 ```
 
----
 
 ### transformResultItem
 
@@ -223,7 +215,6 @@ function transformResultItem(
 **Returns:**
 - `Item`: Transformed item with flattened data properties
 
----
 
 ### transformPodData
 

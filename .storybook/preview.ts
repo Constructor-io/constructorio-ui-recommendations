@@ -14,6 +14,8 @@ const preview: Preview = {
         order: [
           'Getting Started',
           ['Introduction', 'Quickstart'],
+          'Basic Concepts',
+          ['Usage Patterns'],
           'Components',
           [
             'CioRecommendations',
@@ -23,8 +25,6 @@ const preview: Preview = {
           ],
           'Hooks',
           ['UseRecommendationResults', ['Docs', '*']],
-          'Basic Concepts',
-          ['Usage Patterns'],
           'Utils',
           ['Reference'],
         ],
