@@ -27,8 +27,45 @@ function App() {
 ```
 Use this when you want a fully functional recommendations carousel with minimal configuration.
 
+## 2. Compound Components
 
-## 2. Component Overrides
+The compound components pattern exposes a set of related subcomponents that work together under a shared parent context, allowing you to pass props directly to nested components rather than having the top-level component expose all child props. This keeps the API clean and makes it clear which props belong to which component.
+
+The compound component pattern can also be used together with the Render Props pattern or the Component Overrides pattern for maximum flexibility.
+
+### How It Works
+
+1. The parent component provides shared context (state, API client, configuration)
+2. Subcomponents are used directly in your JSX and receive their own props
+3. Each subcomponent manages its own configuration instead of cluttering the parent's API
+
+### Example: Custom Layout with Compound Components
+
+```jsx
+import CioRecommendations from '@constructor-io/constructorio-ui-recommendations';
+
+function App() {
+  return (
+    <CioRecommendations apiKey="YOUR_API_KEY" podId="YOUR_POD_ID">
+      {({ items }) => (
+        <div className="custom-layout">
+          <div className="header-section">
+            <CioRecommendations.PodHeader />
+          </div>
+          <div className="carousel-section">
+            <CioRecommendations.Carousel items={items} />
+          </div>
+        </div>
+      )}
+    </CioRecommendations>
+  );
+}
+```
+
+> **Note:** For each component that supports compound components, its documentation lists all available compound subcomponents, along with their expected hierarchy and usage rules.
+
+
+## 3. Component Overrides
 
 The `componentOverrides` prop allows you to customize specific parts of a component's rendering by providing custom content or render functions. This pattern is useful when you want to customize how a component (or part of it) is rendered without rewriting or wrapping the entire component.
 
@@ -66,42 +103,6 @@ function App() {
 ```
 
 > **Note:** For each component that supports component overrides, its documentation includes a dedicated reference listing all supported keys that can be passed to the `componentOverrides` prop, along with their corresponding render props.
-
-
-## 3. Compound Components
-
-The compound components pattern exposes a set of related subcomponents that work together under a shared parent context, allowing you to pass props directly to nested components rather than having the top-level component expose all child props. This keeps the API clean and makes it clear which props belong to which component.
-
-### How It Works
-
-1. The parent component provides shared context (state, API client, configuration)
-2. Subcomponents are used directly in your JSX and receive their own props
-3. Each subcomponent manages its own configuration instead of cluttering the parent's API
-
-### Example: Custom Layout with Compound Components
-
-```jsx
-import CioRecommendations from '@constructor-io/constructorio-ui-recommendations';
-
-function App() {
-  return (
-    <CioRecommendations apiKey="YOUR_API_KEY" podId="YOUR_POD_ID">
-      {({ items }) => (
-        <div className="custom-layout">
-          <div className="header-section">
-            <CioRecommendations.PodHeader />
-          </div>
-          <div className="carousel-section">
-            <CioRecommendations.Carousel items={items} />
-          </div>
-        </div>
-      )}
-    </CioRecommendations>
-  );
-}
-```
-
-> **Note:** For each component that supports compound components, its documentation lists all available compound subcomponents, along with their expected hierarchy and usage rules.
 
 ## 4. Render Props
 
