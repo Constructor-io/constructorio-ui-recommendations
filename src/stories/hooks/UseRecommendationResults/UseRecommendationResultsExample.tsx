@@ -1,11 +1,13 @@
 import React from 'react';
-import useRecommendationResults from '../../../hooks/useRecommendationResults';
+import useRecommendationResults, { UseRecommendationResultsProps } from '../../../hooks/useRecommendationResults';
 import { useCioRecommendationContext } from '../../../hooks/useCioRecommendationContext';
 import CioRecommendationsProvider from '../../../components/CioRecommendations/CioRecommendationsProvider';
 import { CioRecommendationsProviderProps } from '../../../types';
 import './UseRecommendationResultsExample.css';
 
-interface UseRecommendationResultsExampleProps extends CioRecommendationsProviderProps {}
+interface UseRecommendationResultsExampleProps
+  extends CioRecommendationsProviderProps,
+    UseRecommendationResultsProps {}
 
 function CustomRecommendations() {
   const { podId } = useCioRecommendationContext();

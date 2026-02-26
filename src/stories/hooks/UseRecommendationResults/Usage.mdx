@@ -1,4 +1,4 @@
-import { Meta, Canvas, Source } from '@storybook/blocks';
+import { Meta, Canvas, Source, ArgTypes } from '@storybook/blocks';
 import * as UseRecommendationResultsStories from './UseRecommendationResults.stories';
 import UseRecommendationResultsExampleCss from './UseRecommendationResultsExample.css?raw';
 
@@ -62,10 +62,7 @@ function App() {
 
 ## Props
 
-| Property | Type | Description |
-| -------- | ---- | ----------- |
-| `initialRecommendationResponse` | `ApiRecommendationsResponse` | Initial value for recommendation results. Useful for Server-Side Rendering (SSR) to hydrate the component on the client |
-
+<ArgTypes of={UseRecommendationResultsStories} include={['initialRecommendationResponse']} />
 ---
 
 ## Return Value
