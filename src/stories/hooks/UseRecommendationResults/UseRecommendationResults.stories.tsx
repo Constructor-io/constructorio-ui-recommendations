@@ -13,14 +13,6 @@ const meta = {
       },
     },
   },
-  argTypes: {
-    initialRecommendationResponse: {
-      description: 'Initial value for recommendation results. Useful for Server-Side Rendering (SSR) to hydrate the component on the client',
-      table: {
-        type: { summary: 'ApiRecommendationsResponse' },
-      },
-    },
-  },
 } satisfies Meta<typeof UseRecommendationResultsExample>;
 
 export default meta;

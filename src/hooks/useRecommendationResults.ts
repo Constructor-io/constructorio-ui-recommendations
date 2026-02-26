@@ -8,6 +8,10 @@ import { useCioRecommendationContext } from './useCioRecommendationContext';
 import { transformRecommendationResponse } from '../utils/transformers';
 
 export interface UseRecommendationResultsProps {
+  /**
+   * Initial value for recommendation results.
+   * Useful for Server-Side Rendering (SSR) to hydrate the component on the client
+   */
   initialRecommendationResponse?: ApiRecommendationsResponse;
 }
 

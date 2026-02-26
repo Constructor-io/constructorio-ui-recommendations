@@ -1,5 +1,7 @@
 import React from 'react';
-import useRecommendationResults, { UseRecommendationResultsProps } from '../../../hooks/useRecommendationResults';
+import useRecommendationResults, {
+  UseRecommendationResultsProps,
+} from '../../../hooks/useRecommendationResults';
 import { useCioRecommendationContext } from '../../../hooks/useCioRecommendationContext';
 import CioRecommendationsProvider from '../../../components/CioRecommendations/CioRecommendationsProvider';
 import { CioRecommendationsProviderProps } from '../../../types';
@@ -33,7 +35,7 @@ function CustomRecommendations() {
     <div className='hook-example-container'>
       <div className='hook-example-header'>
         <div>
-          <h2 className='hook-example-title'>{data.response.pod.displayName}</h2>
+          <h2 className='hook-example-title'>{data?.response.pod.displayName}</h2>
           <span className='hook-example-pod-id'>Pod: {podId}</span>
         </div>
         <button className='hook-example-refresh' type='button' onClick={refetch}>
@@ -41,7 +43,7 @@ function CustomRecommendations() {
         </button>
       </div>
       <div className='hook-example-grid'>
-        {data.response.results.slice(0, 6).map((item) => (
+        {data?.response.results.slice(0, 6).map((item) => (
           <div key={item.id} className='hook-example-card'>
             <img src={item.imageUrl} alt={item.name} />
             <h3>{item.name}</h3>
