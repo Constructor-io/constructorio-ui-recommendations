@@ -12,8 +12,8 @@ div.subheading {
 
 div.link-list {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
   row-gap: 10px;
 }
 
@@ -29,7 +29,7 @@ div.link-list {
   div.link-list {
     display: -ms-grid;
     -ms-grid-columns: 1fr 1fr;
-    -ms-grid-rows: 1fr 1fr;
+    -ms-grid-rows: 1fr;
   }
 }
 

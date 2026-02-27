@@ -1,0 +1,16 @@
+.compound-components-layout {
+  padding: 24px;
+  background: #f8fafc;
+  border-radius: 16px;
+}
+
+.compound-components-layout .compound-header-section {
+  margin-bottom: 16px;
+}
+
+.compound-components-layout .compound-carousel-section {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}

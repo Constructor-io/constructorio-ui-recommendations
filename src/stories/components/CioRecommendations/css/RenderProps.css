@@ -1,4 +1,4 @@
-.render-props-showcase {
+.render-props {
   padding: 24px;
   background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   color: white;
@@ -6,29 +6,29 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-.render-props-showcase .showcase-header {
+.render-props .header {
   margin-bottom: 24px;
   text-align: center;
 }
 
-.render-props-showcase .showcase-title {
+.render-props .title {
   margin: 0 0 8px;
   font-size: 28px;
   font-weight: 700;
 }
 
-.render-props-showcase .showcase-subtitle {
+.render-props .subtitle {
   font-size: 16px;
   opacity: 0.9;
 }
 
-.render-props-showcase .showcase-grid {
+.render-props .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 16px;
 }
 
-.render-props-showcase .showcase-card {
+.render-props .card {
   background-color: white;
   color: #1f2937;
   border-radius: 12px;
@@ -37,11 +37,11 @@
   cursor: pointer;
 }
 
-.render-props-showcase .showcase-card:hover {
+.render-props .card:hover {
   transform: translateY(-4px);
 }
 
-.render-props-showcase .showcase-card img {
+.render-props .card img {
   width: 100%;
   height: 180px;
   object-fit: cover;
@@ -49,13 +49,13 @@
   margin-bottom: 12px;
 }
 
-.render-props-showcase .showcase-card h3 {
+.render-props .card h3 {
   margin: 0 0 8px;
   font-size: 16px;
   font-weight: 600;
 }
 
-.render-props-showcase .showcase-card .price {
+.render-props .card .price {
   font-size: 18px;
   font-weight: 700;
   color: #059669;

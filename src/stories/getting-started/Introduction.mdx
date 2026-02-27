@@ -1,0 +1,65 @@
+import { Meta } from '@storybook/blocks';
+import Code from '../assets/code-brackets.svg';
+import Rocket from '../assets/rocket.svg';
+import Carousel from '../assets/carousel.svg';
+import Header from '../assets/header.svg';
+import '../assets/storybook-introduction.css';
+
+<Meta title='Getting Started/Introduction' />
+
+# Constructor Recommendations UI
+
+[Constructor Recommendations UI](https://github.com/Constructor-io/constructorio-ui-recommendations) is a React library that provides components for fetching and rendering product recommendations powered by Constructor.io. It handles state management, data fetching, and rendering logic out of the box.
+
+## Prerequisites
+
+- React 16.12+
+- Constructor.io API key
+- Recommendations Pod ID
+
+<div className='subheading'>Get Started</div>
+
+<div className='link-list'>
+  <a className='link-item' href='./?path=/docs/getting-started-quickstart--docs'>
+    <img src={Rocket} alt='quickstart' />
+    <span>
+      <strong>Quickstart</strong>
+      Install the library and render your first recommendations pod
+    </span>
+  </a>
+</div>
+
+<div className='subheading'>Components</div>
+
+<div className='link-list'>
+  <a className='link-item' href='./?path=/docs/components-ciorecommendations--docs'>
+    <img src={Carousel} alt='component' />
+    <span>
+      <strong>CioRecommendations</strong>
+      An all-in-one component that renders a recommendations pod in a carousel layout
+    </span>
+  </a>
+  <a className='link-item' href='./?path=/docs/components-podheader--docs'>
+    <img src={Header} alt='header' />
+    <span>
+      <strong>PodHeader</strong>
+      Renders the header and optional subheader for a recommendations pod
+    </span>
+  </a>
+</div>
+
+<div className='subheading'>Hooks</div>
+
+<div className='link-list'>
+  <a className='link-item' href='./?path=/docs/hooks-userecommendationresults--docs'>
+    <img src={Code} alt='code' />
+    <span>
+      <strong>useRecommendationResults</strong>
+      A hook that fetches and manages recommendation results from Constructor
+    </span>
+  </a>
+</div>
+
+<div className='badge-wrapper tip-wrapper'>
+  <span className='badge tip'>Tip</span>Having trouble with a unique use case? Contact your friendly Integration Engineers for support!
+</div>

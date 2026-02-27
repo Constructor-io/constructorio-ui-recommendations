@@ -2,7 +2,12 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import CioRecommendations from '../../../components/CioRecommendations/CioRecommendations';
 import { DEMO_API_KEY, DEMO_POD_ID } from '../../../constants';
-import './CioRecommendationsExamples.css';
+import './css/RenderProps.css';
+import './css/OverrideEntireComponent.css';
+import './css/OverrideCarousel.css';
+import './css/OverridePodHeader.css';
+import './css/OverrideProductCard.css';
+import './css/CompoundComponents.css';
 
 const meta = {
   title: 'Components/CioRecommendations',
@@ -37,24 +42,120 @@ export const WithCustomParameters: Story = {
   },
 };
 
-export const RenderPropsShowcase: Story = {
+export const RenderProps: Story = {
   args: {
     apiKey: DEMO_API_KEY,
     podId: DEMO_POD_ID,
     children: ({ items, podId }) => (
-      <div className='render-props-showcase'>
-        <div className='showcase-header'>
-          <h2 className='showcase-title'>Featured Recommendations</h2>
-          <p className='showcase-subtitle'>Personalized picks for you from {podId}</p>
+      <div className='render-props'>
+        <div className='header'>
+          <h2 className='title'>Featured Recommendations</h2>
+          <p className='subtitle'>Personalized picks for you from {podId}</p>
         </div>
-        <div className='showcase-grid'>
+        <div className='grid'>
           {items.slice(0, 6).map((item) => (
-            <div key={item.id} className='showcase-card'>
+            <div key={item.id} className='card'>
               <img src={item.imageUrl} alt={item.name} />
               <h3>{item.name}</h3>
               {item.price && <div className='price'>${item.price}</div>}
             </div>
           ))}
+        </div>
+      </div>
+    ),
+  },
+};
+
+export const OverrideEntireComponent: Story = {
+  args: {
+    apiKey: DEMO_API_KEY,
+    podId: DEMO_POD_ID,
+    componentOverrides: {
+      reactNode: ({ items, podId }) => (
+        <div className='custom-recommendations'>
+          <h2>Products from {podId}</h2>
+          <ul>
+            {items.map((item) => (
+              <li key={item.id}>{item.name}</li>
+            ))}
+          </ul>
+        </div>
+      ),
+    },
+  },
+};
+
+export const OverrideCarousel: Story = {
+  args: {
+    apiKey: DEMO_API_KEY,
+    podId: DEMO_POD_ID,
+    componentOverrides: {
+      carousel: {
+        reactNode: ({ items }) => (
+          <div className='custom-grid'>
+            {items.map((item) => (
+              <div key={item.id} className='grid-item'>
+                <img src={item.imageUrl} alt={item.name} />
+                <p>{item.name}</p>
+              </div>
+            ))}
+          </div>
+        ),
+      },
+    },
+  },
+};
+
+export const OverridePodHeader: Story = {
+  args: {
+    apiKey: DEMO_API_KEY,
+    podId: DEMO_POD_ID,
+    podSubheader: 'Curated picks for you',
+    componentOverrides: {
+      podHeader: {
+        reactNode: ({ podHeader, podSubheader }) => (
+          <div className='custom-header'>
+            <span className='badge'>Featured</span>
+            <h2>{podHeader}</h2>
+            {podSubheader && <p>{podSubheader}</p>}
+          </div>
+        ),
+      },
+    },
+  },
+};
+
+export const OverrideProductCard: Story = {
+  args: {
+    apiKey: DEMO_API_KEY,
+    podId: DEMO_POD_ID,
+    componentOverrides: {
+      carousel: {
+        productCard: {
+          reactNode: ({ item }) => (
+            <div className='custom-product-card'>
+              <img src={item.imageUrl} alt={item.name} />
+              <h3>{item.name}</h3>
+              {item.price && <span className='price'>${item.price}</span>}
+            </div>
+          ),
+        },
+      },
+    },
+  },
+};
+
+export const CompoundComponents: Story = {
+  args: {
+    apiKey: DEMO_API_KEY,
+    podId: DEMO_POD_ID,
+    children: ({ items }) => (
+      <div className='compound-components-layout'>
+        <div className='compound-header-section'>
+          <CioRecommendations.PodHeader podHeader='My custom header' />
+        </div>
+        <div className='compound-carousel-section'>
+          <CioRecommendations.Carousel items={items} />
         </div>
       </div>
     ),
