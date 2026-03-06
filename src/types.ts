@@ -125,7 +125,6 @@ export interface CioRecommendationsProviderProps {
   cioClientOptions?: CioClientOptions;
   parameters?: RecommendationsParameters;
   itemFieldGetters?: Partial<ItemFieldGetters>;
-  /** Callback functions for user interactions */
   callbacks?: Callbacks;
 }
 
