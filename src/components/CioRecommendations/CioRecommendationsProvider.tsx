@@ -17,6 +17,7 @@ export default function CioRecommendationsProvider(
     cioClientOptions: customCioClientOptions = {},
     parameters,
     itemFieldGetters,
+    callbacks,
   } = props;
 
   const [cioClientOptions, setCioClientOptions] = useState(customCioClientOptions);
@@ -31,8 +32,9 @@ export default function CioRecommendationsProvider(
       setCioClientOptions,
       parameters,
       itemFieldGetters: { ...defaultGetters, ...itemFieldGetters },
+      callbacks,
     }),
-    [cioClient, cioClientOptions, podId, podSubheader, parameters, itemFieldGetters],
+    [cioClient, cioClientOptions, podId, podSubheader, parameters, itemFieldGetters, callbacks],
   );
 
   return (

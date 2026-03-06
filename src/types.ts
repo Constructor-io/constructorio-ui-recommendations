@@ -6,6 +6,10 @@ import ConstructorIOClient, {
   RecommendationsRequestType as RecommendationsRequestModel,
   RecommendationsParameters,
 } from '@constructor-io/constructorio-client-javascript';
+import type {
+  ProductCardEventDetail,
+  CarouselNavEventDetail,
+} from '@constructor-io/constructorio-ui-components';
 
 export interface Item {
   name: string;
@@ -88,6 +92,29 @@ export interface RecommendationsContextValue {
   setCioClientOptions: (options: CioClientOptions) => void;
   parameters?: RecommendationsParameters;
   itemFieldGetters: ItemFieldGetters;
+  callbacks?: Callbacks;
+}
+
+/**
+ * Callback functions for recommendation component interactions.
+ */
+export interface Callbacks {
+  /** Called when a product card is clicked (excluding add-to-cart/wishlist buttons) */
+  onProductClick?: (e: CustomEvent<ProductCardEventDetail>) => void;
+  /** Called when the add-to-cart button is clicked */
+  onAddToCart?: (e: CustomEvent<ProductCardEventDetail>) => void;
+  /** Called when the wishlist button is clicked */
+  onAddToWishlist?: (e: CustomEvent<ProductCardEventDetail>) => void;
+  /** Called when mouse enters a product card image */
+  onProductImageEnter?: (e: CustomEvent<ProductCardEventDetail>) => void;
+  /** Called when mouse leaves a product card image */
+  onProductImageLeave?: (e: CustomEvent<ProductCardEventDetail>) => void;
+  /** Called when the carousel next button is clicked */
+  onCarouselNext?: (e: CustomEvent<CarouselNavEventDetail>) => void;
+  /** Called when the carousel previous button is clicked */
+  onCarouselPrevious?: (e: CustomEvent<CarouselNavEventDetail>) => void;
+  /** Whether to allow event propagation past the container. Defaults to false. */
+  allowPropagation?: boolean;
 }
 
 export interface CioRecommendationsProviderProps {
@@ -98,6 +125,8 @@ export interface CioRecommendationsProviderProps {
   cioClientOptions?: CioClientOptions;
   parameters?: RecommendationsParameters;
   itemFieldGetters?: Partial<ItemFieldGetters>;
+  /** Callback functions for user interactions */
+  callbacks?: Callbacks;
 }
 
 export interface SwatchItem {
