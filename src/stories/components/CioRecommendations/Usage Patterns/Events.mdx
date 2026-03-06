@@ -77,22 +77,6 @@ interface CarouselNavEventDetail {
 }
 ```
 
-The `Item` type contains all the product data from the Constructor.io API:
-
-```ts
-interface Item {
-  id: string;
-  name: string;
-  url?: string;
-  imageUrl?: string;
-  price?: number;
-  salePrice?: number;
-  description?: string;
-  // ... additional fields from your catalog
-  data: Record<string, any>; // Additional custom metadata
-}
-```
-
 ## Advanced: Direct Event Listening
 
 For more complex use cases, you can also listen to events directly using the exported `CIO_EVENTS` constants:
