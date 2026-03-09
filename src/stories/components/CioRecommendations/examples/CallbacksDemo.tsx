@@ -8,14 +8,16 @@ import { DEMO_API_KEY, DEMO_POD_ID } from '../../../../constants';
 import '../css/EventListening.css';
 
 export function CallbacksDemo() {
-  const [eventLog, setEventLog] = useState<string[]>([]);
+  const [eventLog, setEventLog] = useState<{ message: string; key: string }[]>([]);
 
   const logEvent = useCallback((eventType: string, e: CustomEvent) => {
     const timestamp = new Date().toLocaleTimeString();
     const detail = e.detail?.product?.name || e.detail?.direction || 'N/A';
     const message = `[${timestamp}] ${eventType} - ${detail}`;
+    const key = `[${Date.now()}] ${eventType} - ${detail}`;
+    const entry = { message, key };
 
-    setEventLog((prev) => [message, ...prev.slice(0)]);
+    setEventLog((prev) => [entry, ...prev.slice(0, 100)]);
   }, []);
 
   const callbacks = useMemo(
@@ -43,8 +45,8 @@ export function CallbacksDemo() {
           <div className='event-log-empty'>Click on products to see events...</div>
         ) : (
           eventLog.map((entry) => (
-            <div key={entry} className='event-log-entry'>
-              {entry}
+            <div key={entry.key} className='event-log-entry'>
+              {entry.message}
             </div>
           ))
         )}
