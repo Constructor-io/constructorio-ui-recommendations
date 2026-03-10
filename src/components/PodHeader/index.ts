@@ -1,5 +1,2 @@
-import PodHeader from './PodHeader';
-
 export * from './PodHeader';
-
-export default PodHeader;
+export { default } from './PodHeader';
