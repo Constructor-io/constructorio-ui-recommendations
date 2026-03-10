@@ -1,82 +1,75 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import {
   CIO_EVENTS,
   ProductCardEventDetail,
   CarouselNavEventDetail,
 } from '@constructor-io/constructorio-ui-components';
 import { useCioRecommendationContext } from './useCioRecommendationContext';
-import { Callbacks } from '../types';
 
 /**
  * Hook for wiring up recommendation callbacks to DOM events.
  *
  * Reads callbacks from context and attaches DOM event listeners to the container.
+ * Only attaches listeners for callbacks that are provided.
  *
  * @param container - The container element that wraps the recommendations
  */
 export default function useRecommendationEvents(container: HTMLElement | null): void {
   const { callbacks } = useCioRecommendationContext();
 
-  // Store callbacks in a ref to avoid re-attaching listeners when callbacks change
-  const callbacksRef = useRef<Callbacks | undefined>(callbacks);
-  callbacksRef.current = callbacks;
-
   useEffect(() => {
-    if (!container) return undefined;
+    if (!container || !callbacks) return undefined;
 
-    const shouldStopPropagation = !callbacksRef.current?.allowPropagation;
+    const shouldStopPropagation = !callbacks.allowPropagation;
 
-    const handleProductClick = (e: Event) => {
-      if (shouldStopPropagation) e.stopPropagation();
-      callbacksRef.current?.onProductClick?.(e as CustomEvent<ProductCardEventDetail>);
+    const createHandler = <T>(callback?: (e: CustomEvent<T>) => void) => {
+      if (!callback) return undefined;
+
+      return (e: Event) => {
+        if (shouldStopPropagation) e.stopPropagation();
+        callback(e as CustomEvent<T>);
+      };
     };
 
-    const handleConversion = (e: Event) => {
-      if (shouldStopPropagation) e.stopPropagation();
-      callbacksRef.current?.onAddToCart?.(e as CustomEvent<ProductCardEventDetail>);
-    };
+    const handleProductClick = createHandler<ProductCardEventDetail>(callbacks.onProductClick);
+    const handleConversion = createHandler<ProductCardEventDetail>(callbacks.onAddToCart);
+    const handleWishlist = createHandler<ProductCardEventDetail>(callbacks.onAddToWishlist);
+    const handleImageEnter = createHandler<ProductCardEventDetail>(callbacks.onProductImageEnter);
+    const handleImageLeave = createHandler<ProductCardEventDetail>(callbacks.onProductImageLeave);
+    const handleCarouselNext = createHandler<CarouselNavEventDetail>(callbacks.onCarouselNext);
+    const handleCarouselPrevious = createHandler<CarouselNavEventDetail>(
+      callbacks.onCarouselPrevious,
+    );
 
-    const handleWishlist = (e: Event) => {
-      if (shouldStopPropagation) e.stopPropagation();
-      callbacksRef.current?.onAddToWishlist?.(e as CustomEvent<ProductCardEventDetail>);
-    };
-
-    const handleImageEnter = (e: Event) => {
-      if (shouldStopPropagation) e.stopPropagation();
-      callbacksRef.current?.onProductImageEnter?.(e as CustomEvent<ProductCardEventDetail>);
-    };
-
-    const handleImageLeave = (e: Event) => {
-      if (shouldStopPropagation) e.stopPropagation();
-      callbacksRef.current?.onProductImageLeave?.(e as CustomEvent<ProductCardEventDetail>);
-    };
-
-    const handleCarouselNext = (e: Event) => {
-      if (shouldStopPropagation) e.stopPropagation();
-      callbacksRef.current?.onCarouselNext?.(e as CustomEvent<CarouselNavEventDetail>);
-    };
-
-    const handleCarouselPrevious = (e: Event) => {
-      if (shouldStopPropagation) e.stopPropagation();
-      callbacksRef.current?.onCarouselPrevious?.(e as CustomEvent<CarouselNavEventDetail>);
-    };
-
-    container.addEventListener(CIO_EVENTS.productCard.click, handleProductClick);
-    container.addEventListener(CIO_EVENTS.productCard.conversion, handleConversion);
-    container.addEventListener(CIO_EVENTS.productCard.wishlist, handleWishlist);
-    container.addEventListener(CIO_EVENTS.productCard.imageEnter, handleImageEnter);
-    container.addEventListener(CIO_EVENTS.productCard.imageLeave, handleImageLeave);
-    container.addEventListener(CIO_EVENTS.carousel.next, handleCarouselNext);
-    container.addEventListener(CIO_EVENTS.carousel.previous, handleCarouselPrevious);
+    if (handleProductClick)
+      container.addEventListener(CIO_EVENTS.productCard.click, handleProductClick);
+    if (handleConversion)
+      container.addEventListener(CIO_EVENTS.productCard.conversion, handleConversion);
+    if (handleWishlist) container.addEventListener(CIO_EVENTS.productCard.wishlist, handleWishlist);
+    if (handleImageEnter)
+      container.addEventListener(CIO_EVENTS.productCard.imageEnter, handleImageEnter);
+    if (handleImageLeave)
+      container.addEventListener(CIO_EVENTS.productCard.imageLeave, handleImageLeave);
+    if (handleCarouselNext)
+      container.addEventListener(CIO_EVENTS.carousel.next, handleCarouselNext);
+    if (handleCarouselPrevious)
+      container.addEventListener(CIO_EVENTS.carousel.previous, handleCarouselPrevious);
 
     return () => {
-      container.removeEventListener(CIO_EVENTS.productCard.click, handleProductClick);
-      container.removeEventListener(CIO_EVENTS.productCard.conversion, handleConversion);
-      container.removeEventListener(CIO_EVENTS.productCard.wishlist, handleWishlist);
-      container.removeEventListener(CIO_EVENTS.productCard.imageEnter, handleImageEnter);
-      container.removeEventListener(CIO_EVENTS.productCard.imageLeave, handleImageLeave);
-      container.removeEventListener(CIO_EVENTS.carousel.next, handleCarouselNext);
-      container.removeEventListener(CIO_EVENTS.carousel.previous, handleCarouselPrevious);
+      if (handleProductClick)
+        container.removeEventListener(CIO_EVENTS.productCard.click, handleProductClick);
+      if (handleConversion)
+        container.removeEventListener(CIO_EVENTS.productCard.conversion, handleConversion);
+      if (handleWishlist)
+        container.removeEventListener(CIO_EVENTS.productCard.wishlist, handleWishlist);
+      if (handleImageEnter)
+        container.removeEventListener(CIO_EVENTS.productCard.imageEnter, handleImageEnter);
+      if (handleImageLeave)
+        container.removeEventListener(CIO_EVENTS.productCard.imageLeave, handleImageLeave);
+      if (handleCarouselNext)
+        container.removeEventListener(CIO_EVENTS.carousel.next, handleCarouselNext);
+      if (handleCarouselPrevious)
+        container.removeEventListener(CIO_EVENTS.carousel.previous, handleCarouselPrevious);
     };
-  }, [container]);
+  }, [container, callbacks]);
 }

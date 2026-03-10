@@ -132,6 +132,68 @@ describe('useRecommendationEvents', () => {
       // No error thrown
       unmount();
     });
+
+    it('should not add event listeners when callbacks is undefined', () => {
+      const addEventListenerSpy = jest.spyOn(container, 'addEventListener');
+
+      const { unmount } = renderHook(() => useRecommendationEvents(container), {
+        wrapper: createWrapper(),
+      });
+
+      expect(addEventListenerSpy).not.toHaveBeenCalled();
+
+      addEventListenerSpy.mockRestore();
+      unmount();
+    });
+  });
+
+  describe('selective listener attachment', () => {
+    it('should only add event listeners for callbacks that are provided', () => {
+      const addEventListenerSpy = jest.spyOn(container, 'addEventListener');
+      const onProductClick = jest.fn();
+
+      const { unmount } = renderHook(() => useRecommendationEvents(container), {
+        wrapper: createWrapper({ onProductClick }),
+      });
+
+      // Should only add listener for productCard.click
+      expect(addEventListenerSpy).toHaveBeenCalledTimes(1);
+      expect(addEventListenerSpy).toHaveBeenCalledWith(
+        CIO_EVENTS.productCard.click,
+        expect.any(Function),
+      );
+
+      addEventListenerSpy.mockRestore();
+      unmount();
+    });
+
+    it('should add multiple listeners when multiple callbacks are provided', () => {
+      const addEventListenerSpy = jest.spyOn(container, 'addEventListener');
+      const onProductClick = jest.fn();
+      const onAddToCart = jest.fn();
+      const onCarouselNext = jest.fn();
+
+      const { unmount } = renderHook(() => useRecommendationEvents(container), {
+        wrapper: createWrapper({ onProductClick, onAddToCart, onCarouselNext }),
+      });
+
+      expect(addEventListenerSpy).toHaveBeenCalledTimes(3);
+      expect(addEventListenerSpy).toHaveBeenCalledWith(
+        CIO_EVENTS.productCard.click,
+        expect.any(Function),
+      );
+      expect(addEventListenerSpy).toHaveBeenCalledWith(
+        CIO_EVENTS.productCard.conversion,
+        expect.any(Function),
+      );
+      expect(addEventListenerSpy).toHaveBeenCalledWith(
+        CIO_EVENTS.carousel.next,
+        expect.any(Function),
+      );
+
+      addEventListenerSpy.mockRestore();
+      unmount();
+    });
   });
 
   describe('cleanup on unmount', () => {
