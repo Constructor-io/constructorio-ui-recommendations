@@ -1,0 +1,78 @@
+import { Meta, Canvas, Source } from '@storybook/blocks';
+import * as CioRecommendationsStories from '../CioRecommendations.stories';
+import CompoundComponentsCss from '../css/CompoundComponents.css?raw';
+
+<Meta title='Components/CioRecommendations/Usage Patterns/Compound Components' />
+
+# Compound Components
+
+This document describes the **compound components API** exposed by CioRecommendations. For a full explanation of how compound components work, see the [Usage Patterns Reference](./?path=/docs/basic-concepts-usage-patterns--docs#3-compound-components).
+
+The compound components pattern lets you pass props directly to nested components rather than having the top-level component expose all child props. This keeps the API clean and makes it clear which props belong to which component.
+
+Use this reference to understand **which subcomponents are available** and how to use them.
+
+---
+
+## Usage
+
+CioRecommendations exposes subcomponents that can be used within the render props pattern to compose custom layouts.
+
+```tsx
+<CioRecommendations apiKey="YOUR_API_KEY" podId="YOUR_POD_ID">
+  {({ items }) => (
+    <div className="custom-layout">
+      <CioRecommendations.PodHeader />
+      <CioRecommendations.Carousel items={items} />
+    </div>
+  )}
+</CioRecommendations>
+```
+
+## Available Subcomponents
+
+| Subcomponent                   | Description                                                                 |
+| ------------------------------ | --------------------------------------------------------------------------- |
+| `CioRecommendations.PodHeader` | Renders the recommendation pod header with title and optional subheader     |
+| `CioRecommendations.Carousel`  | Renders the product carousel with navigation controls                       |
+
+---
+
+## Example: Custom Layout
+
+Use compound components to create a custom layout while keeping the default rendering of each subcomponent.
+
+<Canvas of={CioRecommendationsStories.CompoundComponents} />
+
+```jsx
+import CioRecommendations from '@constructor-io/constructorio-ui-recommendations';
+
+function App() {
+  return (
+    <CioRecommendations apiKey="YOUR_API_KEY" podId="YOUR_POD_ID">
+      {({ items }) => (
+        <div className="compound-components-layout">
+          <div className="compound-header-section">
+            <CioRecommendations.PodHeader podHeader='My custom header' />
+          </div>
+          <div className="compound-carousel-section">
+            <CioRecommendations.Carousel items={items} />
+          </div>
+        </div>
+      )}
+    </CioRecommendations>
+  );
+}
+```
+
+### CSS
+
+<Source code={CompoundComponentsCss} language="css" />
+
+---
+
+## See Also
+
+- [Component Overrides Pattern](./?path=/docs/components-ciorecommendations-usage-patterns-component-overrides--docs)
+- [Render Props Pattern](./?path=/docs/components-ciorecommendations-usage-patterns-render-props--docs)
+- [Usage Patterns Overview](./?path=/docs/basic-concepts-usage-patterns--docs)

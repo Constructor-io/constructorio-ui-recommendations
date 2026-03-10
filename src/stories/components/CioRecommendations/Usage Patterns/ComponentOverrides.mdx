@@ -1,0 +1,125 @@
+import { Meta, Canvas, Source } from '@storybook/blocks';
+import * as CioRecommendationsStories from '../CioRecommendations.stories';
+import OverrideEntireComponentCss from '../css/OverrideEntireComponent.css?raw';
+import OverrideCarouselCss from '../css/OverrideCarousel.css?raw';
+
+<Meta title='Components/CioRecommendations/Usage Patterns/Component Overrides' />
+
+# Component Overrides
+
+This document describes the **component overrides API** exposed by CioRecommendations. For a full explanation of how component overrides work, see the [Usage Patterns Reference](./?path=/docs/basic-concepts-usage-patterns--docs).
+
+The component overrides pattern allows you to customize specific parts of a component's rendering by providing **custom content** or **render functions**. This pattern lets you change the markup or behavior of subcomponents without rewriting or wrapping the entire component.
+
+Use this reference to understand **which keys can be overridden**, their types, and their purpose.
+
+---
+
+## Usage
+
+CioRecommendations supports overrides via the `componentOverrides` prop.
+
+```tsx
+<CioRecommendations
+  apiKey="YOUR_API_KEY"
+  podId="YOUR_POD_ID"
+  componentOverrides={{
+    podHeader: {
+      reactNode: ({ podHeader, podSubheader }) => <CustomHeader title={podHeader} />,
+    },
+  }}
+/>
+```
+
+## Available Override Keys
+
+| Key       | Type                                                     | Description                                                                                          |
+| --------- | -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| reactNode | [`ReactNode \| (RecommendationsRenderProps) => ReactNode`](./?path=/docs/components-ciorecommendations-usage-patterns-render-props--docs#available-render-props) | Override the entire CioRecommendations render                                                        |
+| podHeader | `PodHeaderOverrides`                                     | Override the [PodHeader](./?path=/docs/components-podheader-usage-patterns-component-overrides--docs) component |
+| carousel  | `CarouselOverrides`                                      | Override the Carousel component from constructorio-ui-components                                     |
+| error     | `CioRecommendationsErrorOverrides`  | Override the default error component  |
+| loading   | `CioRecommendationsLoadingOverrides`  | Override the default loading component  |
+
+---
+
+## Override the Entire Component
+
+Replace the entire CioRecommendations render with a custom implementation while still benefiting from the component's data fetching.
+
+<Canvas of={CioRecommendationsStories.OverrideEntireComponent} />
+
+```jsx
+import CioRecommendations from '@constructor-io/constructorio-ui-recommendations';
+
+function App() {
+  return (
+    <CioRecommendations
+      apiKey="YOUR_API_KEY"
+      podId="YOUR_POD_ID"
+      componentOverrides={{
+        reactNode: ({ items, podId }) => (
+          <div className="custom-recommendations">
+            <h2>Products from {podId}</h2>
+            <ul>
+              {items.map((item) => (
+                <li key={item.id}>{item.name}</li>
+              ))}
+            </ul>
+          </div>
+        ),
+      }}
+    />
+  );
+}
+```
+### CSS
+
+<Source code={OverrideEntireComponentCss} language="css" />
+
+---
+
+## Override the Carousel
+
+Customize the carousel component while keeping the pod header intact.
+
+<Canvas of={CioRecommendationsStories.OverrideCarousel} />
+
+```jsx
+import CioRecommendations from '@constructor-io/constructorio-ui-recommendations';
+
+function App() {
+  return (
+    <CioRecommendations
+      apiKey="YOUR_API_KEY"
+      podId="YOUR_POD_ID"
+      componentOverrides={{
+        carousel: {
+          reactNode: ({ items }) => (
+            <div className="custom-grid">
+              {items.map((item) => (
+                <div key={item.id} className="grid-item">
+                  <img src={item.imageUrl} alt={item.name} />
+                  <p>{item.name}</p>
+                </div>
+              ))}
+            </div>
+          ),
+        },
+      }}
+    />
+  );
+}
+```
+
+### CSS
+
+<Source code={OverrideCarouselCss} language="css" />
+
+---
+
+## See Also
+
+- [PodHeader Component Overrides](./?path=/docs/components-podheader-usage-patterns-component-overrides--docs)
+- [Render Props Pattern](./?path=/docs/components-ciorecommendations-usage-patterns-render-props--docs)
+- [Usage Patterns Overview](./?path=/docs/basic-concepts-usage-patterns--docs)

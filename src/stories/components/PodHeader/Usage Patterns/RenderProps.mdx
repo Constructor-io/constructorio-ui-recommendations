@@ -1,0 +1,69 @@
+import { Meta, Canvas, Markdown, Source } from '@storybook/blocks';
+import * as PodHeaderStories from '../PodHeader.stories';
+import RenderPropsCssExample from '../PodHeaderRenderPropsExample.css?raw';
+
+<Meta title='Components/PodHeader/Usage Patterns/Render Props' />
+
+# Render Props
+
+This document describes the **render props API** exposed by PodHeader. For a full explanation of how render props work, see the [Usage Patterns Reference](./?path=/docs/basic-concepts-usage-patterns--docs).
+
+Render props allow you to fully control how the component is rendered by passing a function that receives the component's internal state and helpers, while the component continues to manage behavior and state.
+
+Use this reference to understand **which render props are available**, their types, and when to use them.
+
+---
+
+## Usage
+
+The PodHeader component accepts a render function as its `children` prop.
+
+```tsx
+<PodHeader podHeader="Title" podSubheader="Subtitle">
+  {(props) => (
+    <div>
+      {/* Custom rendering using render props */}
+    </div>
+  )}
+</PodHeader>
+```
+
+## Available Render Props
+
+Accessible to children of the `PodHeader` component via render props
+
+| Property     | Type                  | Description                  |
+| ------------ | --------------------- | ---------------------------- |
+| podHeader    | `string`              | Main header text for the pod |
+| podSubheader | `string \| undefined` | Optional subheader text      |
+
+
+---
+
+## Example
+
+<Canvas of={PodHeaderStories.RenderProps} />
+
+```jsx
+import { PodHeader } from '@constructor-io/constructorio-ui-recommendations';
+
+export default function MyComponent() {
+  return (
+    <PodHeader podHeader='Featured Collection' podSubheader='Hand-picked by our team'>
+      {({ podHeader, podSubheader }) => (
+        <header className='render-props-showcase'>
+          <div className='showcase-content'>
+            <h2 className='showcase-title'>{podHeader}</h2>
+            {podSubheader && <span className='showcase-subtitle'>{podSubheader}</span>}
+          </div>
+          <button className='view-all-btn' type='button'>View All</button>
+        </header>
+      )}
+    </PodHeader>
+  );
+}
+```
+
+### CSS
+
+<Source code={RenderPropsCssExample} language='css' />

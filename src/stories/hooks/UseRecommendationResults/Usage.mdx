@@ -1,0 +1,186 @@
+import { Meta, Canvas, Source, ArgTypes } from '@storybook/blocks';
+import * as UseRecommendationResultsStories from './UseRecommendationResults.stories';
+import UseRecommendationResultsExampleCss from './UseRecommendationResultsExample.css?raw';
+
+<Meta of={UseRecommendationResultsStories} name='Usage' />
+
+# useRecommendationResults
+
+A hook that fetches and manages recommendation results from the Constructor.io Recommendations API. Use this hook when you need full control over how recommendations are rendered while letting the library handle data fetching and state management.
+
+## When to Use
+
+Use this hook when you need to:
+- Build a completely custom recommendations UI
+- Integrate recommendations into an existing component structure
+- Access the raw recommendation data for custom processing
+- Implement custom loading and error states
+
+**Example use cases:**
+- Building a custom grid layout instead of the default carousel
+- Integrating recommendations into a sidebar widget
+- Creating a recommendations page with filtering and sorting
+- Implementing server-side rendering with initial data
+
+## Usage
+
+This hook must be used within a `CioRecommendationsProvider` context.
+
+```jsx
+import {
+  CioRecommendationsProvider,
+  useCioRecommendationContext,
+  useRecommendationResults
+} from '@constructor-io/constructorio-ui-recommendations';
+
+function CustomRecommendations() {
+  // Access context values
+  const { podId } = useCioRecommendationContext();
+
+  // Fetch recommendations
+  const { status, data, refetch } = useRecommendationResults();
+
+  // Render your custom UI
+  return (
+    <div>
+      <h2>{data.response.pod.displayName}</h2>
+      {data.response.results.map((item) => (
+        <div key={item.id}>{item.name}</div>
+      ))}
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <CioRecommendationsProvider apiKey="YOUR_API_KEY" podId="YOUR_POD_ID">
+      <CustomRecommendations />
+    </CioRecommendationsProvider>
+  );
+}
+```
+
+## Props
+
+<ArgTypes of={UseRecommendationResultsStories} include={['initialRecommendationResponse']} />
+---
+
+## Return Value
+
+| property | type                            | description                                                                                   |
+| -------- | ------------------------------- | --------------------------------------------------------------------------------------------- |
+| status   | `RequestStatus`                 | The current status of the recommendation request (eg. `IDLE`, `FETCHING`, `SUCCESS`, `ERROR`) |
+| message  | `string` \| `null`              | Any error message encountered during the request                                              |
+| data     | `RecommendationsData` \| `null` | The transformed recommendation data                                                           |
+| refetch  | () => void                      | A function to manually refetch the recommendation results                                     |
+
+
+### Type Guards
+
+The hook also exports type guard functions for narrowing the return type:
+
+| Function          | Description                                            |
+| ----------------- | ------------------------------------------------------ |
+| `isResponseLoaded`  | Returns `true` when `status` is `SUCCESS`              |
+| `isResponseLoading` | Returns `true` when `status` is `FETCHING` or `IDLE`   |
+| `isResponseError`   | Returns `true` when `status` is `ERROR`                |
+
+```jsx
+import {
+  useRecommendationResults,
+  isResponseLoaded,
+  isResponseLoading,
+  isResponseError
+} from '@constructor-io/constructorio-ui-recommendations';
+
+function MyComponent() {
+  const response = useRecommendationResults();
+
+  if (isResponseLoading(response)) {
+    return <LoadingSpinner />;
+  }
+
+  if (isResponseError(response)) {
+    return <ErrorMessage message={response.message} />;
+  }
+
+  if (isResponseLoaded(response)) {
+    // TypeScript knows response.data is defined here
+    return <RecommendationsList items={response.data.response.results} />;
+  }
+}
+```
+
+## Interactive Example
+
+<Canvas of={UseRecommendationResultsStories.Default} />
+
+```jsx
+import {
+  CioRecommendationsProvider,
+  useCioRecommendationContext,
+  useRecommendationResults
+} from '@constructor-io/constructorio-ui-recommendations';
+
+function CustomRecommendations() {
+  const { podId } = useCioRecommendationContext();
+  const { status, data, message, refetch } = useRecommendationResults();
+
+  if (status === 'fetching' || status === 'idle') {
+    return (
+      <div className='hook-example-container'>
+        <div className='hook-example-loading'>Loading recommendations...</div>
+      </div>
+    );
+  }
+
+  if (status === 'error') {
+    return (
+      <div className='hook-example-container'>
+        <div className='hook-example-error'>Error: {message}</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className='hook-example-container'>
+      <div className='hook-example-header'>
+        <div>
+          <h2 className='hook-example-title'>{data.response.pod.displayName}</h2>
+          <span className='hook-example-pod-id'>Pod: {podId}</span>
+        </div>
+        <button className='hook-example-refresh' type='button' onClick={refetch}>
+          Refresh
+        </button>
+      </div>
+      <div className='hook-example-grid'>
+        {data.response.results.slice(0, 6).map((item) => (
+          <div key={item.id} className='hook-example-card'>
+            <img src={item.imageUrl} alt={item.name} />
+            <h3>{item.name}</h3>
+            {item.price && <span className='hook-example-price'>${item.price}</span>}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <CioRecommendationsProvider apiKey="YOUR_API_KEY" podId="YOUR_POD_ID">
+      <CustomRecommendations />
+    </CioRecommendationsProvider>
+  );
+}
+```
+
+### CSS
+
+<Source code={UseRecommendationResultsExampleCss} language='css' />
+---
+
+## See Also
+
+- [CioRecommendations Component](./?path=/docs/components-ciorecommendations--docs)
+- [Usage Patterns](./?path=/docs/basic-concepts-usage-patterns--docs)

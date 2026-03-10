@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   Carousel,
   CarouselOverrides,
@@ -26,6 +26,7 @@ import {
   CioRecommendationsError,
   CioRecommendationsErrorOverrides,
 } from './CioRecommendationsError';
+import useRecommendationEvents from '../../hooks/useRecommendationEvents';
 
 export interface CioRecommendationsRenderProps extends RecommendationsContextValue {
   items: Item[];
@@ -52,6 +53,13 @@ export function CioRecommendationsInner(props: CioRecommendationsInnerProps) {
   const recommendationsResponse = useRecommendationResults();
   const context = useCioRecommendationContext();
   const { podSubheader } = context;
+  const [containerElement, setContainerElement] = useState<HTMLDivElement | null>(null);
+
+  const containerRef = useCallback((node: HTMLDivElement | null) => {
+    setContainerElement(node);
+  }, []);
+
+  useRecommendationEvents(containerElement);
 
   if (isResponseLoading(recommendationsResponse)) {
     return <CioRecommendationsLoading componentOverrides={componentOverrides?.loading} />;
@@ -76,7 +84,7 @@ export function CioRecommendationsInner(props: CioRecommendationsInnerProps) {
     );
 
     return (
-      <div className='cio-recommendations' {...dataAttributes}>
+      <div ref={containerRef} className='cio-recommendations' {...dataAttributes}>
         <RenderPropsWrapper
           props={{ items, ...context }}
           override={children || componentOverrides?.reactNode}>

@@ -25,7 +25,7 @@ export function CioRecommendationsError({
 
   return (
     <RenderPropsWrapper override={children || componentOverrides?.reactNode} props={{ response }}>
-      <div className='cio-error' />;
+      <div className='cio-error' />
     </RenderPropsWrapper>
   );
 }
