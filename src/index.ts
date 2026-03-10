@@ -14,3 +14,9 @@ export * as utils from './utils';
 
 // Types
 export * from './types';
+export {
+  CIO_EVENTS,
+  ProductCardEventDetail,
+  CarouselNavEventDetail,
+  CioEventDetailMap,
+} from '@constructor-io/constructorio-ui-components';
