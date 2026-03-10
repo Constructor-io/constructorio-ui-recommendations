@@ -35,6 +35,119 @@ describe('useRecommendationEvents', () => {
     document.body.removeChild(container);
   });
 
+  describe('callback invocation', () => {
+    it.each([
+      ['onProductClick', CIO_EVENTS.productCard.click, { product: { id: '1', name: 'P1' } }],
+      ['onAddToCart', CIO_EVENTS.productCard.conversion, { product: { id: '2', name: 'P2' } }],
+      ['onAddToWishlist', CIO_EVENTS.productCard.wishlist, { product: { id: '3', name: 'P3' } }],
+      ['onProductImageEnter', CIO_EVENTS.productCard.imageEnter, { product: { id: '4', name: 'P4' } }],
+      ['onProductImageLeave', CIO_EVENTS.productCard.imageLeave, { product: { id: '5', name: 'P5' } }],
+      ['onCarouselNext', CIO_EVENTS.carousel.next, { direction: 'next' }],
+      ['onCarouselPrevious', CIO_EVENTS.carousel.previous, { direction: 'previous' }],
+    ] as const)('should invoke %s with the correct event detail', (callbackName, eventName, detail) => {
+      const handler = jest.fn();
+      const callbacks = { [callbackName]: handler } as Callbacks;
+
+      const { unmount } = renderHook(() => useRecommendationEvents(container), {
+        wrapper: createWrapper(callbacks),
+      });
+
+      act(() => {
+        container.dispatchEvent(new CustomEvent(eventName, { bubbles: true, detail }));
+      });
+
+      expect(handler).toHaveBeenCalledTimes(1);
+      expect(handler).toHaveBeenCalledWith(
+        expect.objectContaining({ detail }),
+      );
+
+      unmount();
+    });
+
+    it('should not throw when only some callbacks are provided', () => {
+      const onProductClick = jest.fn();
+
+      const { unmount } = renderHook(() => useRecommendationEvents(container), {
+        wrapper: createWrapper({ onProductClick }),
+      });
+
+      // Dispatch events for callbacks that were NOT provided
+      act(() => {
+        container.dispatchEvent(
+          new CustomEvent(CIO_EVENTS.productCard.conversion, {
+            bubbles: true,
+            detail: { product: { id: '1', name: 'P1' } },
+          }),
+        );
+        container.dispatchEvent(
+          new CustomEvent(CIO_EVENTS.carousel.next, {
+            bubbles: true,
+            detail: { direction: 'next' },
+          }),
+        );
+      });
+
+      expect(onProductClick).not.toHaveBeenCalled();
+      unmount();
+    });
+  });
+
+  describe('container null handling', () => {
+    it('should not throw when container is null', () => {
+      const onProductClick = jest.fn();
+
+      const { unmount } = renderHook(() => useRecommendationEvents(null), {
+        wrapper: createWrapper({ onProductClick }),
+      });
+
+      // No error thrown — just verify we can unmount cleanly
+      unmount();
+    });
+  });
+
+  describe('no callbacks provided', () => {
+    it('should not throw when callbacks is undefined', () => {
+      const { unmount } = renderHook(() => useRecommendationEvents(container), {
+        wrapper: createWrapper(),
+      });
+
+      act(() => {
+        container.dispatchEvent(
+          new CustomEvent(CIO_EVENTS.productCard.click, {
+            bubbles: true,
+            detail: { product: { id: '1', name: 'P1' } },
+          }),
+        );
+      });
+
+      // No error thrown
+      unmount();
+    });
+  });
+
+  describe('cleanup on unmount', () => {
+    it('should not invoke callbacks after unmount', () => {
+      const onProductClick = jest.fn();
+
+      const { unmount } = renderHook(() => useRecommendationEvents(container), {
+        wrapper: createWrapper({ onProductClick }),
+      });
+
+      unmount();
+
+      act(() => {
+        container.dispatchEvent(
+          new CustomEvent(CIO_EVENTS.productCard.click, {
+            bubbles: true,
+            detail: { product: { id: '1', name: 'P1' } },
+          }),
+        );
+      });
+
+      expect(onProductClick).not.toHaveBeenCalled();
+    });
+  });
+
   describe('allowPropagation', () => {
     it('should stop propagation by default when allowPropagation is not set', () => {
       const onProductClick = jest.fn();
