@@ -14,7 +14,7 @@ import { Callbacks } from '../types';
  *
  * @param container - The container element that wraps the recommendations
  */
-export function useRecommendationEvents(container: HTMLElement | null): void {
+export default function useRecommendationEvents(container: HTMLElement | null): void {
   const { callbacks } = useCioRecommendationContext();
 
   // Store callbacks in a ref to avoid re-attaching listeners when callbacks change
@@ -80,5 +80,3 @@ export function useRecommendationEvents(container: HTMLElement | null): void {
     };
   }, [container]);
 }
-
-export default useRecommendationEvents;
