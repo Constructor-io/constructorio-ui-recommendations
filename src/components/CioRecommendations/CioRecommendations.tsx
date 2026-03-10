@@ -26,7 +26,7 @@ import {
   CioRecommendationsError,
   CioRecommendationsErrorOverrides,
 } from './CioRecommendationsError';
-import { useRecommendationEvents } from '../../hooks/useRecommendationEvents';
+import useRecommendationEvents from '../../hooks/useRecommendationEvents';
 
 export interface CioRecommendationsRenderProps extends RecommendationsContextValue {
   items: Item[];
@@ -55,14 +55,9 @@ export function CioRecommendationsInner(props: CioRecommendationsInnerProps) {
   const { podSubheader } = context;
   const [containerElement, setContainerElement] = useState<HTMLDivElement | null>(null);
 
-  const containerRef = useCallback(
-    (node: HTMLDivElement | null) => {
-      if (node !== containerElement) {
-        setContainerElement(node);
-      }
-    },
-    [containerElement],
-  );
+  const containerRef = useCallback((node: HTMLDivElement | null) => {
+    setContainerElement(node);
+  }, []);
 
   useRecommendationEvents(containerElement);
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderHook, act } from '@testing-library/react';
 import { CIO_EVENTS } from '@constructor-io/constructorio-ui-components';
-import { useRecommendationEvents } from '../../../src/hooks/useRecommendationEvents';
+import useRecommendationEvents from '../../../src/hooks/useRecommendationEvents';
 import CioRecommendationsProvider from '../../../src/components/CioRecommendations/CioRecommendationsProvider';
 import { DEMO_API_KEY, DEMO_POD_ID } from '../../../src/constants';
 import { Callbacks } from '../../../src/types';
@@ -40,29 +40,38 @@ describe('useRecommendationEvents', () => {
       ['onProductClick', CIO_EVENTS.productCard.click, { product: { id: '1', name: 'P1' } }],
       ['onAddToCart', CIO_EVENTS.productCard.conversion, { product: { id: '2', name: 'P2' } }],
       ['onAddToWishlist', CIO_EVENTS.productCard.wishlist, { product: { id: '3', name: 'P3' } }],
-      ['onProductImageEnter', CIO_EVENTS.productCard.imageEnter, { product: { id: '4', name: 'P4' } }],
-      ['onProductImageLeave', CIO_EVENTS.productCard.imageLeave, { product: { id: '5', name: 'P5' } }],
+      [
+        'onProductImageEnter',
+        CIO_EVENTS.productCard.imageEnter,
+        { product: { id: '4', name: 'P4' } },
+      ],
+      [
+        'onProductImageLeave',
+        CIO_EVENTS.productCard.imageLeave,
+        { product: { id: '5', name: 'P5' } },
+      ],
       ['onCarouselNext', CIO_EVENTS.carousel.next, { direction: 'next' }],
       ['onCarouselPrevious', CIO_EVENTS.carousel.previous, { direction: 'previous' }],
-    ] as const)('should invoke %s with the correct event detail', (callbackName, eventName, detail) => {
-      const handler = jest.fn();
-      const callbacks = { [callbackName]: handler } as Callbacks;
+    ] as const)(
+      'should invoke %s with the correct event detail',
+      (callbackName, eventName, detail) => {
+        const handler = jest.fn();
+        const callbacks = { [callbackName]: handler } as Callbacks;
 
-      const { unmount } = renderHook(() => useRecommendationEvents(container), {
-        wrapper: createWrapper(callbacks),
-      });
+        const { unmount } = renderHook(() => useRecommendationEvents(container), {
+          wrapper: createWrapper(callbacks),
+        });
 
-      act(() => {
-        container.dispatchEvent(new CustomEvent(eventName, { bubbles: true, detail }));
-      });
+        act(() => {
+          container.dispatchEvent(new CustomEvent(eventName, { bubbles: true, detail }));
+        });
 
-      expect(handler).toHaveBeenCalledTimes(1);
-      expect(handler).toHaveBeenCalledWith(
-        expect.objectContaining({ detail }),
-      );
+        expect(handler).toHaveBeenCalledTimes(1);
+        expect(handler).toHaveBeenCalledWith(expect.objectContaining({ detail }));
 
-      unmount();
-    });
+        unmount();
+      },
+    );
 
     it('should not throw when only some callbacks are provided', () => {
       const onProductClick = jest.fn();
