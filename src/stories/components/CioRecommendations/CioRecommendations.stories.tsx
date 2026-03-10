@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import CioRecommendations from '../../../components/CioRecommendations/CioRecommendations';
 import { DEMO_API_KEY, DEMO_POD_ID } from '../../../constants';
+import { CallbacksDemo } from './examples/CallbacksDemo';
 import './css/RenderProps.css';
 import './css/OverrideEntireComponent.css';
 import './css/OverrideCarousel.css';
@@ -160,4 +161,9 @@ export const CompoundComponents: Story = {
       </div>
     ),
   },
+};
+
+export const WithCallbacks: Story = {
+  render: () => <CallbacksDemo />,
+  tags: ['!autodocs'],
 };

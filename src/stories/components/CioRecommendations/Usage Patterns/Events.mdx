@@ -1,0 +1,109 @@
+import { Meta, Canvas, Source } from '@storybook/addon-docs/blocks';
+import * as CioRecommendationsStories from '../CioRecommendations.stories';
+
+import CallbacksDemoSource from '../examples/CallbacksDemo.tsx?raw';
+
+<Meta title='Components/CioRecommendations/Usage Patterns/Callbacks' />
+
+# Callbacks
+
+Handle user interactions with recommendation components using the `callbacks` prop.
+
+## Interactive Demo
+
+Click on product cards to see callback events in the log panel.
+
+<Canvas of={CioRecommendationsStories.WithCallbacks} />
+
+## Demo Source Code
+
+<Source code={CallbacksDemoSource} language='tsx' />
+
+## Basic Usage
+
+Pass callback functions via the `callbacks` prop to respond to user interactions:
+
+```tsx
+import CioRecommendations from '@constructor-io/constructorio-ui-recommendations';
+
+function MyRecommendations() {
+  return (
+    <CioRecommendations
+      apiKey='your-api-key'
+      podId='your-pod-id'
+      callbacks={{
+        onProductClick: (e) => {
+          const product = e.detail.product;
+          console.log('Product clicked:', product.name);
+          // Navigate to product page, track analytics, etc.
+        },
+        onAddToCart: (e) => {
+          const product = e.detail.product;
+          console.log('Add to cart:', product.name);
+          // Add item to cart, show confirmation, etc.
+        },
+      }}
+    />
+  );
+}
+```
+
+## Available Callbacks
+
+| Callback              | Description                                                              | Event Detail                |
+| --------------------- | ------------------------------------------------------------------------ | --------------------------- |
+| `onProductClick`      | Called when a product card is clicked (excluding action buttons)         | `{ product: Item }`         |
+| `onAddToCart`         | Called when the add-to-cart button is clicked                            | `{ product: Item }`         |
+| `onAddToWishlist`     | Called when the wishlist button is clicked                               | `{ product: Item }`         |
+| `onProductImageEnter` | Called when mouse enters a product card image                            | `{ product: Item }`         |
+| `onProductImageLeave` | Called when mouse leaves a product card image                            | `{ product: Item }`         |
+| `onCarouselNext`      | Called when the carousel next button is clicked                          | `{ direction: 'next' }`     |
+| `onCarouselPrevious`  | Called when the carousel previous button is clicked                      | `{ direction: 'previous' }` |
+| `allowPropagation`    | Whether to allow event propagation past the container (default: `false`) | `boolean`                   |
+
+## Event Detail Types
+
+Callbacks receive a `CustomEvent` with typed detail:
+
+```ts
+// Product card events
+interface ProductCardEventDetail {
+  product: Item;
+}
+
+// Carousel navigation events
+interface CarouselNavEventDetail {
+  direction: 'next' | 'previous';
+}
+```
+
+## Advanced: Direct Event Listening
+
+For more complex use cases, you can also listen to events directly using the exported `CIO_EVENTS` constants:
+
+```tsx
+import { CIO_EVENTS } from '@constructor-io/constructorio-ui-recommendations';
+
+// Listen to events on a container element
+containerRef.current.addEventListener(CIO_EVENTS.productCard.click, (e) => {
+  console.log('Product clicked:', e.detail.product);
+});
+```
+
+Available event constants:
+
+| Constant                            | Event Name              |
+| ----------------------------------- | ----------------------- |
+| `CIO_EVENTS.productCard.click`      | Product card click      |
+| `CIO_EVENTS.productCard.conversion` | Add to cart click       |
+| `CIO_EVENTS.productCard.wishlist`   | Wishlist click          |
+| `CIO_EVENTS.productCard.imageEnter` | Image mouse enter       |
+| `CIO_EVENTS.productCard.imageLeave` | Image mouse leave       |
+| `CIO_EVENTS.carousel.next`          | Carousel next click     |
+| `CIO_EVENTS.carousel.previous`      | Carousel previous click |
+
+## Notes
+
+- Callbacks receive the full `CustomEvent` object, allowing access to `e.detail`, `e.target`, etc.
+- Events are automatically stopped from propagating past the recommendations container (set `callbacks.allowPropagation: true` to override)
+- The `callbacks` prop is the recommended approach for most use cases
