@@ -24,7 +24,7 @@ export interface PodHeaderProps
     IncludeComponentOverrides<PodHeaderOverrides>,
     IncludeRenderProps<Props> {}
 
-export function PodHeader(props: PodHeaderProps) {
+export default function PodHeader(props: PodHeaderProps) {
   const { podHeader, podSubheader, componentOverrides, children } = props;
 
   return (

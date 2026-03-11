@@ -1,5 +1,5 @@
 import React from 'react';
-import CioRecommendationsProvider from '../../../components/CioRecommendations/CioRecommendationsProvider';
+import { CioRecommendationsProvider } from '../../../components/CioRecommendations';
 import { CioRecommendationsProviderProps } from '../../../types';
 import './DisplayHookExample.css';
 

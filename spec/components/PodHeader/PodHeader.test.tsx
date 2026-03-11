@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { PodHeader } from '../../../src/components/PodHeader/PodHeader';
+import PodHeader from '../../../src/components/PodHeader';
 
 describe('PodHeader', () => {
   it('renders pod header text', () => {

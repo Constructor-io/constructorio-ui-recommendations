@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
-import CioRecommendations from '../../../components/CioRecommendations/CioRecommendations';
+import CioRecommendations from '../../../components/CioRecommendations';
 import { DEMO_API_KEY, DEMO_POD_ID } from '../../../constants';
 import { CallbacksDemo } from './examples/CallbacksDemo';
 import './css/RenderProps.css';

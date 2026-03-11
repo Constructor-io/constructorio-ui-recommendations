@@ -16,7 +16,7 @@ import useRecommendationResults, {
 import CioRecommendationsProvider from './CioRecommendationsProvider';
 import { CioRecommendationsProviderProps, Item, RecommendationsContextValue } from '../../types';
 import { getRecommendationsPodContainerDataAttributes } from '../../utils/dataAttributeHelpers';
-import { PodHeader, PodHeaderOverrides } from '../PodHeader/PodHeader';
+import PodHeader, { PodHeaderOverrides } from '../PodHeader';
 import { useCioRecommendationContext } from '../../hooks/useCioRecommendationContext';
 import {
   CioRecommendationsLoading,

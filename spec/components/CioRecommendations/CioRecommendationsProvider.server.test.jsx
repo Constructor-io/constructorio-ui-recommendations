@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import CioRecommendationsProvider from '../../../src/components/CioRecommendations/CioRecommendationsProvider';
+import { CioRecommendationsProvider } from '../../../src/components/CioRecommendations';
 import { useCioRecommendationContext } from '../../../src/hooks/useCioRecommendationContext';
 import { DEMO_API_KEY, DEMO_POD_ID } from '../../../src/constants';
 
