@@ -3,7 +3,7 @@ import useRecommendationResults, {
   UseRecommendationResultsProps,
 } from '../../../hooks/useRecommendationResults';
 import { useCioRecommendationContext } from '../../../hooks/useCioRecommendationContext';
-import CioRecommendationsProvider from '../../../components/CioRecommendations/CioRecommendationsProvider';
+import { CioRecommendationsProvider } from '../../../components/CioRecommendations';
 import { CioRecommendationsProviderProps } from '../../../types';
 import './UseRecommendationResultsExample.css';
 

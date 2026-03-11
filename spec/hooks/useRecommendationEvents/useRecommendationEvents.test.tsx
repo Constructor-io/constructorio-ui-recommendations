@@ -2,7 +2,7 @@ import React from 'react';
 import { renderHook, act } from '@testing-library/react';
 import { CIO_EVENTS } from '@constructor-io/constructorio-ui-components';
 import useRecommendationEvents from '../../../src/hooks/useRecommendationEvents';
-import CioRecommendationsProvider from '../../../src/components/CioRecommendations/CioRecommendationsProvider';
+import { CioRecommendationsProvider } from '../../../src/components/CioRecommendations';
 import { DEMO_API_KEY, DEMO_POD_ID } from '../../../src/constants';
 import { Callbacks } from '../../../src/types';
 

@@ -3,7 +3,7 @@ import {
   CarouselNavEventDetail,
   ProductCardEventDetail,
 } from '@constructor-io/constructorio-ui-components';
-import CioRecommendations from '../../../../components/CioRecommendations/CioRecommendations';
+import CioRecommendations from '../../../../components/CioRecommendations';
 import { DEMO_API_KEY, DEMO_POD_ID } from '../../../../constants';
 import '../css/EventListening.css';
 

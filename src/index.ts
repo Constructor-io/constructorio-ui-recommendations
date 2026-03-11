@@ -1,4 +1,4 @@
-import CioRecommendations from './components/CioRecommendations/CioRecommendations';
+import CioRecommendations from './components/CioRecommendations';
 
 // Components
 export default CioRecommendations;

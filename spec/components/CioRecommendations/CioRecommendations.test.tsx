@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import CioRecommendations from '../../../src/components/CioRecommendations/CioRecommendations';
+import CioRecommendations from '../../../src/components/CioRecommendations';
 import { useCioRecommendationContext } from '../../../src/hooks/useCioRecommendationContext';
 import { DEMO_API_KEY, DEMO_POD_ID } from '../../../src/constants';
 
