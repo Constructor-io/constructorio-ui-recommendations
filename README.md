@@ -104,7 +104,7 @@ By default, importing React components from this library does not pull any CSS i
 If you wish to use starter styles from this library, add an import statement similar to the example import statement below:
 
 ```javascript
-import '@constructoo-io/constructorio-ui-recommendations/styles.css';
+import '@constructor-io/constructorio-ui-recommendations/styles.css';
 ```
 
 - The starter styles can be used as a foundation to build on top of, or as a reference to be replaced completely.
