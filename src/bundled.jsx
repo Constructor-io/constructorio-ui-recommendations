@@ -4,11 +4,12 @@ import ReactDOM from 'react-dom/client';
 import CioRecommendationsComponent from './components/CioRecommendations';
 import versionNumber from './version';
 import './styles.css';
+import { shopifyDefaults } from './utils/shopifyDefaults';
 
-const CioRecommendations = ({ selector, includeCSS = true, ...rest }) => {
+const CioRecommendations = ({ selector, includeCSS = true, useShopifyDefaults, ...rest }) => {
   if (document) {
     const stylesheet = document.getElementById('cio-recommendations-styles');
-    const containerSelector = selector;
+    const containerSelector = useShopifyDefaults ? shopifyDefaults.selector : selector;
     const containerElement = containerSelector ? document.querySelector(containerSelector) : null;
 
     if (!containerElement) {
@@ -30,6 +31,7 @@ const CioRecommendations = ({ selector, includeCSS = true, ...rest }) => {
       <React.StrictMode>
         <CioRecommendationsComponent
           {...rest}
+          useShopifyDefaults={useShopifyDefaults}
           cioClientOptions={{
             ...rest.cioClientOptions,
             version: `cio-ui-recommendations-bundled-${versionNumber}`,

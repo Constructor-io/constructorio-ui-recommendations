@@ -292,6 +292,66 @@ describe('CioRecommendations', () => {
     });
   });
 
+  describe('Shopify Defaults Test', () => {
+    it('passes useShopifyDefaults through context', async () => {
+      render(
+        <CioRecommendations apiKey={DEMO_API_KEY} podId={DEMO_POD_ID} useShopifyDefaults>
+          {({ useShopifyDefaults: shopifyFlag }) => (
+            <div data-testid='shopify-flag'>{shopifyFlag ? 'enabled' : 'disabled'}</div>
+          )}
+        </CioRecommendations>,
+      );
+
+      await waitFor(() => {
+        expect(screen.getByTestId('shopify-flag')).toHaveTextContent('enabled');
+      });
+    });
+
+    it('includes shopify default callbacks when useShopifyDefaults is true', async () => {
+      render(
+        <CioRecommendations apiKey={DEMO_API_KEY} podId={DEMO_POD_ID} useShopifyDefaults>
+          {({ callbacks }) => (
+            <div>
+              <span data-testid='has-add-to-cart'>
+                {typeof callbacks?.onAddToCart === 'function' ? 'yes' : 'no'}
+              </span>
+              <span data-testid='has-product-click'>
+                {typeof callbacks?.onProductClick === 'function' ? 'yes' : 'no'}
+              </span>
+            </div>
+          )}
+        </CioRecommendations>,
+      );
+
+      await waitFor(() => {
+        expect(screen.getByTestId('has-add-to-cart')).toHaveTextContent('yes');
+        expect(screen.getByTestId('has-product-click')).toHaveTextContent('yes');
+      });
+    });
+
+    it('does not include shopify default callbacks when useShopifyDefaults is not set', async () => {
+      render(
+        <CioRecommendations apiKey={DEMO_API_KEY} podId={DEMO_POD_ID}>
+          {({ callbacks }) => (
+            <div>
+              <span data-testid='has-add-to-cart-default'>
+                {typeof callbacks?.onAddToCart === 'function' ? 'yes' : 'no'}
+              </span>
+              <span data-testid='has-product-click-default'>
+                {typeof callbacks?.onProductClick === 'function' ? 'yes' : 'no'}
+              </span>
+            </div>
+          )}
+        </CioRecommendations>,
+      );
+
+      await waitFor(() => {
+        expect(screen.getByTestId('has-add-to-cart-default')).toHaveTextContent('no');
+        expect(screen.getByTestId('has-product-click-default')).toHaveTextContent('no');
+      });
+    });
+  });
+
   describe('Passing Props Test', () => {
     it('calls API with correct parameters', async () => {
       const customParameters = {
