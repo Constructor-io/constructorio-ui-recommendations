@@ -100,11 +100,8 @@ CioRecommendations({
 For no-build environments (Shopify, plain HTML storefronts, quick prototypes), you can load the library directly via a `<script>` tag:
 
 ```html
-<!-- Via unpkg (replace x.x.x with the desired version) -->
-<script src="https://unpkg.com/@constructor-io/constructorio-ui-recommendations@x.x.x/dist/constructorio-ui-recommendations-bundled.js"></script>
-
-<!-- Or via jsDelivr -->
-<script src="https://cdn.jsdelivr.net/npm/@constructor-io/constructorio-ui-recommendations@x.x.x/dist/constructorio-ui-recommendations-bundled.js"></script>
+<!-- replace x.x.x with the desired version -->
+<script defer src="https://cdn.cnstrc.com/ui/recommendations/x.x.x.js"></script>
 ```
 
 > **Note:** Always pin to a specific version (e.g. `@1.0.0`) rather than `@latest` to avoid unexpected breaking changes in production. Check the [GitHub releases page](https://github.com/Constructor-io/constructorio-ui-recommendations/releases) for the latest stable version.
@@ -117,21 +114,21 @@ For no-build environments (Shopify, plain HTML storefronts, quick prototypes), y
 <head>
   <meta charset="UTF-8" />
   <title>Recommendations Example</title>
+
+  <!-- Load the bundled library -->
+  <script defer src="https://cdn.cnstrc.com/ui/recommendations/x.x.x.js"></script>
 </head>
 <body>
 
   <!-- Container for the recommendations pod -->
   <div id="recommendations-container"></div>
 
-  <!-- Load the bundled library -->
-  <script src="https://unpkg.com/@constructor-io/constructorio-ui-recommendations@1.0.0/dist/constructorio-ui-recommendations-bundled.js"></script>
-
   <!-- Initialize -->
-  <script>
+  <script defer>
     CioRecommendations({
       selector: '#recommendations-container',
       includeCSS: true,
-      apiKey: 'YOUR_API_KEY',
+      apiKey: 'key_M57QS8SMPdLdLx4x',
       podId: 'YOUR_POD_ID',
     });
   </script>
