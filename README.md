@@ -124,7 +124,7 @@ For no-build environments (Shopify, plain HTML storefronts, quick prototypes), y
   <div id="recommendations-container"></div>
 
   <!-- Initialize -->
-  <script defer>
+  <script>
     CioRecommendations({
       selector: '#recommendations-container',
       includeCSS: true,
