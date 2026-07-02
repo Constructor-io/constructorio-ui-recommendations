@@ -93,6 +93,7 @@ export interface RecommendationsContextValue {
   parameters?: RecommendationsParameters;
   itemFieldGetters: ItemFieldGetters;
   callbacks?: Callbacks;
+  useShopifyDefaults?: boolean;
 }
 
 /**
@@ -126,6 +127,7 @@ export interface CioRecommendationsProviderProps {
   parameters?: RecommendationsParameters;
   itemFieldGetters?: Partial<ItemFieldGetters>;
   callbacks?: Callbacks;
+  useShopifyDefaults?: boolean;
 }
 
 export interface SwatchItem {

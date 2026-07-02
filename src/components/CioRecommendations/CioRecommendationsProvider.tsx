@@ -4,6 +4,7 @@ import { RecommendationsContextValue, CioRecommendationsProviderProps } from '..
 import useCioClient from '../../hooks/useCioClient';
 import { RecommendationContext } from '../../hooks/useCioRecommendationContext';
 import * as defaultGetters from '../../utils/itemFieldGetters';
+import { shopifyDefaults } from '../../utils/shopifyDefaults';
 
 export default function CioRecommendationsProvider(
   props: CioRecommendationsProviderProps & IncludeRenderProps<RecommendationsContextValue>,
@@ -18,6 +19,7 @@ export default function CioRecommendationsProvider(
     parameters,
     itemFieldGetters,
     callbacks,
+    useShopifyDefaults
   } = props;
 
   const [cioClientOptions, setCioClientOptions] = useState(customCioClientOptions);
@@ -32,9 +34,10 @@ export default function CioRecommendationsProvider(
       setCioClientOptions,
       parameters,
       itemFieldGetters: { ...defaultGetters, ...itemFieldGetters },
-      callbacks,
+      callbacks: { ...(useShopifyDefaults && shopifyDefaults.callbacks), ...callbacks },
+      useShopifyDefaults
     }),
-    [cioClient, cioClientOptions, podId, podSubheader, parameters, itemFieldGetters, callbacks],
+    [cioClient, cioClientOptions, podId, podSubheader, parameters, itemFieldGetters, useShopifyDefaults, callbacks],
   );
 
   return (
