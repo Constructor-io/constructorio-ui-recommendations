@@ -4,6 +4,8 @@ import {
   transformResultVariation,
   transformResultItem,
   transformRecommendationResponse,
+  toPodRecommendationsResponse,
+  transformRecommendationPageResponse,
 } from '../../src/utils/transformers';
 import { getPrice, getSalePrice } from '../../src/utils/itemFieldGetters';
 
@@ -180,5 +182,91 @@ describe('Testing Transformers: transformRecommendationResponse', () => {
     result?.response.results.forEach((transformedResult) => {
       expect(transformedResult.price).toBeDefined();
     });
+  });
+});
+
+describe('Testing Transformers: toPodRecommendationsResponse', () => {
+  const pod = {
+    pod_id: 'similar_items',
+    request: { item_id: 'product-123', num_results: 12 },
+    response: {
+      results: [],
+      total_num_results: 0,
+      pod: { id: 'similar_items', display_name: 'Similar Items' },
+    },
+    result_id: 'similar-result-id',
+  };
+
+  it('should use the pod result_id and add pod_id to the request', () => {
+    const result = toPodRecommendationsResponse(pod);
+
+    expect(result.result_id).toBe('similar-result-id');
+    expect(result.request.pod_id).toBe('similar_items');
+    expect(result.request.item_id).toBe('product-123');
+    expect(result.response.pod).toEqual(pod.response.pod);
+  });
+
+  it('should fall back to pod_id when the response has no pod object', () => {
+    const result = toPodRecommendationsResponse({
+      ...pod,
+      response: { results: [], total_num_results: 0 } as any,
+    });
+
+    expect(result.response.pod).toEqual({ id: 'similar_items', display_name: 'similar_items' });
+  });
+});
+
+describe('Testing Transformers: transformRecommendationPageResponse', () => {
+  const pageResponse = {
+    request: { page_id: 'pdp_b2c' },
+    response: {
+      page_id: 'pdp_b2c',
+      display_name: 'PDP - B2C',
+      page_type: 'pdp',
+      pods: [
+        {
+          pod_id: 'similar_items',
+          request: {},
+          response: {
+            results: testApiResponse.response.results,
+            total_num_results: testApiResponse.response.results.length,
+            pod: { id: 'similar_items', display_name: 'Similar Items' },
+          },
+          result_id: 'similar-result-id',
+        },
+        {
+          pod_id: 'complete_the_look',
+          request: {},
+          response: {
+            results: [],
+            total_num_results: 0,
+            pod: { id: 'complete_the_look', display_name: 'Complete the Look' },
+          },
+          result_id: 'complete-result-id',
+        },
+      ],
+    },
+    result_id: 'page-result-id',
+  };
+
+  it('should keep pods in page order, each with its own resultId', () => {
+    const result = transformRecommendationPageResponse(pageResponse as any);
+
+    expect(result?.resultId).toBe('page-result-id');
+    expect(result?.pageId).toBe('pdp_b2c');
+    expect(result?.pageType).toBe('pdp');
+    expect(result?.pods.map((pod) => pod.response.pod.id)).toEqual([
+      'similar_items',
+      'complete_the_look',
+    ]);
+    expect(result?.pods.map((pod) => pod.resultId)).toEqual([
+      'similar-result-id',
+      'complete-result-id',
+    ]);
+    expect(result?.pods[0].response.results).toHaveLength(testApiResponse.response.results.length);
+  });
+
+  it('should return null when the response has no pods', () => {
+    expect(transformRecommendationPageResponse({ response: {} } as any)).toBeNull();
   });
 });

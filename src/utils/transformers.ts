@@ -8,7 +8,10 @@ import {
   ApiVariation,
   ApiPod,
   ApiRecommendationsResponse,
+  ApiRecommendationPagePod,
+  ApiRecommendationPageResponse,
   ItemFieldGetters,
+  RecommendationPageData,
 } from '../types';
 
 export function transformPodData(podData: ApiPod): Pod {
@@ -128,4 +131,45 @@ export function transformRecommendationResponse(
     },
     rawApiResponse: res,
   } as RecommendationsData; // Type override due to partials in client-js
+}
+
+/**
+ * Convert one pod of a page response into the single-pod response shape, so it can be rendered
+ * and tracked like a `getRecommendations` response. The pod's own `result_id` is used, never the
+ * page's.
+ */
+export function toPodRecommendationsResponse(
+  pod: ApiRecommendationPagePod,
+): ApiRecommendationsResponse {
+  const response = pod.response || { results: [], total_num_results: 0 };
+
+  return {
+    request: { ...pod.request, pod_id: pod.pod_id },
+    response: {
+      ...response,
+      results: response.results || [],
+      pod: response.pod || { id: pod.pod_id, display_name: pod.pod_id },
+    },
+    result_id: pod.result_id,
+  } as ApiRecommendationsResponse;
+}
+
+export function transformRecommendationPageResponse(
+  res: ApiRecommendationPageResponse,
+  options?: { itemFieldGetters: Partial<ItemFieldGetters> },
+): Nullable<RecommendationPageData> {
+  const { response, result_id: resultId } = res;
+
+  if (!response || !Array.isArray(response.pods)) return null;
+
+  return {
+    resultId,
+    pageId: response.page_id,
+    displayName: response.display_name,
+    pageType: response.page_type,
+    pods: response.pods
+      .map((pod) => transformRecommendationResponse(toPodRecommendationsResponse(pod), options))
+      .filter((pod): pod is RecommendationsData => pod !== null),
+    rawApiResponse: res,
+  };
 }

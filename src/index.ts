@@ -7,6 +7,7 @@ export {
   CioRecommendationsProvider,
 } from './components/CioRecommendations';
 export { default as PodHeader } from './components/PodHeader';
+export { default as CioRecommendationsPage } from './components/CioRecommendationsPage';
 
 // Hooks
 export { useCioRecommendationContext } from './hooks/useCioRecommendationContext';
@@ -17,6 +18,7 @@ export {
   isResponseLoading,
   isResponseError,
 } from './hooks/useRecommendationResults';
+export { default as useRecommendationPageResults } from './hooks/useRecommendationPageResults';
 
 // Utils
 export * as utils from './utils';
@@ -50,3 +52,8 @@ export type {
   UseRecommendationsResultsReturnFailure,
   UseRecommendationsResultsReturnLoading,
 } from './hooks/useRecommendationResults';
+export type { CioRecommendationsPageProps } from './components/CioRecommendationsPage';
+export type {
+  UseRecommendationPageResultsProps,
+  UseRecommendationPageResultsReturn,
+} from './hooks/useRecommendationPageResults';

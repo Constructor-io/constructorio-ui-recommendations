@@ -14,7 +14,12 @@ import useRecommendationResults, {
   isResponseLoading,
 } from '../../hooks/useRecommendationResults';
 import CioRecommendationsProvider from './CioRecommendationsProvider';
-import { CioRecommendationsProviderProps, Item, RecommendationsContextValue } from '../../types';
+import {
+  CioRecommendationsProviderProps,
+  Item,
+  RecommendationsContextValue,
+  RecommendationsData,
+} from '../../types';
 import { getRecommendationsPodContainerDataAttributes } from '../../utils/dataAttributeHelpers';
 import PodHeader, { PodHeaderOverrides } from '../PodHeader';
 import { useCioRecommendationContext } from '../../hooks/useCioRecommendationContext';
@@ -48,9 +53,16 @@ export interface CioRecommendationsProps
   extends CioRecommendationsProviderProps,
     CioRecommendationsInnerProps {}
 
-export function CioRecommendationsInner(props: CioRecommendationsInnerProps) {
-  const { children, componentOverrides } = props;
-  const recommendationsResponse = useRecommendationResults();
+export interface CioRecommendationsResultsProps extends CioRecommendationsInnerProps {
+  data: RecommendationsData;
+}
+
+/**
+ * Renders one loaded pod: its tracking container, header and carousel.
+ * Shared by `CioRecommendations` and `CioRecommendationsPage`.
+ */
+export function CioRecommendationsResults(props: CioRecommendationsResultsProps) {
+  const { children, componentOverrides, data } = props;
   const context = useCioRecommendationContext();
   const { podSubheader } = context;
   const [containerElement, setContainerElement] = useState<HTMLDivElement | null>(null);
@@ -60,6 +72,32 @@ export function CioRecommendationsInner(props: CioRecommendationsInnerProps) {
   }, []);
 
   useRecommendationEvents(containerElement);
+
+  const podData = data.response.pod;
+  const items = data.response.results;
+  const { displayName } = podData;
+
+  const dataAttributes = getRecommendationsPodContainerDataAttributes(data);
+
+  return (
+    <div ref={containerRef} className='cio-recommendations' {...dataAttributes}>
+      <RenderPropsWrapper
+        props={{ items, ...context }}
+        override={children || componentOverrides?.reactNode}>
+        <PodHeader
+          podHeader={displayName}
+          podSubheader={podSubheader}
+          componentOverrides={componentOverrides?.podHeader}
+        />
+        <Carousel items={items} componentOverrides={componentOverrides?.carousel} />
+      </RenderPropsWrapper>
+    </div>
+  );
+}
+
+export function CioRecommendationsInner(props: CioRecommendationsInnerProps) {
+  const { children, componentOverrides } = props;
+  const recommendationsResponse = useRecommendationResults();
 
   if (isResponseLoading(recommendationsResponse)) {
     return <CioRecommendationsLoading componentOverrides={componentOverrides?.loading} />;
@@ -75,27 +113,12 @@ export function CioRecommendationsInner(props: CioRecommendationsInnerProps) {
   }
 
   if (isResponseLoaded(recommendationsResponse)) {
-    const podData = recommendationsResponse.data.response.pod;
-    const items = recommendationsResponse.data.response.results;
-    const { displayName } = podData;
-
-    const dataAttributes = getRecommendationsPodContainerDataAttributes(
-      recommendationsResponse.data,
-    );
-
     return (
-      <div ref={containerRef} className='cio-recommendations' {...dataAttributes}>
-        <RenderPropsWrapper
-          props={{ items, ...context }}
-          override={children || componentOverrides?.reactNode}>
-          <PodHeader
-            podHeader={displayName}
-            podSubheader={podSubheader}
-            componentOverrides={componentOverrides?.podHeader}
-          />
-          <Carousel items={items} componentOverrides={componentOverrides?.carousel} />
-        </RenderPropsWrapper>
-      </div>
+      <CioRecommendationsResults
+        data={recommendationsResponse.data}
+        componentOverrides={componentOverrides}>
+        {children}
+      </CioRecommendationsResults>
     );
   }
 
