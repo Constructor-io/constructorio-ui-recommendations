@@ -79,6 +79,31 @@ function YourComponent() {
 }
 ```
 
+### Recommendation Pages
+
+`CioRecommendationsPage` renders every pod on a [recommendation page](https://docs.constructor.com/reference/v1-recommendations-get-page-results) from a single request. Results are deduplicated across the pods. Each pod is rendered like `CioRecommendations`, in its own `[data-cnstrc-recommendations]` container that carries the pod's id and its own `result_id`. The page's top-level `result_id` identifies the request and is not used for tracking.
+
+Requires a version of `@constructor-io/constructorio-client-javascript` that provides `recommendations.getRecommendationPage`.
+
+```javascript
+import { CioRecommendationsPage } from '@constructor-io/constructorio-ui-recommendations';
+
+function ProductPage({ itemId }) {
+  return (
+    <CioRecommendationsPage
+      apiKey='key_M57QS8SMPdLdLx4x'
+      pageId='pdp_b2c'
+      parameters={{
+        itemIds: itemId,
+        podOverrides: { complete_the_look: { numResults: 8 } },
+      }}
+    />
+  );
+}
+```
+
+The bundle also exposes `CioRecommendationsPage({ selector, includeCSS, apiKey, pageId, parameters })`.
+
 ### Vanilla JavaScript (Bundle)
 
 This is a framework agnostic method that can be used in any JavaScript project. The `CioRecommendations` function provides a simple interface to inject an entire recommendations UI into the provided `selector`.

@@ -2,10 +2,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import CioRecommendationsComponent from './components/CioRecommendations';
+import CioRecommendationsPageComponent from './components/CioRecommendationsPage';
 import versionNumber from './version';
 import './styles.css';
 
-const CioRecommendations = ({ selector, includeCSS = true, ...rest }) => {
+const mountComponent = (Component, name, { selector, includeCSS = true, ...rest }) => {
   if (document) {
     const stylesheet = document.getElementById('cio-recommendations-styles');
     const containerSelector = selector;
@@ -13,7 +14,7 @@ const CioRecommendations = ({ selector, includeCSS = true, ...rest }) => {
 
     if (!containerElement) {
       // eslint-disable-next-line no-console
-      console.error(`CioRecommendations: There were no elements found for the provided selector`);
+      console.error(`${name}: There were no elements found for the provided selector`);
 
       return;
     }
@@ -28,7 +29,7 @@ const CioRecommendations = ({ selector, includeCSS = true, ...rest }) => {
 
     ReactDOM.createRoot(containerElement).render(
       <React.StrictMode>
-        <CioRecommendationsComponent
+        <Component
           {...rest}
           cioClientOptions={{
             ...rest.cioClientOptions,
@@ -40,8 +41,15 @@ const CioRecommendations = ({ selector, includeCSS = true, ...rest }) => {
   }
 };
 
+const CioRecommendations = (props) =>
+  mountComponent(CioRecommendationsComponent, 'CioRecommendations', props);
+
+export const CioRecommendationsPage = (props) =>
+  mountComponent(CioRecommendationsPageComponent, 'CioRecommendationsPage', props);
+
 if (window) {
   window.CioRecommendations = CioRecommendations;
+  window.CioRecommendationsPage = CioRecommendationsPage;
 }
 
 export default CioRecommendations;

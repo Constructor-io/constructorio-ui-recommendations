@@ -75,6 +75,69 @@ export interface RecommendationsData {
   rawApiResponse: ApiRecommendationsResponse;
 }
 
+/**
+ * Parameters that can be set per pod on a page request. Each replaces the page-wide value for that pod.
+ */
+export interface RecommendationPagePodOverride {
+  numResults?: number;
+  filters?: Record<string, any>;
+  filterMatchTypes?: Record<string, 'all' | 'any' | 'none'>;
+  preFilterExpression?: RecommendationsParameters['preFilterExpression'];
+  fmtOptions?: RecommendationsParameters['fmtOptions'];
+  hiddenFields?: string[];
+  variationsMap?: RecommendationsParameters['variationsMap'];
+}
+
+/**
+ * Parameters for `recommendations.getRecommendationPage` in the Constructor JS client.
+ * `podOverrides` is keyed by pod id.
+ */
+export interface RecommendationPageParameters extends RecommendationPagePodOverride {
+  itemIds?: string | string[];
+  variationId?: string;
+  section?: string;
+  term?: string;
+  podOverrides?: Record<string, RecommendationPagePodOverride>;
+}
+
+/**
+ * One pod of a page response, as returned by the API
+ */
+export interface ApiRecommendationPagePod extends Record<string, any> {
+  pod_id: string;
+  request: Record<string, any>;
+  response: ApiRecommendationsResponse['response'];
+  /** The id to send with this pod's tracking events */
+  result_id: string;
+}
+
+/**
+ * A page response, as returned by the API
+ */
+export interface ApiRecommendationPageResponse extends Record<string, any> {
+  request: Record<string, any>;
+  response: {
+    page_id: string;
+    display_name?: string;
+    page_type?: string;
+    pods: Array<ApiRecommendationPagePod>;
+    [key: string]: any;
+  };
+  /** Identifies the page request. Not a tracking id: each pod carries its own `result_id`. */
+  result_id: string;
+}
+
+export interface RecommendationPageData {
+  /** Identifies the page request. Not a tracking id. */
+  resultId: string;
+  pageId: string;
+  displayName?: string;
+  pageType?: string;
+  /** One entry per pod, in the page's configured order */
+  pods: Array<RecommendationsData>;
+  rawApiResponse: ApiRecommendationPageResponse;
+}
+
 export enum RequestStatus {
   IDLE = 'idle',
   FETCHING = 'fetching',
